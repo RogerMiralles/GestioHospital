@@ -27,6 +27,8 @@ public abstract class Persona {
         
         if (!nifCorrecto(nif)) {
             error += "NIF Incorrecto";
+        } else if (!cumplePatron("")){
+            
         }
         
     }
@@ -40,10 +42,17 @@ public abstract class Persona {
         if(!textAnalitzar.matches()) {
             return false;
         } else {
-            for (int i = 0; i < 8; i++) {
-                
-            }
+            return TABLA_LETRA.charAt(Integer.parseInt(nif.substring(0,8)) % 23) == nif.charAt(9);
         }
-        return true;
-    }       
+    }
+    
+    private static boolean cumplePatron (String patron, String... datos){
+        Pattern regles = Pattern.compile(patron);
+        for (String dato : datos) {
+            Matcher textAnalitzar = regles.matcher(dato);
+            if (!textAnalitzar.matches())
+                return false;
+        }
+        return true;          
+    }
 }
