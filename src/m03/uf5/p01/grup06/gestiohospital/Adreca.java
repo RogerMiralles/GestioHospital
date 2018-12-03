@@ -17,7 +17,7 @@ public class Adreca {
     private String planta;
     private String porta;
     
-    Adreca(String ciutat, int codiPostal, String carrer, int numero, String planta, String porta){
+    public Adreca(String ciutat, int codiPostal, String carrer, int numero, String planta, String porta){
         this.ciutat = ciutat;
         this.codiPostal = codiPostal;
         this.carrer = carrer;
