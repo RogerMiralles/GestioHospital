@@ -23,7 +23,11 @@ public abstract class Persona {
     private Adreca adreca;
     
     public Persona (String nom, String cognom1, String cognom2, String numSegSocial, String nif, String telefon, Adreca Adreca) {
+        String error = null;
         
+        if (!nifCorrecto(nif)) {
+            error += "NIF Incorrecto";
+        }
         
     }
     
@@ -31,22 +35,13 @@ public abstract class Persona {
         String TABLA_LETRA ="TRWAGMYFPDXBNJZSQVHLCKE";        
         Pattern reglas = Pattern.compile("[0-9]{8}[A-Z]");
         Matcher textAnalitzar;
-        boolean valido = false;
         
-        for (int i = 0; i < 5 && !valido; i++) {
-            textAnalitzar = reglas.matcher(nif);
-            if(!textAnalitzar.matches())
-                return false;
-            else{
-                Pattern reglaDni = Pattern.compile("[0-9]{8}");
-                Matcher textDni = reglaDni.matcher(nif);
-                textDni.find();
-                int dni = Integer.parseInt(textDni.group());
-                char lletra = TABLA_LETRA.charAt(dni % 23);
-                if(nif.charAt(nif.length()-1) == lletra)
-                    valido = true;
-                else 
-                    return false;
+        textAnalitzar = reglas.matcher(nif);
+        if(!textAnalitzar.matches()) {
+            return false;
+        } else {
+            for (int i = 0; i < 8; i++) {
+                
             }
         }
         return true;

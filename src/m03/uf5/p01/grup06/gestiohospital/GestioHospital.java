@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package m03.uf5.p01.grupx.gestiohospital;
+package m03.uf5.p01.grup06.gestiohospital;
 
 /**
  *
