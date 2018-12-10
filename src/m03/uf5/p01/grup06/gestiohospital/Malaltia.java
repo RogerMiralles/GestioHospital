@@ -26,4 +26,5 @@ public class Malaltia {
         this.tractament = tractament;
         this.duradaTractament = duracion;
     }
+    
 }
