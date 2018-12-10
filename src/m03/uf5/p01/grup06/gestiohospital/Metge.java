@@ -25,20 +25,15 @@ public class Metge extends Persona{
     }
     
 
-    public void toString(){
-        System.out.println("Dades Metge");
-        System.out.println("______________________");
-        System.out.println("NIF: ");
-        System.out.println("Nom: ");
-        System.out.println("Cognoms: ");
-        System.out.println("Telefon: ");
-        System.out.println("Adreca: ");
-        System.out.println("Numero Seguretat Social: ");
-        System.out.println("Numero empleat: ");
-        System.out.println("Salari mensual: ");
-        System.out.println("Codi compte corrent: ");
-        
-        
+    public String toString(){
+            
+        return "Dades Metge \n___________________ \nNIF: "+this.getNif()+"\nNom: "
+                +this.getNom()+"\nCognoms: "+this.getCognom1()+" "
+                +this.getCognom2()+"\nTelefon: "+this.getTelefon()
+                +"\nNumero Seguretat Social: "+this.getNumSegSocial()
+                +"\n Adreca: "
+                +"\nNumero empleat: "+numEmpleat+"\nSalari mensual: "+salariMensual+
+                "\nCodi compte corrent: "+ codiCompteCorrent;
         
     }
     
