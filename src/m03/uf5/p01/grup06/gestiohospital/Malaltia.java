@@ -32,7 +32,7 @@ public class Malaltia {
         String diagnostic;
         if (causaBaixa){
             diagnostic = "Té la malaltia "+nom+" que causa baixa, el tractament és "+tractament+" i durarà "+duradaTractament.toDays();
-        }
+}
         else{
             diagnostic = "Té la malaltia "+nom+" que no causa baixa, el tractament és "+tractament+" i durarà "+duradaTractament.toDays();
         }

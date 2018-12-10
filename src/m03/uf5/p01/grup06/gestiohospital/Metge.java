@@ -31,9 +31,9 @@ public class Metge extends Persona{
                 +this.getNom()+"\nCognoms: "+this.getCognom1()+" "
                 +this.getCognom2()+"\nTelefon: "+this.getTelefon()
                 +"\nNumero Seguretat Social: "+this.getNumSegSocial()
-                +"\n Adreca: "
-                +"\nNumero empleat: "+numEmpleat+"\nSalari mensual: "+salariMensual+
-                "\nCodi compte corrent: "+ codiCompteCorrent;
+                +"\n Adreca: "+this.getAdreca().toString()
+                +"\nNumero empleat: "+this.numEmpleat+"\nSalari mensual: "+this.salariMensual+
+                "\nCodi compte corrent: "+ this.codiCompteCorrent;
         
     }
     
