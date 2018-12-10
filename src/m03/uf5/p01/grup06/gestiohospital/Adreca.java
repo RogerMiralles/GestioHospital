@@ -25,4 +25,9 @@ public class Adreca {
         this.planta = planta;
         this.porta = porta;
     }
+    
+    @Override
+    public String toString(){
+        return "Ciutat: "+ciutat+", Codi Postal: "+codiPostal+", Carrer: "+carrer+", Numero: "+numero+", Planta: "+planta+", Porta: "+porta;
+    }
 }

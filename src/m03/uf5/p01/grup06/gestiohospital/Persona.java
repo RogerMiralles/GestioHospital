@@ -131,4 +131,11 @@ public abstract class Persona {
     public String getTelefon() {
         return telefon;
     }
+
+    public Adreca getAdreca() {
+        return adreca;
+    }
+    
+   
+    
 }
