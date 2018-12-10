@@ -89,4 +89,49 @@ public abstract class Persona {
         }
         return true;          
     }
+
+    /**
+     * @return the nom
+     */
+    public String getNom() {
+        return nom;
+    }
+
+    /**
+     * @return the cognom1
+     */
+    public String getCognom1() {
+        return cognom1;
+    }
+
+    /**
+     * @return the cognom2
+     */
+    public String getCognom2() {
+        return cognom2;
+    }
+
+    /**
+     * @return the numSegSocial
+     */
+    public String getNumSegSocial() {
+        return numSegSocial;
+    }
+
+    /**
+     * @return the nif
+     */
+    public String getNif() {
+        return nif;
+    }
+
+    /**
+     * @return the telefon
+     */
+    public String getTelefon() {
+        return telefon;
+    }
+
+   
+    
 }
