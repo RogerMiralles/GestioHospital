@@ -10,10 +10,11 @@ package m03.uf5.p01.grup06.gestiohospital;
  * @author david
  */
 public class Pacient extends Persona{
+    private Historial historial;
     
     public Pacient(String nom, String cognom1, String cognom2, String numSegSocial, String nif, String telefon, Adreca adreca) {
         super(nom, cognom1, cognom2, numSegSocial, nif, telefon, adreca);
-        Historial historial = new Historial();
+        historial = new Historial();
     }
     
     @Override
@@ -22,7 +23,7 @@ public class Pacient extends Persona{
               +"Nnumero de SS: "+this.getNumSegSocial()+"\n"
               +"DNI: "+this.getNif()+"\n"
               +"Telefon: "+this.getTelefon()+"\n"
-              +"Adreça: "+this.getAdreca().toString()+".";
-              
+              +"Adreça: "+this.getAdreca().toString()+"\n"
+              +historial.toString();
     }
 }
