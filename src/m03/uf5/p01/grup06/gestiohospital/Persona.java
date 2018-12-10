@@ -131,7 +131,4 @@ public abstract class Persona {
     public String getTelefon() {
         return telefon;
     }
-
-   
-    
 }
