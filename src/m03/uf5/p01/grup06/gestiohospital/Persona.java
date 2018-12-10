@@ -132,6 +132,10 @@ public abstract class Persona {
         return telefon;
     }
 
+    public Adreca getAdreca() {
+        return adreca;
+    }
+    
    
     
 }
