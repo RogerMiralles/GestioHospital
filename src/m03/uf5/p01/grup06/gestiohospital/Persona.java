@@ -134,8 +134,5 @@ public abstract class Persona {
 
     public Adreca getAdreca() {
         return adreca;
-    }
-    
-   
-    
+    }    
 }
