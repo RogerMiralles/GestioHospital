@@ -24,8 +24,16 @@ public class Visita {
        this.metge=metge;
        
    }
-   
-   
-   
-    
+
+    public LocalDateTime getData() {
+        return data;
+    }
+
+    public Malaltia getMalaltia() {
+        return malaltia;
+    }
+
+    public Metge getMetge() {
+        return metge;
+    } 
 }

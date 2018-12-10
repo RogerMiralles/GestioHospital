@@ -26,5 +26,8 @@ public class Malaltia {
         this.tractament = tractament;
         this.duradaTractament = duracion;
     }
-    
+
+    public String getNom() {
+        return nom;
+    }
 }
