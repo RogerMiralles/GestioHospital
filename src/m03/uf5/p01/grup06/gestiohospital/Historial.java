@@ -37,4 +37,8 @@ public class Historial {
         }
         return s;
     }
+    
+    public void addVisita (Visita v) {
+        visitas.add(v);
+    }
 }

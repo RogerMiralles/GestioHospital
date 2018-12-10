@@ -11,11 +11,15 @@ package m03.uf5.p01.grup06.gestiohospital;
  */
 public class GestioHospital {
 
-    /**
-     * @param args the command line arguments
-     */
+    private Hospital h;
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+        iniciaHospital();
+        
     }
     
+    private static void iniciaHospital() {
+        h = new Hospital();
+        
+    }
 }
