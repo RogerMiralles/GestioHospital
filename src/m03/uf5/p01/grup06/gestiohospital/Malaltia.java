@@ -20,7 +20,7 @@ public class Malaltia {
     Duration duradaTractament;
     
     public Malaltia(String nom, boolean baixa, String tractament, Duration duracion){
-        this.codi = inc++;
+        this.codi = ++inc;
         this.nom = nom;
         this.causaBaixa = baixa;
         this.tractament = tractament;
@@ -29,13 +29,11 @@ public class Malaltia {
     
     @Override
     public String toString(){
-        String diagnostic;
         if (causaBaixa){
-            diagnostic = "Té la malaltia "+nom+" que causa baixa, el tractament és "+tractament+" i durarà "+duradaTractament.toDays();
-}
-        else{
-            diagnostic = "Té la malaltia "+nom+" que no causa baixa, el tractament és "+tractament+" i durarà "+duradaTractament.toDays();
+            return "Té la malaltia "+nom+" que causa baixa, el tractament és "+tractament+" i durarà "+duradaTractament.toDays();
         }
-        return diagnostic;
+        else{
+            return "Té la malaltia "+nom+" que no causa baixa, el tractament és "+tractament+" i durarà "+duradaTractament.toDays();
+        }
     }
 }
