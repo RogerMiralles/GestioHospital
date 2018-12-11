@@ -16,7 +16,7 @@ public class Historial {
     
     private final int codi;
     private static int ultCodigo = 0;
-    private ArrayList<Visita> visitas = new ArrayList<>();
+    private final ArrayList<Visita> visitas = new ArrayList<>();
     
     public Historial() {
         this.codi = ++ultCodigo;
