@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package m03.uf5.p01.grup06.gestiohospital;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- *
- * @author Joel C
- */
 public abstract class Persona {
     
     private String nom;
@@ -89,45 +80,27 @@ public abstract class Persona {
         }
         return true;          
     }
-
-    /**
-     * @return the nom
-     */
+    
     public String getNom() {
         return nom;
     }
-
-    /**
-     * @return the cognom1
-     */
+    
     public String getCognom1() {
         return cognom1;
     }
-
-    /**
-     * @return the cognom2
-     */
+    
     public String getCognom2() {
         return cognom2;
     }
-
-    /**
-     * @return the numSegSocial
-     */
+    
     public String getNumSegSocial() {
         return numSegSocial;
     }
-
-    /**
-     * @return the nif
-     */
+    
     public String getNif() {
         return nif;
     }
-
-    /**
-     * @return the telefon
-     */
+    
     public String getTelefon() {
         return telefon;
     }
