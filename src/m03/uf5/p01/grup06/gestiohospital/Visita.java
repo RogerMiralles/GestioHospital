@@ -12,18 +12,18 @@ import java.time.LocalDateTime;
  * @author Aleix
  */
 public class Visita {
-    
-   private LocalDateTime data;
-   private Malaltia malaltia;
-   private Metge metge;
-   
-   public Visita(LocalDateTime data, Malaltia malaltia, Metge metge){
-       
-       this.data=data;
-       this.malaltia=malaltia;
-       this.metge=metge;
-       
-   }
+
+    private final LocalDateTime data;
+    private final Malaltia malaltia;
+    private final Metge metge;
+
+    public Visita(LocalDateTime data, Malaltia malaltia, Metge metge) {
+
+        this.data = data;
+        this.malaltia = malaltia;
+        this.metge = metge;
+
+    }
 
     public LocalDateTime getData() {
         return data;
@@ -35,5 +35,5 @@ public class Visita {
 
     public Metge getMetge() {
         return metge;
-    } 
+    }
 }

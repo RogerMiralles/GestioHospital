@@ -16,8 +16,8 @@ public class Adreca {
     private final int numero;
     private final String planta;
     private final String porta;
-    
-    public Adreca(String ciutat, int codiPostal, String carrer, int numero, String planta, String porta){
+
+    public Adreca(String ciutat, int codiPostal, String carrer, int numero, String planta, String porta) {
         this.ciutat = ciutat;
         this.codiPostal = codiPostal;
         this.carrer = carrer;
@@ -25,9 +25,9 @@ public class Adreca {
         this.planta = planta;
         this.porta = porta;
     }
-    
+
     @Override
-    public String toString(){
-        return "Ciutat: "+ciutat+", Codi Postal: "+codiPostal+", Carrer: "+carrer+", Numero: "+numero+", Planta: "+planta+", Porta: "+porta;
+    public String toString() {
+        return "Carrer " + carrer + " Nº" + numero + " " + numero + " " + planta + "-" + porta + "\n" + codiPostal + " " + ciutat;
     }
 }
