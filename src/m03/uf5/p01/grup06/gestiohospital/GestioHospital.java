@@ -38,6 +38,23 @@ public class GestioHospital {
     }
     
     private static int opcionMenu() {
-        
+        System.out.println("╔══════════════════════════════════╗"
+                         + "║                                                       ║"
+                         + "║    Menu de selecció d'accions de l'Hospital           ║"
+                         + "║                                                       ║"
+                         + "║           1 - Registrar Visita                        ║"
+                         + "║                                                       ║"
+                         + "║           2 - Afegir Nou Pacient                      ║"
+                         + "║                                                       ║"
+                         + "║           3 - Mostrar Dades del Pacient               ║"
+                         + "║                                                       ║"
+                         + "║           4 - Mostrar Dades del Metge                 ║"
+                         + "║                                                       ║"
+                         + "║           5 - Mostrar Historial del Pacient           ║"
+                         + "║                                                       ║"
+                         + "║           6 - Sortir                                  ║"
+                         + "║                                                       ║"
+                         + "╚══════════════════════════════════╝");
+        return SC.nextInt();
     }
 }
