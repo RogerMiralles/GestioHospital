@@ -13,9 +13,9 @@ import java.time.Duration;
  */
 public class Malaltia {
     private static int inc = 0;
-    private int codi;
-    private String nom;
-    private boolean causaBaixa;
+    private final int codi;
+    private final String nom;
+    private final boolean causaBaixa;
     String tractament;
     Duration duradaTractament;
     
