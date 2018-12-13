@@ -10,12 +10,12 @@ package m03.uf5.p01.grup06.gestiohospital;
  * @author Joel C
  */
 public class Adreca {
-    private String ciutat;
-    private int codiPostal;
-    private String carrer;
-    private int numero;
-    private String planta;
-    private String porta;
+    private final String ciutat;
+    private final int codiPostal;
+    private final String carrer;
+    private final int numero;
+    private final String planta;
+    private final String porta;
     
     public Adreca(String ciutat, int codiPostal, String carrer, int numero, String planta, String porta){
         this.ciutat = ciutat;
