@@ -10,7 +10,6 @@ package m03.uf5.p01.grup06.gestiohospital;
  * @author Joel C
  */
 public class Adreca {
-
     private final String ciutat;
     private final int codiPostal;
     private final String carrer;
