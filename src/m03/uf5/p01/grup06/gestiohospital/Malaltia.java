@@ -36,4 +36,8 @@ public class Malaltia {
             return "Té la malaltia " + nom + " que no causa baixa, el tractament és " + tractament + " i durarà " + duradaTractament.toDays();
         }
     }
+    
+    public int getCodi () {
+        return this.codi;
+    }
 }

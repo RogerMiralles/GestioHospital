@@ -27,4 +27,8 @@ public class Pacient extends Persona {
                 + "Adreça: " + this.getAdreca().toString() + "\n"
                 + historial.toString();
     }
+    
+    public Historial getHistorial() {
+        return this.historial;
+    }
 }

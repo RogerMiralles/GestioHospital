@@ -41,4 +41,8 @@ public class Historial {
     public void addVisita (Visita v) {
         visitas.add(v);
     }
+    
+    public int getCodi () {
+        return this.codi;
+    }
 }
