@@ -1,21 +1,22 @@
 package m03.uf5.p01.grup06.gestiohospital;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class GestioHospital {
 
     private static Hospital h;
     private static final Scanner SC = new Scanner(System.in);
-    
+
     public static void main(String[] args) {
-        //iniciaHospital();
+        iniciaHospital();
         boolean seguir = true;
-        
-        while (seguir){
+
+        while (seguir) {
             switch (opcionMenu()) {
                 case 1:
-                    //addVisita();
+                    addVisita();
                     break;
                 case 2:
                     break;
@@ -32,48 +33,57 @@ public class GestioHospital {
             }
         }
     }
-    
+
     private static void iniciaHospital() {
-        Adreca a1 = new Adreca("Terrassa",8226,"C/Pablo Picaso",45,"Segona","Primera");
-        Adreca a2 = new Adreca("Barcelona",8001,"Plaça Catalunya",78,"Quarta","Segona");
-        Adreca a3 = new Adreca("Terrassa",8221,"Plaça Doctor Robert",5,"S/N","S/N");
-        
-        h = new Hospital("Mutua Terrassa",a3);      
-        Pacient p1 = new Pacient("Juan","Martín","Pascual","281234567840","45990250W","666555444",a1);
-        Metge m1 = new Metge("Gregory","House","Smith","396120465841","12345678Z","937564023",a2,11,3000,"ES35");
-        Malaltia ma1 = new Malaltia("Resfriado",false,"Xarop per la tos", Duration.ofDays(5));        
+        try {
+            Adreca a1 = new Adreca("Terrassa", 8226, "C/Pablo Picaso", 45, "Segona", "Primera");
+            Adreca a2 = new Adreca("Barcelona", 8001, "Plaça Catalunya", 78, "Quarta", "Segona");
+            Adreca a3 = new Adreca("Terrassa", 8221, "Plaça Doctor Robert", 5, "S/N", "S/N");
+
+            h = new Hospital("Mutua Terrassa", a3);
+            
+            h.addPacient(new Pacient("Juan", "Martín", "Pascual", "281234567840", "45990250W", "666555444", a1));
+            h.addMetge(new Metge("Gregory", "House", "Smith", "396120465841", "48181321R", "937564023", a2, 11, 3000, "ES35"));
+            h.addMalaltia(new Malaltia("Resfriado", false, "Xarop per la tos", Duration.ofDays(5)));
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
-    
+
     private static int opcionMenu() {
         System.out.println("╔══════════════════════════════════╗\n"
-                         + "║                                                     ║\n"
-                         + "║    Menu de selecció d'accions de l'Hospital         ║\n"
-                         + "║                                                     ║\n"
-                         + "║           1 - Registrar Visita                      ║\n"
-                         + "║                                                     ║\n"
-                         + "║           2 - Afegir Nou Pacient                    ║\n"
-                         + "║                                                     ║\n"
-                         + "║           3 - Mostrar Dades del Pacient             ║\n"
-                         + "║                                                     ║\n"
-                         + "║           4 - Mostrar Dades del Metge               ║\n"
-                         + "║                                                     ║\n"
-                         + "║           5 - Mostrar Historial del Pacient         ║\n"
-                         + "║                                                     ║\n"
-                         + "║           6 - Sortir                                ║\n"
-                         + "║                                                     ║\n"
-                         + "╚══════════════════════════════════╝\n");
+                + "║                                                     ║\n"
+                + "║    Menu de selecció d'accions de l'Hospital         ║\n"
+                + "║                                                     ║\n"
+                + "║           1 - Registrar Visita                      ║\n"
+                + "║                                                     ║\n"
+                + "║           2 - Afegir Nou Pacient                    ║\n"
+                + "║                                                     ║\n"
+                + "║           3 - Mostrar Dades del Pacient             ║\n"
+                + "║                                                     ║\n"
+                + "║           4 - Mostrar Dades del Metge               ║\n"
+                + "║                                                     ║\n"
+                + "║           5 - Mostrar Historial del Pacient         ║\n"
+                + "║                                                     ║\n"
+                + "║           6 - Sortir                                ║\n"
+                + "║                                                     ║\n"
+                + "╚══════════════════════════════════╝\n");
+                System.out.print("Inserte aqui su opcion: ");
         return SC.nextInt();
     }
-    
+
     private static void addVisita() {
-        System.out.println("Inserte el metodo de identificacion del paciente:\n"
-                + "\t1. NIF \n\t2. Numero de la Seguridad Social\n\t 3. Codi historial");
-        
-        int codi = -1;
-        switch(SC.nextInt()) {
+        System.out.print("\nInserte el metodo de identificacion del paciente:\n"
+                + "\t1. NIF \n\t2. Numero de la Seguridad Social\n\t3. Codi historial\nInserte aqui su opcion:");
+
+        int codi;
+        switch (SC.nextInt()) {
             case 1:
                 System.out.print("Inserte el DNI del paciente: ");
-                codi = h.getPacient(SC.next()).getHistorial().getCodi();
+                String dni = SC.next();
+                System.out.println(h.getPacient(dni));
+                codi = h.getPacient(dni).getHistorial().getCodi();
                 break;
             case 2:
                 System.out.print("Inserte el Numero de la Seguridad Social del paciente: ");
@@ -84,30 +94,45 @@ public class GestioHospital {
                 codi = SC.nextInt();
                 break;
             default:
-                System.out.println("Opcion insertada incorrecta.");
+                System.out.println("Opcion insertada incorrecta. Intentlo otra vez.");
                 addVisita();
-                break;
+                return;
         }
-        
+
         System.out.println("Inserte el metodo de identificacion del medico:\n"
                 + "\t1. NIF \n\t2. Numero de la Seguridad Social");
-        Metge m;
-        switch(SC.nextInt()) {
+        Metge metg;
+        switch (SC.nextInt()) {
             case 1:
                 System.out.print("Inserte el DNI del medico: ");
-                m = h.getMetge(SC.next());
+                metg = h.getMetge(SC.next());
                 break;
             case 2:
                 System.out.print("Inserte el Numero de la Seguridad Social del medico: ");
-                m = h.getMetge(SC.nextInt());
-                break; 
+                metg = h.getMetge(SC.nextInt());
+                break;
+            default:
+                System.out.println("Opcion insertada incorrecta. Intentlo otra vez.");
+                addVisita();
+                return;
         }
-        
-        Visita v = new Visita();
-        
+
+        System.out.print("Inserta el codi de la malaltia: ");
+        Malaltia mal = h.getMalaltia(SC.nextInt());
+
+        if (mal == null) {
+            System.out.println("Malaltia no encontrada. Intentlo otra vez.");
+            addVisita();
+            return;
+        }
+
+        Visita v = new Visita(LocalDateTime.now(), mal, metg);
+
         h.getHistorial(codi).addVisita(v);
+
+        System.out.println("Visita añadida con exito.");
     }
-    
+
     private static void addPacient() {
         System.out.print("Inserte el nombre: ");
         String nom = SC.nextLine();
@@ -121,8 +146,8 @@ public class GestioHospital {
         String nif = SC.next();
         System.out.print("Inserte el telefon: ");
         int tel = SC.nextInt();
-        
-        Pacient p = new Pacient (/* .... */);
+
+        Pacient p = new Pacient(/* .... */);
         h.addPacient(p);
     }
 }
