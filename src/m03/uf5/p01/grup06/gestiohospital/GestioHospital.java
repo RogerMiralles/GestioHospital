@@ -175,12 +175,12 @@ public class GestioHospital {
         switch(option){
             case 1:
                 int identSeg = SC.nextInt();
-                h.getPacient(identSeg);
+                System.out.println(h.getPacient(identSeg));
                 break;
                 
             case 2:
                 String identDNI = SC.next();
-                h.getPacient(identDNI);
+                System.out.println(h.getPacient(identDNI));
                 break;
         }
     }
