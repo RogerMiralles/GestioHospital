@@ -25,6 +25,7 @@ public class GestioHospital {
                     mostrarPacient();
                     break;
                 case 4:
+                    mostrarMetge();
                     break;
                 case 5:
                     break;
@@ -181,6 +182,24 @@ public class GestioHospital {
             case 2:
                 String identDNI = SC.next();
                 System.out.println(h.getPacient(identDNI));
+                break;
+        }
+    }
+
+    private static void mostrarMetge() {
+        System.out.println("Quin metge es vol mostrar?"
+                          +"    1 - Seleccionar por numero de la seguridad social."
+                          +"    2 - Seleccionar por DNI.");
+        int option = SC.nextInt();
+        switch(option){
+            case 1:
+                int identSeg = SC.nextInt();
+                System.out.println(h.getMetge(identSeg));
+                break;
+                
+            case 2:
+                String identDNI = SC.next();
+                System.out.println(h.getMetge(identDNI));
                 break;
         }
     }
