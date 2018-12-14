@@ -18,8 +18,10 @@ public class GestioHospital {
                     //addVisita();
                     break;
                 case 2:
+                    addPacient();
                     break;
                 case 3:
+                    mostrarPacient();
                     break;
                 case 4:
                     break;
@@ -114,15 +116,47 @@ public class GestioHospital {
         System.out.print("Inserte el primer apellido: ");
         String ap1 = SC.nextLine();
         System.out.print("Inserte el segundo apellido: ");
-        String aps = SC.nextLine();
+        String ap2 = SC.nextLine();
         System.out.print("Inserte el numero de la seguridad social: ");
-        int nSc = SC.nextInt();
+        String nSc = SC.next();
         System.out.print("Inserte el DNI o NIF: ");
         String nif = SC.next();
-        System.out.print("Inserte el telefon: ");
-        int tel = SC.nextInt();
+        System.out.print("Inserte el telefonO: ");
+        String tel = SC.next();
+        System.out.println("-------------------------------------"
+                          +"\nRellena los campos de tu dirección:");
+        System.out.println("Inserte la Calle:");
+        String calle = SC.nextLine();
+        System.out.println("Inserte el Numero:");
+        int num = SC.nextInt();
+        System.out.println("Inserte la Planta (con letras):");
+        String planta = SC.next();
+        System.out.println("Inserte la Puerta (con letras):");
+        String puerta = SC.next();
+        System.out.println("Inserte el Codigo Postal (omitir 0 a la izquierda):");
+        int postal = SC.nextInt();
+        System.out.println("Insertar la Ciudad:");
+        String ciudad = SC.nextLine();
         
-        Pacient p = new Pacient (/* .... */);
+        Pacient p = new Pacient(nom, ap1, ap2, nSc, nif, tel, new Adreca(ciudad,postal,calle,num,planta,puerta));
         h.addPacient(p);
+    }
+    
+    private static void mostrarPacient(){
+        System.out.println("Quin pacient es vol mostrar?"
+                          +"    1 - Seleccionar por numero de la seguridad social."
+                          +"    2 - Seleccionar por DNI.");
+        int option = SC.nextInt();
+        switch(option){
+            case 1:
+                int identSeg = SC.nextInt();
+                h.getPacient(identSeg);
+                break;
+                
+            case 2:
+                String identDNI = SC.next();
+                h.getPacient(identDNI);
+                break;
+        }
     }
 }
