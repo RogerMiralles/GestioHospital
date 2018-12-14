@@ -18,11 +18,14 @@ public abstract class Persona {
         
         if (!nifCorrecto(nif)) {
             error += "- NIF incorrecto ";
-        } else if (!cumplePatron("^[A-zçñàáéèíóòúÇÑÁÀÉÈÍÒÓÚ]*", nom, cognom1, cognom2)){
+        }
+        if (!cumplePatron("^[A-zçñàáéèíóòúÇÑÁÀÉÈÍÒÓÚ]*", nom, cognom1, cognom2)){
             error += "- Nombre o apellido incorrecto ";
-        } else if (!segSocialCorrecto(numSegSocial)) {
+        }
+        if (!segSocialCorrecto(numSegSocial)) {
             error += "- Numero de la seguridad social incorrecto ";
-        } else if (!cumplePatron("^[967][1-9]{8}$", telefon)) {
+        }
+        if (!cumplePatron("^[967][0-9]{8}$", telefon)) {
             error += "- Numero de telefono incorrecto ";
         }
         
@@ -48,7 +51,7 @@ public abstract class Persona {
         if(!textAnalitzar.matches()) {
             return false;
         } else {
-            return TABLA_LETRA.charAt((Integer.parseInt(nif.substring(0,8)) % 23)-1) == nif.charAt(9);
+            return TABLA_LETRA.charAt((Integer.parseInt(nif.substring(0,8)) % 23)) == nif.charAt(8);
         }
     }
     

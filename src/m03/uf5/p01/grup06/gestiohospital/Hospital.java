@@ -43,7 +43,7 @@ public class Hospital {
     
     public void addPacient (Pacient... p)  {
         for (Pacient pacient : p) {
-            if (pacients.containsKey(pacient.getNif()) || pacients.containsValue(pacient)) {
+            if (pacients.containsKey(pacient.getNif())) {
                 if (!historials.containsKey(pacient.getHistorial().getCodi())) {
                     this.addHistorial(pacient.getHistorial());
                 }
