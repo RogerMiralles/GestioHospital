@@ -52,7 +52,7 @@ public class GestioHospital {
         System.out.println("Inserte el metodo de identificacion del paciente:\n"
                 + "\t1. NIF \n\t2. Numero de la Seguridad Social\n\t 3. Codi historial");
         
-        int codi = -1;
+        int codi;
         switch(SC.nextInt()) {
             case 1:
                 System.out.print("Inserte el DNI del paciente: ");
@@ -60,7 +60,7 @@ public class GestioHospital {
                 break;
             case 2:
                 System.out.print("Inserte el Numero de la Seguridad Social del paciente: ");
-                //codi = h.getPacient()
+                codi = h.getPacient(SC.nextInt()).getHistorial().getCodi();
                 break;
             case 3:
                 System.out.print("Inserte el codigo del historal del paciente: ");
@@ -71,7 +71,22 @@ public class GestioHospital {
                 addVisita();
                 break;
         }
-        Visita v = 
+        
+        System.out.println("Inserte el metodo de identificacion del medico:\n"
+                + "\t1. NIF \n\t2. Numero de la Seguridad Social");
+        Metge m;
+        switch(SC.nextInt()) {
+            case 1:
+                System.out.print("Inserte el DNI del medico: ");
+                m = h.getMetge(SC.next());
+                break;
+            case 2:
+                System.out.print("Inserte el Numero de la Seguridad Social del medico: ");
+                m = h.getMetge(SC.nextInt());
+                break; 
+        }
+        
+        Visita v = new Visita();
         
         h.getHistorial(codi).addVisita(v);
     }
@@ -90,8 +105,7 @@ public class GestioHospital {
         System.out.print("Inserte el telefon: ");
         int tel = SC.nextInt();
         
-        
-        
+        Pacient p = new Pacient (/* .... */);
         h.addPacient(p);
     }
 }

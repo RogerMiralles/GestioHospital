@@ -2,6 +2,7 @@ package m03.uf5.p01.grup06.gestiohospital;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class Hospital {
     private final Map<String, Pacient> pacients;
@@ -81,12 +82,32 @@ public class Hospital {
         }
     }
     
+    public Metge getMetge (int SS) {
+        for(Entry<String,Metge> entrada : metges.entrySet()){
+            Metge m = entrada.getValue();
+            if (m.getNumSegSocial().equals(SS)) {
+                return m;
+            }
+        }
+        return null;
+    }
+    
     public Pacient getPacient (String dni) {
         if (pacients.containsKey(dni)) {
             return pacients.get(dni);
         } else {
             return null;
         }
+    }
+    
+    public Pacient getPacient (int SS) {
+        for(Entry<String,Pacient> entrada : pacients.entrySet()){
+            Pacient p = entrada.getValue();
+            if (p.getNumSegSocial().equals(SS)) {
+                return p;
+            }
+        }
+        return null;
     }
     
     public Historial getHistorial (int codi) {

@@ -48,7 +48,7 @@ public abstract class Persona {
         if(!textAnalitzar.matches()) {
             return false;
         } else {
-            return TABLA_LETRA.charAt(Integer.parseInt(nif.substring(0,8)) % 23) == nif.charAt(9);
+            return TABLA_LETRA.charAt((Integer.parseInt(nif.substring(0,8)) % 23)-1) == nif.charAt(9);
         }
     }
     
