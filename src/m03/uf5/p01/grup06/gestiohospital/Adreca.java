@@ -11,13 +11,13 @@ package m03.uf5.p01.grup06.gestiohospital;
  */
 public class Adreca {
     private final String ciutat;
-    private final int codiPostal;
+    private final long codiPostal;
     private final String carrer;
     private final int numero;
     private final String planta;
     private final String porta;
 
-    public Adreca(String ciutat, int codiPostal, String carrer, int numero, String planta, String porta) {
+    public Adreca(String ciutat, long codiPostal, String carrer, int numero, String planta, String porta) {
         this.ciutat = ciutat;
         this.codiPostal = codiPostal;
         this.carrer = carrer;
@@ -28,6 +28,6 @@ public class Adreca {
 
     @Override
     public String toString() {
-        return "Carrer " + carrer + " Nº" + numero + " " + numero + " " + planta + "-" + porta + "\n" + codiPostal + " " + ciutat;
+        return "Carrer " + carrer + " Nº" + numero + " " + planta + "-" + porta + "\n" + codiPostal + " " + ciutat;
     }
 }

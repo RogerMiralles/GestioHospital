@@ -110,6 +110,16 @@ public class Hospital {
         return null;
     }
     
+    public Pacient getPacientPerHistorial (int numHistorial) {
+        for(Entry<String,Pacient> entrada : pacients.entrySet()){
+            Pacient p = entrada.getValue();
+            if (p.getHistorial().getCodi() == numHistorial) {
+                return p;
+            }
+        }
+        return null;
+    }
+    
     public Historial getHistorial (int codi) {
         if (historials.containsKey(codi)) {
             return historials.get(codi);

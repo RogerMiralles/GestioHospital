@@ -16,8 +16,7 @@ public class Pacient extends Persona {
                 + "Nnumero de SS: " + this.getNumSegSocial() + "\n"
                 + "DNI: " + this.getNif() + "\n"
                 + "Telefon: " + this.getTelefon() + "\n"
-                + "Adreça: " + this.getAdreca().toString() + "\n"
-                + historial.toString();
+                + "Adreça:\n" + this.getAdreca().toString() + "\n";
     }
     
     public Historial getHistorial() {
