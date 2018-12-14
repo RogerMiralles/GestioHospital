@@ -9,13 +9,13 @@ public class GestioHospital {
     private static final Scanner SC = new Scanner(System.in);
     
     public static void main(String[] args) {
-        iniciaHospital();
+        //iniciaHospital();
         boolean seguir = true;
         
         while (seguir){
             switch (opcionMenu()) {
                 case 1:
-                    addVisita();
+                    //addVisita();
                     break;
                 case 2:
                     break;
@@ -45,7 +45,24 @@ public class GestioHospital {
     }
     
     private static int opcionMenu() {
-        
+        System.out.println("╔══════════════════════════════════╗\n"
+                         + "║                                                     ║\n"
+                         + "║    Menu de selecció d'accions de l'Hospital         ║\n"
+                         + "║                                                     ║\n"
+                         + "║           1 - Registrar Visita                      ║\n"
+                         + "║                                                     ║\n"
+                         + "║           2 - Afegir Nou Pacient                    ║\n"
+                         + "║                                                     ║\n"
+                         + "║           3 - Mostrar Dades del Pacient             ║\n"
+                         + "║                                                     ║\n"
+                         + "║           4 - Mostrar Dades del Metge               ║\n"
+                         + "║                                                     ║\n"
+                         + "║           5 - Mostrar Historial del Pacient         ║\n"
+                         + "║                                                     ║\n"
+                         + "║           6 - Sortir                                ║\n"
+                         + "║                                                     ║\n"
+                         + "╚══════════════════════════════════╝\n");
+        return SC.nextInt();
     }
     
     private static void addVisita() {
