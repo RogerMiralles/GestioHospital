@@ -33,7 +33,7 @@ public class Hospital {
     
     public void addMetge (Metge... m)  {
         for (Metge metge : m) {
-            if (metges.containsKey(metge.getNif()) || metges.containsValue(metge)) {
+            if (!metges.containsKey(metge.getNif())) {
                 metges.put(metge.getNif(), metge);
             } else {
                 throw (new IllegalArgumentException("Metge duplicat."));
@@ -43,7 +43,7 @@ public class Hospital {
     
     public void addPacient (Pacient... p)  {
         for (Pacient pacient : p) {
-            if (pacients.containsKey(pacient.getNif())) {
+            if (!pacients.containsKey(pacient.getNif())) {
                 if (!historials.containsKey(pacient.getHistorial().getCodi())) {
                     this.addHistorial(pacient.getHistorial());
                 }
@@ -56,7 +56,7 @@ public class Hospital {
     
     public void addHistorial (Historial... h)  {
         for (Historial historial : h) {
-            if (historials.containsKey(historial.getCodi())) {
+            if (!historials.containsKey(historial.getCodi())) {
                 historials.put(historial.getCodi(), historial);
             } else {
                 throw (new IllegalArgumentException("Historial duplicat."));
@@ -66,7 +66,7 @@ public class Hospital {
     
     public void addMalaltia (Malaltia... m)  {
         for (Malaltia malaltia : m) {
-            if (malalties.containsKey(malaltia.getCodi())) {
+            if (!malalties.containsKey(malaltia.getCodi())) {
                 malalties.put(malaltia.getCodi(), malaltia);
             } else {
                 throw (new IllegalArgumentException("Malaltia duplicada."));
