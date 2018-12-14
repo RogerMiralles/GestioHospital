@@ -69,7 +69,7 @@ public class GestioHospital {
         System.out.println("Inserte el metodo de identificacion del paciente:\n"
                 + "\t1. NIF \n\t2. Numero de la Seguridad Social\n\t 3. Codi historial");
         
-        int codi;
+        int codi = -1;
         switch(SC.nextInt()) {
             case 1:
                 System.out.print("Inserte el DNI del paciente: ");
