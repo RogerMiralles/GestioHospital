@@ -28,6 +28,7 @@ public class GestioHospital {
                     mostrarMetge();
                     break;
                 case 5:
+                    historialPacient();
                     break;
                 case 6:
                     seguir = false;
@@ -202,5 +203,40 @@ public class GestioHospital {
                 System.out.println(h.getMetge(identDNI));
                 break;
         }
+    }
+
+    private static void historialPacient() {
+        System.out.println("Quin pacient es vol mostrar?"
+                          +"    1 - Seleccionar por numero de la seguridad social."
+                          +"    2 - Seleccionar por DNI.");
+        int option = SC.nextInt();
+        switch(option){
+            case 1:
+                int identSeg = SC.nextInt();
+                if(h.getPacient(identSeg)!= null){
+                  System.out.println("Intro numero historial");
+                    int historialCodi = SC.nextInt();
+                    System.out.println(h.getHistorial(historialCodi));  
+                }
+                else{
+                    System.out.println("No existeix el pacient");
+                }
+                
+                break;
+                
+            case 2:
+                String identDNI = SC.next();
+                if(h.getPacient(identDNI)!= null){
+                  System.out.println("Intro numero historial");
+                    int historialCodi = SC.nextInt();
+                    System.out.println(h.getHistorial(historialCodi));  
+                }
+                else{
+                    System.out.println("No existeix el pacient");
+                }
+                System.out.println(h.getPacient(identDNI));
+                break;
+        }
+        
     }
 }
