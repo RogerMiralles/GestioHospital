@@ -5,15 +5,15 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class Hospital {
+
     private final Map<String, Pacient> pacients;
     private final Map<String, Metge> metges;
     private final Map<Integer, Historial> historials;
     private final Map<Integer, Malaltia> malalties;
     private final String nomHospital;
     private final Adreca adreca;
-    
-    
-    public Hospital(String nom, Adreca adreca){
+
+    public Hospital(String nom, Adreca adreca) {
         this.nomHospital = nom;
         this.adreca = adreca;
         this.pacients = new HashMap<>();
@@ -21,7 +21,7 @@ public class Hospital {
         this.historials = new HashMap<>();
         this.malalties = new HashMap<>();
     }
-    
+
     public Hospital(String nom, String ciutat, int codiPostal, String carrer, int numero, String planta, String porta) {
         this.nomHospital = nom;
         this.adreca = new Adreca(ciutat, codiPostal, carrer, numero, planta, porta);
@@ -30,31 +30,33 @@ public class Hospital {
         this.historials = new HashMap<>();
         this.malalties = new HashMap<>();
     }
-    
-    public void addMetge (Metge... m)  {
+
+    public void addMetge(Metge... m) {
         for (Metge metge : m) {
-            if (!metges.containsKey(metge.getNif())) {
+            if (metges.containsKey(metge.getNif())) {
+                throw (new IllegalArgumentException("Metge duplicat. (Ja hi ha un pacient amb aquet DNI)."));
+            } else if (getMetge(Long.parseLong(metge.getNumSegSocial())) != null) {
+                throw (new IllegalArgumentException("Metge duplicat. (Ja hi ha un pacient amb aquet num de la SS)."));
+            } else {
                 metges.put(metge.getNif(), metge);
-            } else {
-                throw (new IllegalArgumentException("Metge duplicat."));
             }
         }
     }
-    
-    public void addPacient (Pacient... p)  {
+
+    public void addPacient(Pacient... p) {
         for (Pacient pacient : p) {
-            if (!pacients.containsKey(pacient.getNif())) {
-                if (!historials.containsKey(pacient.getHistorial().getCodi())) {
-                    this.addHistorial(pacient.getHistorial());
-                }
-                pacients.put(pacient.getNif(), pacient);
+            if (pacients.containsKey(pacient.getNif())) {
+                throw (new IllegalArgumentException("Pacient duplicat. (Ja hi ha un pacient amb aquet DNI)."));
+            } else if (this.getPacient(Long.parseLong(pacient.getNumSegSocial())) != null) {
+                throw (new IllegalArgumentException("Pacient duplicat. (Ja hi ha un pacient amb aquet num de la SS)."));
             } else {
-                throw (new IllegalArgumentException("Pacient duplicat."));
+                this.addHistorial(pacient.getHistorial());
+                pacients.put(pacient.getNif(), pacient);
             }
         }
     }
-    
-    public void addHistorial (Historial... h)  {
+
+    public void addHistorial(Historial... h) {
         for (Historial historial : h) {
             if (!historials.containsKey(historial.getCodi())) {
                 historials.put(historial.getCodi(), historial);
@@ -63,8 +65,8 @@ public class Hospital {
             }
         }
     }
-    
-    public void addMalaltia (Malaltia... m)  {
+
+    public void addMalaltia(Malaltia... m) {
         for (Malaltia malaltia : m) {
             if (!malalties.containsKey(malaltia.getCodi())) {
                 malalties.put(malaltia.getCodi(), malaltia);
@@ -73,45 +75,45 @@ public class Hospital {
             }
         }
     }
-    
-    public Metge getMetge (String dni) {
+
+    public Metge getMetge(String dni) {
         if (metges.containsKey(dni)) {
             return metges.get(dni);
         } else {
             return null;
         }
     }
-    
-    public Metge getMetge (int SS) {
-        for(Entry<String,Metge> entrada : metges.entrySet()){
+
+    public Metge getMetge(long SS) {
+        for (Entry<String, Metge> entrada : metges.entrySet()) {
             Metge m = entrada.getValue();
-            if (m.getNumSegSocial().equals(SS)) {
+            if (Long.parseLong(m.getNumSegSocial()) == SS) {
                 return m;
             }
         }
         return null;
     }
-    
-    public Pacient getPacient (String dni) {
+
+    public Pacient getPacient(String dni) {
         if (pacients.containsKey(dni)) {
             return pacients.get(dni);
         } else {
             return null;
         }
     }
-    
-    public Pacient getPacient (int SS) {
-        for(Entry<String,Pacient> entrada : pacients.entrySet()){
+
+    public Pacient getPacient(double SS) {
+        for (Entry<String, Pacient> entrada : pacients.entrySet()) {
             Pacient p = entrada.getValue();
-            if (p.getNumSegSocial().equals(SS)) {
+            if (Long.parseLong(p.getNumSegSocial()) == SS) {
                 return p;
             }
         }
         return null;
     }
-    
-    public Pacient getPacientPerHistorial (int numHistorial) {
-        for(Entry<String,Pacient> entrada : pacients.entrySet()){
+
+    public Pacient getPacient(int numHistorial) {
+        for (Entry<String, Pacient> entrada : pacients.entrySet()) {
             Pacient p = entrada.getValue();
             if (p.getHistorial().getCodi() == numHistorial) {
                 return p;
@@ -119,31 +121,32 @@ public class Hospital {
         }
         return null;
     }
-    
-    public Historial getHistorial (int codi) {
+
+    public Historial getHistorial(int codi) {
         if (historials.containsKey(codi)) {
             return historials.get(codi);
         } else {
             return null;
         }
     }
-    
-    public Historial getHistorial (String dniPacient) {
+
+    public Historial getHistorial(String dniPacient) {
         int codi = this.getPacient(dniPacient).getHistorial().getCodi();
         return getHistorial(codi);
     }
-         
-    public Malaltia getMalaltia (int codi) {
+
+    public Malaltia getMalaltia(int codi) {
         if (malalties.containsKey(codi)) {
             return malalties.get(codi);
         } else {
             return null;
         }
     }
-    
+
     @Override
-    public String toString () {
-        return "Hospital " + this.nomHospital + "\n Adreça: " + this.adreca + 
-                "\n Metges: " + this.metges.size() + "\n Pacients: " + this.pacients.size();     
+    public String toString() {
+        return "Hospital " + this.nomHospital + "\n" + this.adreca
+                + "\n Metges: " + this.metges.size() + "\n Pacients: " + this.pacients.size()
+                + "\n Historials: " + this.historials.size() + "\n Malalties: " + this.malalties.size();
     }
 }

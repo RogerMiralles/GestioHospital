@@ -62,6 +62,7 @@ public class GestioHospital {
             h.getPacient("45872365S").getHistorial().addVisita(new Visita(LocalDateTime.parse("2018-02-23T10:15:30"), h.getMalaltia(2), h.getMetge("78941245R")));
             h.getPacient("45872365S").getHistorial().addVisita(new Visita(LocalDateTime.parse("2012-10-02T10:15:30"), h.getMalaltia(1), h.getMetge("48181321R")));
 
+            System.out.println("Hospital iniciado con exito.\n\n" + h + "\n");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -90,9 +91,15 @@ public class GestioHospital {
     }
 
     private static void addVisita() {
-
-        int codi = identificaPacient().getHistorial().getCodi();
+        
+        Pacient p = identificaPacient();
+        if (p == null) { 
+            return; 
+        }
         Metge metg = identificaMetge();
+        if (metg == null) {
+            return;
+        }
 
         Malaltia mal = null;
         while (mal == null) {
@@ -101,7 +108,7 @@ public class GestioHospital {
             System.out.println("Malaltia no encontrada. Intentlo otra vez.");
         }
 
-        h.getHistorial(codi).addVisita(new Visita(LocalDateTime.now(), mal, metg));
+        h.getHistorial(p.getHistorial().getCodi()).addVisita(new Visita(LocalDateTime.now(), mal, metg));
         System.out.println("Visita añadida con exito.");
     }
 
@@ -131,28 +138,41 @@ public class GestioHospital {
         System.out.print("Insertar la Ciudad:");
         String ciudad = SC.next();
 
-        Pacient p = new Pacient(nom, ap1, ap2, nSs, nif, tel, new Adreca(ciudad, postal, calle, num, planta, puerta));
-        h.addPacient(p);
-        System.out.println("Paciente añadido con exito.");
+        try {
+            Pacient p = new Pacient(nom, ap1, ap2, nSs, nif, tel, new Adreca(ciudad, postal, calle, num, planta, puerta));
+            h.addPacient(p);
+            System.out.println("Paciente añadido con exito.");
+        } catch (Exception e) {
+            System.out.println("No se ha podido añadir al paciente: " + e.getMessage());
+        }
     }
 
     private static void mostrarPacient() {
-        System.out.println("\n" + identificaPacient() + "\n");
+        Pacient p = identificaPacient();
+        if (p != null) {
+            System.out.println("\n" + p + "\n");
+        }
     }
 
     private static void mostrarMetge() {
-        System.out.println("\n" + identificaMetge() + "\n");
+        Metge m = identificaMetge();
+        if (m != null) {
+            System.out.println("\n" + m + "\n");
+        }
     }
 
     private static void mostraHistorial() {
-        System.out.println("\n" + identificaPacient().getHistorial() + "\n");
+        Pacient p = identificaPacient();
+        if (p != null) {
+            System.out.println("\n" + p.getHistorial() + "\n");
+        }
     }
 
     private static Pacient identificaPacient() {
         Pacient p = null;
         while (p == null) {
             System.out.print("\nInserte el metodo de identificacion del paciente:\n"
-                    + "\t1. NIF \n\t2. Numero de la Seguridad Social\n\t3. Codigo de historial\n\nInserte aqui su opcion: ");
+                    + "\t1. NIF \n\t2. Numero de la Seguridad Social\n\t3. Codigo de historial\n\t4. Tornar al menu principal\n\nInserte su opcion: ");
             try {
                 switch (Integer.parseInt(SC.next())) {
                     case 1:
@@ -165,7 +185,7 @@ public class GestioHospital {
                     case 2:
                         System.out.print("Inserte el Numero de la Seguridad Social del paciente: ");
                         try {
-                            p = h.getPacient(Integer.parseInt(SC.next()));
+                            p = h.getPacient(Long.parseLong(SC.next()));
                             if (p == null) {
                                 System.out.println("No se ha encontrado nadie con ese numero de la SS. Intentlo otra vez.");
                             }
@@ -176,7 +196,7 @@ public class GestioHospital {
                     case 3:
                         System.out.print("Inserte el codigo del historal del paciente: ");
                         try {
-                            p = h.getPacientPerHistorial(Integer.parseInt(SC.next()));
+                            p = h.getPacient(Integer.parseInt(SC.next()));
                             if (p == null) {
                                 System.out.println("No se ha encontrado nadie con ese numero de historial. Intentlo otra vez.");
                             }
@@ -184,6 +204,8 @@ public class GestioHospital {
                             System.out.println("Numero de historial invalido, intentelo de nuevo insertando unicamente con digitos y sin espacios.");
                         }
                         break;
+                    case 4:
+                        return null;
                     default:
                         System.out.println("Opcion insertada incorrecta. Intentlo otra vez.");
                         break;
@@ -199,7 +221,7 @@ public class GestioHospital {
         Metge metg = null;
         while (metg == null) {
             System.out.print("Inserte el metodo de identificacion del medico:\n"
-                    + "\t1. NIF \n\t2. Numero de la Seguridad Social\n\nInserte aqui su opcion: ");
+                    + "\t1. NIF \n\t2. Numero de la Seguridad Social\n\t3. Tornar al menu principal\n\nInserte su opcion: ");
 
             try {
                 switch (Integer.parseInt(SC.next())) {
@@ -210,11 +232,13 @@ public class GestioHospital {
                     case 2:
                         System.out.print("Inserte el Numero de la Seguridad Social del medico: ");
                         try {
-                            metg = h.getMetge(Integer.parseInt(SC.next()));
+                            metg = h.getMetge(Long.parseLong(SC.next()));
                         } catch (NumberFormatException e) {
                             System.out.println("Numero de la SS invalido, intentelo de nuevo insertando los 12 digitos sin espacios.");
                         }
                         break;
+                    case 3:
+                        return null;
                     default:
                         System.out.println("Opcion insertada incorrecta. Intentlo otra vez.");
                 }
