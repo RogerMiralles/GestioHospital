@@ -3,11 +3,12 @@ package m03.uf5.p01.grup06.gestiohospital;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class GestioHospital {
 
     private static Hospital h;
-    private static final Scanner SC = new Scanner(System.in);
+    private static final Scanner SC = new Scanner(System.in, "ISO-8859-1");
 
     public static void main(String[] args) {
         iniciaHospital();
@@ -87,7 +88,18 @@ public class GestioHospital {
                 + "║                                                     ║\n"
                 + "╚══════════════════════════════════╝\n");
         System.out.print("Inserte aqui su opcion: ");
-        return SC.nextInt();
+        while (true){
+            try {
+                int i = Integer.parseInt(SC.next());
+                if (i >= 1 && i <= 6) {
+                    return i;
+                } else {
+                    System.out.print("Opcion insertada invalida. Inserte un valor del 1 al 6: ");
+                }
+            } catch (NumberFormatException e) {
+                System.out.print("Valor invalido. Inserte un numero: ");
+            }
+        }
     }
 
     private static void addVisita() {
@@ -113,6 +125,7 @@ public class GestioHospital {
     }
 
     private static void addPacient() {
+        SC.useDelimiter(Pattern.compile("(\\n)|;"));
         System.out.print("Inserte el nombre: ");
         String nom = SC.next();
         System.out.print("Inserte el primer apellido: ");
@@ -122,20 +135,20 @@ public class GestioHospital {
         System.out.print("Inserte el numero de la seguridad social: ");
         String nSs = SC.next();
         System.out.print("Inserte el DNI o NIF: ");
-        String nif = SC.next();
+        String nif = SC.next().toUpperCase();
         System.out.print("Inserte el telefono: ");
         String tel = SC.next();
-        System.out.print("Inserte la Calle:");
+        System.out.print("Inserte la calle: ");
         String calle = SC.next();
-        System.out.print("Inserte el Numero:");
+        System.out.print("Inserte el numero: ");
         int num = SC.nextInt();
-        System.out.print("Inserte la Planta (con letras):");
+        System.out.print("Inserte la planta: ");
         String planta = SC.next();
-        System.out.print("Inserte la Puerta (con letras):");
+        System.out.print("Inserte la puerta: ");
         String puerta = SC.next();
-        System.out.print("Inserte el Codigo Postal (omitir 0 a la izquierda):");
+        System.out.print("Inserte el Codigo Postal: ");
         int postal = SC.nextInt();
-        System.out.print("Insertar la Ciudad:");
+        System.out.print("Insertar la ciudad: ");
         String ciudad = SC.next();
 
         try {
@@ -177,7 +190,7 @@ public class GestioHospital {
                 switch (Integer.parseInt(SC.next())) {
                     case 1:
                         System.out.print("Inserte el DNI del paciente: ");
-                        p = h.getPacient(SC.next());
+                        p = h.getPacient(SC.next().toUpperCase());
                         if (p == null) {
                             System.out.println("No se ha encontrado nadie con ese DNI. Intentelo otra vez.");
                         }
@@ -227,7 +240,7 @@ public class GestioHospital {
                 switch (Integer.parseInt(SC.next())) {
                     case 1:
                         System.out.print("Inserte el DNI del medico: ");
-                        metg = h.getMetge(SC.next());
+                        metg = h.getMetge(SC.next().toUpperCase());
                         break;
                     case 2:
                         System.out.print("Inserte el Numero de la Seguridad Social del medico: ");

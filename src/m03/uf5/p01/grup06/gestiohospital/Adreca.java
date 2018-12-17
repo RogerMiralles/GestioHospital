@@ -10,6 +10,7 @@ package m03.uf5.p01.grup06.gestiohospital;
  * @author Joel C
  */
 public class Adreca {
+
     private final String ciutat;
     private final long codiPostal;
     private final String carrer;
@@ -28,6 +29,10 @@ public class Adreca {
 
     @Override
     public String toString() {
-        return "Carrer " + carrer + " Nº" + numero + " " + planta + "-" + porta + "\n" + codiPostal + " " + ciutat;
+        if (codiPostal > 9999) {
+            return "Carrer " + carrer + " Nº" + numero + " " + planta + "-" + porta + "\n" + codiPostal + " " + ciutat;
+        } else {
+            return "Carrer " + carrer + " Nº" + numero + " " + planta + "-" + porta + "\n0" + codiPostal + " " + ciutat;
+        }
     }
 }
