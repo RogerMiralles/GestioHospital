@@ -54,8 +54,8 @@ public class GestioHospital {
             h.addMetge(new Metge("Margarita", "Robles", "Rojas", "257896321461", "78941245R", "654789123", a1, 12, 2500, "ES97"));
             h.addMetge(new Metge("Jose", "Segura", "Iglesias", "157894523691", "78523458D", "678521478", a3, 13, 2000, "ES52"));
 
-            h.addMalaltia(new Malaltia("Resfriado", false, "Xarop per la tos", Duration.ofDays(5)));
-            h.addMalaltia(new Malaltia("Conjuntivitis", true, "Clorido", Duration.ofDays(7)));
+            h.addMalaltia(new Malaltia("Resfriado", false, "Jarabe para la tos", Duration.ofDays(5)));
+            h.addMalaltia(new Malaltia("Conjuntivitis", true, "Colirio", Duration.ofDays(7)));
             h.addMalaltia(new Malaltia("Laringitis", false, "Antibiotico", Duration.ofDays(10)));
 
             h.getPacient("45990250W").getHistorial().addVisita(new Visita(LocalDateTime.parse("2007-12-03T10:15:30"), h.getMalaltia(1), h.getMetge("48181321R")));
@@ -72,19 +72,19 @@ public class GestioHospital {
     private static int opcionMenu() {
         System.out.println("╔══════════════════════════════════╗\n"
                 + "║                                                     ║\n"
-                + "║    Menu de selecció d'accions de l'Hospital         ║\n"
+                + "║    Menu de selección de acciones del Hospital       ║\n"
                 + "║                                                     ║\n"
                 + "║           1 - Registrar Visita                      ║\n"
                 + "║                                                     ║\n"
-                + "║           2 - Afegir Nou Pacient                    ║\n"
+                + "║           2 - Añadir Nuevo Paciente                 ║\n"
                 + "║                                                     ║\n"
-                + "║           3 - Mostrar Dades del Pacient             ║\n"
+                + "║           3 - Mostrar Datos del Paciente            ║\n"
                 + "║                                                     ║\n"
-                + "║           4 - Mostrar Dades del Metge               ║\n"
+                + "║           4 - Mostrar Datos del Medico              ║\n"
                 + "║                                                     ║\n"
-                + "║           5 - Mostrar Historial del Pacient         ║\n"
+                + "║           5 - Mostrar Historial del Paciente        ║\n"
                 + "║                                                     ║\n"
-                + "║           6 - Sortir                                ║\n"
+                + "║           6 - Salir                                 ║\n"
                 + "║                                                     ║\n"
                 + "╚══════════════════════════════════╝\n");
         System.out.print("Inserte aqui su opcion: ");
@@ -115,9 +115,9 @@ public class GestioHospital {
 
         Malaltia mal = null;
         while (mal == null) {
-            System.out.print("Inserta el codi de la malaltia: ");
+            System.out.print("Inserta el codigo de la enfermedad: ");
             mal = h.getMalaltia(SC.nextInt());
-            System.out.println("Malaltia no encontrada. Intentlo otra vez.");
+            System.out.println("Enfermedad no encontrada. Intentlo otra vez.");
         }
 
         h.getHistorial(p.getHistorial().getCodi()).addVisita(new Visita(LocalDateTime.now(), mal, metg));
@@ -185,7 +185,7 @@ public class GestioHospital {
         Pacient p = null;
         while (p == null) {
             System.out.print("\nInserte el metodo de identificacion del paciente:\n"
-                    + "\t1. NIF \n\t2. Numero de la Seguridad Social\n\t3. Codigo de historial\n\t4. Tornar al menu principal\n\nInserte su opcion: ");
+                    + "\t1. NIF \n\t2. Numero de la Seguridad Social\n\t3. Codigo de historial\n\t4. Volver al menu principal\n\nInserte su opcion: ");
             try {
                 switch (Integer.parseInt(SC.next())) {
                     case 1:
@@ -234,7 +234,7 @@ public class GestioHospital {
         Metge metg = null;
         while (metg == null) {
             System.out.print("Inserte el metodo de identificacion del medico:\n"
-                    + "\t1. NIF \n\t2. Numero de la Seguridad Social\n\t3. Tornar al menu principal\n\nInserte su opcion: ");
+                    + "\t1. NIF \n\t2. Numero de la Seguridad Social\n\t3. Volver al menu principal\n\nInserte su opcion: ");
 
             try {
                 switch (Integer.parseInt(SC.next())) {
