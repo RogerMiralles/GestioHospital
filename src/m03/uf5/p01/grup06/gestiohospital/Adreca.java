@@ -30,9 +30,9 @@ public class Adreca {
     @Override
     public String toString() {
         if (codiPostal > 9999) {
-            return "Carrer " + carrer + " Nº" + numero + " " + planta + "-" + porta + "\n" + codiPostal + " " + ciutat;
+            return "Calle " + carrer + " Nº" + numero + " " + planta + "-" + porta + "\n" + codiPostal + " " + ciutat;
         } else {
-            return "Carrer " + carrer + " Nº" + numero + " " + planta + "-" + porta + "\n0" + codiPostal + " " + ciutat;
+            return "Calle " + carrer + " Nº" + numero + " " + planta + "-" + porta + "\n0" + codiPostal + " " + ciutat;
         }
     }
 }

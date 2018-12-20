@@ -15,15 +15,15 @@ public class Historial {
     
     @Override
     public String toString() {
-        String s = "HISTORIAL [Codi " + this.codi + "]\n----------------------------------------------";
+        String s = "HISTORIAL [Codigo " + this.codi + "]\n----------------------------------------------";
         
         Iterator<Visita> lit = visitas.iterator();
         
         while (lit.hasNext()) {
             Visita v = lit.next();
             s += "\n Visita " + v.getData().toString();
-            s += "\n Metge: " + v.getMetge().getNom() + " " + v.getMetge().getCognom1();
-            s += "\n Malaltia: " + v.getMalaltia().toString();
+            s += "\n Medico: " + v.getMetge().getNom() + " " + v.getMetge().getCognom1();
+            s += "\n Enfermedad: " + v.getMalaltia().toString();
             s += "\n----------------------------------------------";
         }
         return s;

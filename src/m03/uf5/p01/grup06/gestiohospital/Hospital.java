@@ -34,9 +34,9 @@ public class Hospital {
     public void addMetge(Metge... m) {
         for (Metge metge : m) {
             if (metges.containsKey(metge.getNif())) {
-                throw (new IllegalArgumentException("Metge duplicat. (Ja hi ha un pacient amb aquet DNI)."));
+                throw (new IllegalArgumentException("Medico duplicado. (Ya hay un medico con este DNI)."));
             } else if (getMetge(Long.parseLong(metge.getNumSegSocial())) != null) {
-                throw (new IllegalArgumentException("Metge duplicat. (Ja hi ha un pacient amb aquet num de la SS)."));
+                throw (new IllegalArgumentException("Medico duplicado. (Ya hay un medico con este numero de SS)."));
             } else {
                 metges.put(metge.getNif(), metge);
             }
@@ -46,9 +46,9 @@ public class Hospital {
     public void addPacient(Pacient... p) {
         for (Pacient pacient : p) {
             if (pacients.containsKey(pacient.getNif())) {
-                throw (new IllegalArgumentException("Pacient duplicat. (Ja hi ha un pacient amb aquet DNI)."));
+                throw (new IllegalArgumentException("Paciente duplicado. (Ya hay un paciente con este DNI)."));
             } else if (this.getPacient(Long.parseLong(pacient.getNumSegSocial())) != null) {
-                throw (new IllegalArgumentException("Pacient duplicat. (Ja hi ha un pacient amb aquet num de la SS)."));
+                throw (new IllegalArgumentException("Paciente duplicado. (Ya hay un paciente con este numero de SS)."));
             } else {
                 this.addHistorial(pacient.getHistorial());
                 pacients.put(pacient.getNif(), pacient);
@@ -61,7 +61,7 @@ public class Hospital {
             if (!historials.containsKey(historial.getCodi())) {
                 historials.put(historial.getCodi(), historial);
             } else {
-                throw (new IllegalArgumentException("Historial duplicat."));
+                throw (new IllegalArgumentException("Historial duplicado."));
             }
         }
     }
@@ -71,7 +71,7 @@ public class Hospital {
             if (!malalties.containsKey(malaltia.getCodi())) {
                 malalties.put(malaltia.getCodi(), malaltia);
             } else {
-                throw (new IllegalArgumentException("Malaltia duplicada."));
+                throw (new IllegalArgumentException("Enfermedad duplicada."));
             }
         }
     }
@@ -146,7 +146,7 @@ public class Hospital {
     @Override
     public String toString() {
         return "Hospital " + this.nomHospital + "\n" + this.adreca
-                + "\n Metges: " + this.metges.size() + "\n Pacients: " + this.pacients.size()
-                + "\n Historials: " + this.historials.size() + "\n Malalties: " + this.malalties.size();
+                + "\n Medicos: " + this.metges.size() + "\n Pacientes: " + this.pacients.size()
+                + "\n Historiales: " + this.historials.size() + "\n Enfermedades: " + this.malalties.size();
     }
 }

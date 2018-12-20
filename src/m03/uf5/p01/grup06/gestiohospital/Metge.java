@@ -16,12 +16,12 @@ public class Metge extends Persona {
 
     @Override
     public String toString() {
-        return "Dades Metge \n___________________ \nNIF: " + this.getNif() + "\nNom: "
-                + this.getNom() + "\nCognoms: " + this.getCognom1() + " "
-                + this.getCognom2() + "\nTelefon: " + this.getTelefon()
-                + "\nNumero Seguretat Social: " + this.getNumSegSocial()
-                + "\nAdreca: " + this.getAdreca().toString()
-                + "\nNumero empleat: " + this.numEmpleat + "\nSalari mensual: " + this.salariMensual
-                + "\nCodi compte corrent: " + this.codiCompteCorrent;
+        return "Datos Me \n___________________ \nNIF: " + this.getNif() + "\nNom: "
+                + this.getNom() + "\nApellidos: " + this.getCognom1() + " "
+                + this.getCognom2() + "\nTelefono: " + this.getTelefon()
+                + "\nNumero Seguridad Social: " + this.getNumSegSocial()
+                + "\nDirección: " + this.getAdreca().toString()
+                + "\nNumero empleado: " + this.numEmpleat + "\nSueldo mensual: " + this.salariMensual
+                + "\nCodigo cuenta corriente: " + this.codiCompteCorrent;
     }
 }

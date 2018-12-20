@@ -12,11 +12,11 @@ public class Pacient extends Persona {
 
     @Override
     public String toString() {
-        return "Dades Pacient: " + this.getNom() + " " + this.getCognom1() + " " + this.getCognom2() + "\n"
-                + "Nnumero de SS: " + this.getNumSegSocial() + "\n"
+        return "Datos Paciente: " + this.getNom() + " " + this.getCognom1() + " " + this.getCognom2() + "\n"
+                + "Numero de SS: " + this.getNumSegSocial() + "\n"
                 + "DNI: " + this.getNif() + "\n"
-                + "Telefon: " + this.getTelefon() + "\n"
-                + "Adreça:\n" + this.getAdreca().toString() + "\n";
+                + "Telefono: " + this.getTelefon() + "\n"
+                + "Dirección:\n" + this.getAdreca().toString() + "\n";
     }
     
     public Historial getHistorial() {

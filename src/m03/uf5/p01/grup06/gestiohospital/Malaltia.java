@@ -22,9 +22,9 @@ public class Malaltia {
     @Override
     public String toString() {
         if (causaBaixa) {
-            return "Té la malaltia " + nom + " que causa baixa, el tractament és " + tractament + " i durarà " + duradaTractament.toDays();
+            return "Tiene la enfermedad " + nom + " que causa baja, el tratamiento es " + tractament + " y durará " + duradaTractament.toDays();
         } else {
-            return "Té la malaltia " + nom + " que no causa baixa, el tractament és " + tractament + " i durarà " + duradaTractament.toDays();
+            return "Tiene la enfermedad " + nom + " que no causa baja, el tratamiento es " + tractament + " y durará " + duradaTractament.toDays();
         }
     }
     
