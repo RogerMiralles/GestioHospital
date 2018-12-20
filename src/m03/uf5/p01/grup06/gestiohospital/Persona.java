@@ -19,7 +19,7 @@ public abstract class Persona {
         if (!nifCorrecto(nif)) {
             error += "- NIF incorrecto ";
         }
-        if (!cumplePatron("^[A-zçñàáéèíóòúÇÑÁÀÉÈÍÒÓÚ]*", nom, cognom1, cognom2)){
+        if (!cumplePatron("^[A-zçñàáéèíóòúÇÑÁÀÉÈÍÒÓÚ]*", nom, cognom1, cognom2)) {
             error += "- Nombre o apellido incorrecto ";
         }
         if (!segSocialCorrecto(numSegSocial)) {
