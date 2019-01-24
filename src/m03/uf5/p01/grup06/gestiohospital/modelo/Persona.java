@@ -1,4 +1,4 @@
-package m03.uf5.p01.grup06.gestiohospital;
+package m03.uf5.p01.grup06.gestiohospital.modelo;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,7 +19,7 @@ public abstract class Persona {
         if (!nifCorrecto(nif)) {
             error += "- NIF incorrecto ";
         }
-        if (!cumplePatron("^[A-zçñàáéèíóòúÇÑÁÀÉÈÍÒÓÚ]*", nom, cognom1, cognom2)) {
+        if (!cumplePatron("^[A-zçñàáéèíóòúÇÑÁÀÉÈÍÒÓÚ·üÜïÏ]*", nom, cognom1, cognom2)){
             error += "- Nombre o apellido incorrecto ";
         }
         if (!segSocialCorrecto(numSegSocial)) {

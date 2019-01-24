@@ -1,11 +1,17 @@
-package m03.uf5.p01.grup06.gestiohospital;
+package m03.uf5.p01.grup06.gestiohospital.controlador;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import m03.uf5.p01.grup06.gestiohospital.modelo.Adreca;
+import m03.uf5.p01.grup06.gestiohospital.modelo.Hospital;
+import m03.uf5.p01.grup06.gestiohospital.modelo.Malaltia;
+import m03.uf5.p01.grup06.gestiohospital.modelo.Metge;
+import m03.uf5.p01.grup06.gestiohospital.modelo.Pacient;
+import m03.uf5.p01.grup06.gestiohospital.modelo.Visita;
 
-public class GestioHospital {
+public class GestioHospital_Antiguo {
 
     private static Hospital h;
     private static final Scanner SC = new Scanner(System.in, "ISO-8859-1");
@@ -117,7 +123,9 @@ public class GestioHospital {
         while (mal == null) {
             System.out.print("Inserta el codigo de la enfermedad: ");
             mal = h.getMalaltia(SC.nextInt());
-            System.out.println("Enfermedad no encontrada. Intentlo otra vez.");
+            if (mal == null) {
+                System.out.println("Enfermedad no encontrada. Intentlo otra vez.");
+            }
         }
 
         h.getHistorial(p.getHistorial().getCodi()).addVisita(new Visita(LocalDateTime.now(), mal, metg));
