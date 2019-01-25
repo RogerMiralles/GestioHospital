@@ -16,12 +16,20 @@ public class Metge extends Persona {
 
     @Override
     public String toString() {
-        return "Datos Me \n___________________ \nNIF: " + this.getNif() + "\nNom: "
+        return "Datos Medico \n___________________ \nNIF: " + this.getNif() + "\nNom: "
                 + this.getNom() + "\nApellidos: " + this.getCognom1() + " "
                 + this.getCognom2() + "\nTelefono: " + this.getTelefon()
                 + "\nNumero Seguridad Social: " + this.getNumSegSocial()
                 + "\nDirección: " + this.getAdreca().toString()
                 + "\nNumero empleado: " + this.numEmpleat + "\nSueldo mensual: " + this.salariMensual
                 + "\nCodigo cuenta corriente: " + this.codiCompteCorrent;
+    }
+    
+    
+    public String FormatCSVMetge(){
+       return this.getNom()+","+this.getCognom1()+","+this.getCognom2() +","
+               +this.getNumSegSocial()+","+this.getNif()+","+this.getTelefon()+
+               ","+this.getAdreca().FormCSVAdreca()+","+numEmpleat+","+salariMensual+
+               ","+codiCompteCorrent;
     }
 }

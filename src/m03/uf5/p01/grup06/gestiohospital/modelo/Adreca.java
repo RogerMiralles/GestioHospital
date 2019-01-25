@@ -35,4 +35,9 @@ public class Adreca {
             return "Calle " + carrer + " Nº" + numero + " " + planta + "-" + porta + "\n0" + codiPostal + " " + ciutat;
         }
     }
+    
+    public String  FormCSVAdreca(){
+        return  ciutat + "," + codiPostal + "," + carrer + "," + numero + "," + planta + "," + porta; 
+        
+    }
 }

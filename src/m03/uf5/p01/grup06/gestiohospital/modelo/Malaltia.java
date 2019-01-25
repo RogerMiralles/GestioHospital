@@ -18,17 +18,59 @@ public class Malaltia {
         this.tractament = tractament;
         this.duradaTractament = duracion;
     }
+    public Malaltia(int codi,String nom, boolean baixa, String tractament, Duration duracion) {
+        this.codi = codi;
+        this.nom = nom;
+        this.causaBaixa = baixa;
+        this.tractament = tractament;
+        this.duradaTractament = duracion;
+    }
+    
 
     @Override
     public String toString() {
-        if (causaBaixa) {
-            return "Tiene la enfermedad " + nom + " que causa baja, el tratamiento es " + tractament + " y durará " + duradaTractament.toDays();
+        if (isCausaBaixa()) {
+            return "Tiene la enfermedad " + getNom() + " que causa baja, el tratamiento es " + getTractament() + " y durará " + getDuradaTractament().toDays();
         } else {
-            return "Tiene la enfermedad " + nom + " que no causa baja, el tratamiento es " + tractament + " y durará " + duradaTractament.toDays();
+            return "Tiene la enfermedad " + getNom() + " que no causa baja, el tratamiento es " + getTractament() + " y durará " + getDuradaTractament().toDays();
         }
     }
     
     public int getCodi () {
         return this.codi;
     }
+
+    /**
+     * @return the nom
+     */
+    public String getNom() {
+        return nom;
+    }
+
+    /**
+     * @return the causaBaixa
+     */
+    public boolean isCausaBaixa() {
+        return causaBaixa;
+    }
+
+    /**
+     * @return the tractament
+     */
+    public String getTractament() {
+        return tractament;
+    }
+
+    /**
+     * @return the duradaTractament
+     */
+    public Duration getDuradaTractament() {
+        return duradaTractament;
+    }
+    
+    public String FormatCSVMalaltia(){
+        return codi+","+nom+","+causaBaixa+","+tractament+","+duradaTractament.toDays();
+    }
+    
+    
 }
