@@ -40,7 +40,7 @@ public class FicheroCSV {
             
             switch (tipo) {
                 case 1:
-                    
+
                     /*
                     datos[0]=nif
                     datos[1]=numSegSocial
@@ -55,13 +55,13 @@ public class FicheroCSV {
                     datos[10]=planta
                     datos[11]=porta     
                   
-                    */
-                    
+                     */
                     Pacient p = new Pacient(datos[2], datos[3], datos[4], datos[1],
                             datos[0], datos[5], new Adreca(datos[6],
                                     Long.parseLong(datos[7]), datos[8], Integer.parseInt(datos[9]),
                                     datos[10], datos[11]));
-                    
+                    break;
+
                 case 2:
                     /*
                     datos[0]=Data
@@ -85,19 +85,19 @@ public class FicheroCSV {
                     datos[18]=numEmpleat
                     datos[19]=SalriMensual
                     datos[20]=CompteCorrent
-                    */
+                     */
                     Visita v = new Visita(LocalDateTime.parse(datos[0]),
                             new Malaltia(Integer.parseInt(datos[1]), datos[2], Boolean.parseBoolean(datos[3]),
                                     datos[4], Duration.ofDays(Long.parseLong(datos[5]))),
-                                    new Metge(datos[6],
-                                            datos[7], datos[8], datos[9],
-                                            datos[10], datos[11], new Adreca(datos[12], Long.parseLong(datos[13]),
-                                                    datos[14], Integer.parseInt(datos[15]), datos[16], datos[17]),
-                                            Integer.parseInt(datos[18]), Integer.parseInt(datos[19]),
-                                            datos[20]));
+                            new Metge(datos[6],
+                                    datos[7], datos[8], datos[9],
+                                    datos[10], datos[11], new Adreca(datos[12], Long.parseLong(datos[13]),
+                                            datos[14], Integer.parseInt(datos[15]), datos[16], datos[17]),
+                                    Integer.parseInt(datos[18]), Integer.parseInt(datos[19]),
+                                    datos[20]));
+                    break;
                 case 3:
-                    
-                    
+
                     /*
                     datos[0]=nom
                     datos[1]=cognom
@@ -115,12 +115,15 @@ public class FicheroCSV {
                     datos[13]=SalriMensual
                     datos[14]=CompteCorrent
                 
-                    */
+                     */
                     Metge m = new Metge(datos[0], datos[1], datos[2], datos[3],
                             datos[4], datos[5], new Adreca(datos[6], Long.parseLong(datos[7]),
                                     datos[8], Integer.parseInt(datos[9]), datos[10], datos[11]),
                             Integer.parseInt(datos[12]), Integer.parseInt(datos[13]),
                             datos[14]);
+                    
+                    
+                    break;
 
                 case 4:
                     /*
@@ -130,10 +133,10 @@ public class FicheroCSV {
                     datos[3]=tractament
                     datos[4]=duracio  
                     
-                    */
-                    Malaltia mal = new Malaltia(Integer.parseInt(datos[0]),datos[1],Boolean.parseBoolean(datos[2]),
-                            datos[3],Duration.ofDays(Long.parseLong(datos[4])));
-
+                     */
+                    Malaltia mal = new Malaltia(Integer.parseInt(datos[0]), datos[1], Boolean.parseBoolean(datos[2]),
+                            datos[3], Duration.ofDays(Long.parseLong(datos[4])));
+                    break;
             }
         }
     }
@@ -141,24 +144,24 @@ public class FicheroCSV {
     public static void escribeCSV(String nombreFichero, Pacient p) {
         try {
             PrintStream out = new PrintStream(new FileOutputStream(nombreFichero, true));
-            out.println(p.getNif() + "," +p.getNumSegSocial()+","+p.getNom()+","+
-                    p.getCognom1()+","+p.getCognom2()+","+p.getTelefon()+","+
-                    p.getAdreca().FormCSVAdreca());//HISTORIAL???
+            out.println(p.getNif() + "," + p.getNumSegSocial() + "," + p.getNom() + ","
+                    + p.getCognom1() + "," + p.getCognom2() + "," + p.getTelefon() + ","
+                    + p.getAdreca().FormCSVAdreca());//HISTORIAL???
         } catch (FileNotFoundException e) {
             System.out.println("Error al crear el fichero");
         }
     }
-    
+
     public static void escribeCSV(String nombreFichero, Visita v) {
         try {
             PrintStream out = new PrintStream(new FileOutputStream(nombreFichero, true));
-            out.println(v.getData()+","+v.getMalaltia().FormatCSVMalaltia()+","
-                    +v.getMetge().FormatCSVMetge());
+            out.println(v.getData() + "," + v.getMalaltia().FormatCSVMalaltia() + ","
+                    + v.getMetge().FormatCSVMetge());
         } catch (FileNotFoundException e) {
             System.out.println("Error al crear el fichero");
         }
     }
-    
+
     public static void escribeCSV(String nombreFichero, Metge m) {
         try {
             PrintStream out = new PrintStream(new FileOutputStream(nombreFichero, true));
@@ -167,7 +170,7 @@ public class FicheroCSV {
             System.out.println("Error al crear el fichero");
         }
     }
-    
+
     public static void escribeCSV(String nombreFichero, Malaltia m) {
         try {
             PrintStream out = new PrintStream(new FileOutputStream(nombreFichero, true));
