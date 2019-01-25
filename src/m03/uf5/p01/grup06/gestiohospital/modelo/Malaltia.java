@@ -21,14 +21,44 @@ public class Malaltia {
 
     @Override
     public String toString() {
-        if (causaBaixa) {
-            return "Tiene la enfermedad " + nom + " que causa baja, el tratamiento es " + tractament + " y durará " + duradaTractament.toDays();
+        if (isCausaBaixa()) {
+            return "Tiene la enfermedad " + getNom() + " que causa baja, el tratamiento es " + getTractament() + " y durará " + getDuradaTractament().toDays();
         } else {
-            return "Tiene la enfermedad " + nom + " que no causa baja, el tratamiento es " + tractament + " y durará " + duradaTractament.toDays();
+            return "Tiene la enfermedad " + getNom() + " que no causa baja, el tratamiento es " + getTractament() + " y durará " + getDuradaTractament().toDays();
         }
     }
     
     public int getCodi () {
         return this.codi;
     }
+
+    /**
+     * @return the nom
+     */
+    public String getNom() {
+        return nom;
+    }
+
+    /**
+     * @return the causaBaixa
+     */
+    public boolean isCausaBaixa() {
+        return causaBaixa;
+    }
+
+    /**
+     * @return the tractament
+     */
+    public String getTractament() {
+        return tractament;
+    }
+
+    /**
+     * @return the duradaTractament
+     */
+    public Duration getDuradaTractament() {
+        return duradaTractament;
+    }
+    
+    
 }
