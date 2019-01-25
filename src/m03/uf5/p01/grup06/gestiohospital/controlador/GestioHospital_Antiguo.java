@@ -35,14 +35,9 @@ public class GestioHospital_Antiguo {
                     mostrarPacient();
                     break;
                 case 4:
-                    try {
-                    FicheroCSV.leeCSV("metges.csv", 3);
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(GestioHospital_Antiguo.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                    
                     mostrarMetge();
-            
-                
+
             
                     break;
                 case 5:
@@ -59,7 +54,7 @@ public class GestioHospital_Antiguo {
     private static void iniciaHospital() {
         try {
             
-            
+            System.out.println("INCIO");
             
             
             Adreca a1 = new Adreca("Terrassa", 8226, "Pablo Picaso", 45, "Segona", "Primera");
@@ -80,11 +75,39 @@ public class GestioHospital_Antiguo {
             
             
             h = new Hospital("Mutua Terrassa", a3);
+           int i=0;
+            do{
+                if(FicheroCSV.leeCSV("pacients.csv").get(i)!=null){
+                    h.addPacient(FicheroCSV.leeCSV("pacients.csv").get(i));
+                }
+              i++ ; 
+            }while(FicheroCSV.leeCSV("pacients.csv").get(i)!=null);  
+            i=0;
+            System.out.println("Bucle 1");
+            do{
+                if(FicheroCSV.leeCSV2("metges.csv").get(i)!=null){
+                    h.addMetge(FicheroCSV.leeCSV2("metges.csv").get(i));
+                }
+                i++;
+            }while(FicheroCSV.leeCSV2("metges.csv").get(i)!=null);   
+                i=0;
+            
+            
+            System.out.println("EJECUTA");
+            do{
+                if(FicheroCSV.leeCSV3("malalties.csv").get(i)!=null){
+                   h.addMalaltia(FicheroCSV.leeCSV3("malalties.csv").get(i)); 
+                }
+                i++;
+                
+            }while(FicheroCSV.leeCSV3("malalties.csv").get(i)!=null);
+            System.out.println("sadaskjdhakjsdh");
+            FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.parse("2007-12-03T10:15:30"), h.getMalaltia(1), h.getMetge("48181321R")) );
+            FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.parse("2015-05-15T10:15:30"), h.getMalaltia(3), h.getMetge("78523458D")) );
+            FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.parse("2018-02-23T10:15:30"), h.getMalaltia(2), h.getMetge("78941245R")) );
+            FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.parse("2012-10-02T10:15:30"), h.getMalaltia(1), h.getMetge("48181321R")) );
 
-            h.addPacient(new Pacient("Juan", "Martín", "Pascual", "281234567840", "45990250W", "666555444", a1));
-            h.addPacient(new Pacient("Maria", "Garcia", "Luque", "012345678939", "45872365S", "961247845", a2));
-
-            h.addMetge(new Metge("Gregory", "House", "Smith", "396120465841", "48181321R", "937564023", a2, 11, 3000, "ES35"));
+            /*h.addMetge(new Metge("Gregory", "House", "Smith", "396120465841", "48181321R", "937564023", a2, 11, 3000, "ES35"));
             h.addMetge(new Metge("Margarita", "Robles", "Rojas", "257896321461", "78941245R", "654789123", a1, 12, 2500, "ES97"));
             h.addMetge(new Metge("Jose", "Segura", "Iglesias", "157894523691", "78523458D", "678521478", a3, 13, 2000, "ES52"));
             
@@ -97,12 +120,13 @@ public class GestioHospital_Antiguo {
             h.getPacient("45990250W").getHistorial().addVisita(new Visita(LocalDateTime.parse("2015-05-15T10:15:30"), h.getMalaltia(3), h.getMetge("78523458D")));
             h.getPacient("45872365S").getHistorial().addVisita(new Visita(LocalDateTime.parse("2018-02-23T10:15:30"), h.getMalaltia(2), h.getMetge("78941245R")));
             h.getPacient("45872365S").getHistorial().addVisita(new Visita(LocalDateTime.parse("2012-10-02T10:15:30"), h.getMalaltia(1), h.getMetge("48181321R")));
-
+*/
             
            
             System.out.println("Hospital iniciado con exito.\n\n" + h + "\n");
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            System.out.println("HA FALLADO EL PRGRAMA");
         }
     }
 

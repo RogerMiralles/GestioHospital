@@ -11,37 +11,25 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Scanner;
 import m03.uf5.p01.grup06.gestiohospital.modelo.*;
-
 
 /**
  *
  * @author Aleix
  */
-public class FicheroCSV {
-    
+ public class FicheroCSV {
+
    
-    
-    /*
-    1.Paciente
-    2.Visita
-    3.Metge
-    4.Malaltia
-    
-    */
-    
-    public static void leeCSV(String nombreFichero,int tipo) throws FileNotFoundException {
+    public static ArrayList<Pacient> leeCSV(String nombreFichero) throws FileNotFoundException {
         File fichero = new File(nombreFichero);
         Scanner sc = new Scanner(fichero);
-        
+        ArrayList <Pacient> pacients=new ArrayList();
         while (sc.hasNext()) {
             String[] datos = sc.nextLine().split(",");
-            
-            switch (tipo) {
-                case 1:
 
-                    /*
+            /*
                     datos[0]=nif
                     datos[1]=numSegSocial
                     datos[2]=nom
@@ -55,15 +43,25 @@ public class FicheroCSV {
                     datos[10]=planta
                     datos[11]=porta     
                   
-                     */
-                    Pacient p = new Pacient(datos[2], datos[3], datos[4], datos[1],
-                            datos[0], datos[5], new Adreca(datos[6],
-                                    Long.parseLong(datos[7]), datos[8], Integer.parseInt(datos[9]),
-                                    datos[10], datos[11]));
-                    break;
+             */
+            Pacient p = new Pacient(datos[2], datos[3], datos[4], datos[1],
+                    datos[0], datos[5], new Adreca(datos[6],
+                            Long.parseLong(datos[7]), datos[8], Integer.parseInt(datos[9]),
+                            datos[10], datos[11]));
+            pacients.add(p);
 
-                case 2:
-                    /*
+            
+        }
+        return pacients;
+    }
+
+    public static ArrayList <Visita>  leeCSV1(String nombreFichero) throws FileNotFoundException {
+        File fichero = new File(nombreFichero);
+        Scanner sc = new Scanner(fichero);
+        ArrayList <Visita> visites=new ArrayList();
+        while (sc.hasNext()) {
+            String[] datos = sc.nextLine().split(",");
+            /*
                     datos[0]=Data
                     datos[1]=codi
                     datos[2]=nom
@@ -85,20 +83,29 @@ public class FicheroCSV {
                     datos[18]=numEmpleat
                     datos[19]=SalriMensual
                     datos[20]=CompteCorrent
-                     */
-                    Visita v = new Visita(LocalDateTime.parse(datos[0]),
-                            new Malaltia(Integer.parseInt(datos[1]), datos[2], Boolean.parseBoolean(datos[3]),
-                                    datos[4], Duration.ofDays(Long.parseLong(datos[5]))),
-                            new Metge(datos[6],
-                                    datos[7], datos[8], datos[9],
-                                    datos[10], datos[11], new Adreca(datos[12], Long.parseLong(datos[13]),
-                                            datos[14], Integer.parseInt(datos[15]), datos[16], datos[17]),
-                                    Integer.parseInt(datos[18]), Integer.parseInt(datos[19]),
-                                    datos[20]));
-                    break;
-                case 3:
+             */
+            Visita v = new Visita(LocalDateTime.parse(datos[0]),
+                    new Malaltia(Integer.parseInt(datos[1]), datos[2], Boolean.parseBoolean(datos[3]),
+                            datos[4], Duration.ofDays(Long.parseLong(datos[5]))),
+                    new Metge(datos[6],
+                            datos[7], datos[8], datos[9],
+                            datos[10], datos[11], new Adreca(datos[12], Long.parseLong(datos[13]),
+                                    datos[14], Integer.parseInt(datos[15]), datos[16], datos[17]),
+                            Integer.parseInt(datos[18]), Integer.parseInt(datos[19]),
+                            datos[20]));
+            visites.add(v);
 
-                    /*
+        }
+        return visites;
+    }
+
+    public static ArrayList<Metge> leeCSV2(String nombreFichero) throws FileNotFoundException {
+        File fichero = new File(nombreFichero);
+        Scanner sc = new Scanner(fichero);
+        ArrayList <Metge> metges = new ArrayList();
+        while (sc.hasNext()) {
+            String[] datos = sc.nextLine().split(",");
+            /*
                     datos[0]=nom
                     datos[1]=cognom
                     datos[2]=cognom
@@ -115,31 +122,45 @@ public class FicheroCSV {
                     datos[13]=SalriMensual
                     datos[14]=CompteCorrent
                 
-                     */
-                    Metge m = new Metge(datos[0], datos[1], datos[2], datos[3],
-                            datos[4], datos[5], new Adreca(datos[6], Long.parseLong(datos[7]),
-                                    datos[8], Integer.parseInt(datos[9]), datos[10], datos[11]),
-                            Integer.parseInt(datos[12]), Integer.parseInt(datos[13]),
-                            datos[14]);
-                    
-                    
-                    break;
+             */
+            Metge m = new Metge(datos[0], datos[1], datos[2], datos[3],
+                    datos[4], datos[5], new Adreca(datos[6], Long.parseLong(datos[7]),
+                            datos[8], Integer.parseInt(datos[9]), datos[10], datos[11]),
+                    Integer.parseInt(datos[12]), Integer.parseInt(datos[13]),
+                    datos[14]);
 
-                case 4:
-                    /*
+            metges.add(m);
+
+        }
+        return metges;
+    }
+
+    public static ArrayList<Malaltia> leeCSV3(String nombreFichero) throws FileNotFoundException {
+        File fichero = new File(nombreFichero);
+        Scanner sc = new Scanner(fichero);
+        ArrayList<Malaltia> malalties = new ArrayList();
+        while (sc.hasNext()) {
+            String[] datos = sc.nextLine().split(",");
+            /*
                     datos[0]=codi
                     datos[1]=nom
                     datos[2]=causaBaixa
                     datos[3]=tractament
                     datos[4]=duracio  
                     
-                     */
-                    Malaltia mal = new Malaltia(Integer.parseInt(datos[0]), datos[1], Boolean.parseBoolean(datos[2]),
-                            datos[3], Duration.ofDays(Long.parseLong(datos[4])));
-                    break;
-            }
+             */
+            Malaltia mal = new Malaltia(Integer.parseInt(datos[0]), datos[1], Boolean.parseBoolean(datos[2]),
+                    datos[3], Duration.ofDays(Long.parseLong(datos[4])));
+            malalties.add(mal);
+
         }
+        return malalties;
     }
+             
+
+               
+                    
+            
 
     public static void escribeCSV(String nombreFichero, Pacient p) {
         try {
@@ -154,6 +175,7 @@ public class FicheroCSV {
 
     public static void escribeCSV(String nombreFichero, Visita v) {
         try {
+            System.out.println("Hola");
             PrintStream out = new PrintStream(new FileOutputStream(nombreFichero, true));
             out.println(v.getData() + "," + v.getMalaltia().FormatCSVMalaltia() + ","
                     + v.getMetge().FormatCSVMetge());
@@ -182,7 +204,7 @@ public class FicheroCSV {
     
     public static boolean existe(String fichero, int tipo){
         try{
-            leeCSV(fichero,tipo);
+            leeCSV(fichero);
             return true;
         }catch(FileNotFoundException e){
             System.out.println("No existe el fichero");
