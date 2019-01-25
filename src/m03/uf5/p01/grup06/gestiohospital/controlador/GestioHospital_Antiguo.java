@@ -1,8 +1,11 @@
 package m03.uf5.p01.grup06.gestiohospital.controlador;
 
+import java.io.FileNotFoundException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import m03.uf5.p01.grup06.gestiohospital.modelo.Adreca;
 import m03.uf5.p01.grup06.gestiohospital.modelo.Hospital;
@@ -32,7 +35,15 @@ public class GestioHospital_Antiguo {
                     mostrarPacient();
                     break;
                 case 4:
+                    try {
+                    FicheroCSV.leeCSV("metges.csv", 3);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(GestioHospital_Antiguo.class.getName()).log(Level.SEVERE, null, ex);
+                }
                     mostrarMetge();
+            
+                
+            
                     break;
                 case 5:
                     mostraHistorial();
@@ -47,10 +58,27 @@ public class GestioHospital_Antiguo {
 
     private static void iniciaHospital() {
         try {
+            
+            
+            
+            
             Adreca a1 = new Adreca("Terrassa", 8226, "Pablo Picaso", 45, "Segona", "Primera");
             Adreca a2 = new Adreca("Barcelona", 8001, "Plaça Catalunya", 78, "Quarta", "Segona");
             Adreca a3 = new Adreca("Terrassa", 8221, "Plaça Doctor Robert", 5, "S/N", "S/N");
 
+            FicheroCSV.escribeCSV("pacients.csv", new Pacient("Juan", "Martín", "Pascual", "281234567840", "45990250W", "666555444", a1));
+            FicheroCSV.escribeCSV("pacients.csv",new Pacient("Maria", "Garcia", "Luque", "012345678939", "45872365S", "961247845", a2));
+            
+            FicheroCSV.escribeCSV("metges.csv", new Metge("Gregory", "House", "Smith", "396120465841", "48181321R", "937564023", a2, 11, 3000, "ES35"));
+            FicheroCSV.escribeCSV("metges.csv", new Metge("Margarita", "Robles", "Rojas", "257896321461", "78941245R", "654789123", a1, 12, 2500, "ES97"));
+            FicheroCSV.escribeCSV("metges.csv",new Metge("Jose", "Segura", "Iglesias", "157894523691", "78523458D", "678521478", a3, 13, 2000, "ES52") );
+            
+            FicheroCSV.escribeCSV("malalties.csv", new Malaltia("Resfriado", false, "Jarabe para la tos", Duration.ofDays(5)));
+            FicheroCSV.escribeCSV("malalties.csv", new Malaltia("Conjuntivitis", true, "Colirio", Duration.ofDays(7)));
+            FicheroCSV.escribeCSV("malalties.csv", new Malaltia("Laringitis", false, "Antibiotico", Duration.ofDays(10)));
+            
+            
+            
             h = new Hospital("Mutua Terrassa", a3);
 
             h.addPacient(new Pacient("Juan", "Martín", "Pascual", "281234567840", "45990250W", "666555444", a1));
@@ -59,7 +87,8 @@ public class GestioHospital_Antiguo {
             h.addMetge(new Metge("Gregory", "House", "Smith", "396120465841", "48181321R", "937564023", a2, 11, 3000, "ES35"));
             h.addMetge(new Metge("Margarita", "Robles", "Rojas", "257896321461", "78941245R", "654789123", a1, 12, 2500, "ES97"));
             h.addMetge(new Metge("Jose", "Segura", "Iglesias", "157894523691", "78523458D", "678521478", a3, 13, 2000, "ES52"));
-
+            
+            
             h.addMalaltia(new Malaltia("Resfriado", false, "Jarabe para la tos", Duration.ofDays(5)));
             h.addMalaltia(new Malaltia("Conjuntivitis", true, "Colirio", Duration.ofDays(7)));
             h.addMalaltia(new Malaltia("Laringitis", false, "Antibiotico", Duration.ofDays(10)));
@@ -69,6 +98,8 @@ public class GestioHospital_Antiguo {
             h.getPacient("45872365S").getHistorial().addVisita(new Visita(LocalDateTime.parse("2018-02-23T10:15:30"), h.getMalaltia(2), h.getMetge("78941245R")));
             h.getPacient("45872365S").getHistorial().addVisita(new Visita(LocalDateTime.parse("2012-10-02T10:15:30"), h.getMalaltia(1), h.getMetge("48181321R")));
 
+            
+           
             System.out.println("Hospital iniciado con exito.\n\n" + h + "\n");
         } catch (Exception e) {
             System.out.println(e.getMessage());

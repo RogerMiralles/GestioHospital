@@ -24,4 +24,12 @@ public class Metge extends Persona {
                 + "\nNumero empleado: " + this.numEmpleat + "\nSueldo mensual: " + this.salariMensual
                 + "\nCodigo cuenta corriente: " + this.codiCompteCorrent;
     }
+    
+    
+    public String FormatCSVMetge(){
+       return this.getNom()+","+this.getCognom1()+","+this.getCognom2() +","
+               +this.getNumSegSocial()+","+this.getNif()+","+this.getTelefon()+
+               ","+this.getAdreca().FormCSVAdreca()+","+numEmpleat+","+salariMensual+
+               ","+codiCompteCorrent;
+    }
 }

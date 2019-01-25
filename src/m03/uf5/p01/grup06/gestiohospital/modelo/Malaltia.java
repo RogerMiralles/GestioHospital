@@ -18,6 +18,14 @@ public class Malaltia {
         this.tractament = tractament;
         this.duradaTractament = duracion;
     }
+    public Malaltia(int codi,String nom, boolean baixa, String tractament, Duration duracion) {
+        this.codi = codi;
+        this.nom = nom;
+        this.causaBaixa = baixa;
+        this.tractament = tractament;
+        this.duradaTractament = duracion;
+    }
+    
 
     @Override
     public String toString() {
@@ -58,6 +66,10 @@ public class Malaltia {
      */
     public Duration getDuradaTractament() {
         return duradaTractament;
+    }
+    
+    public String FormatCSVMalaltia(){
+        return codi+","+nom+","+causaBaixa+","+tractament+","+duradaTractament.toDays();
     }
     
     
