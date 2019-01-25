@@ -16,7 +16,7 @@ public class Metge extends Persona {
 
     @Override
     public String toString() {
-        return "Datos Me \n___________________ \nNIF: " + this.getNif() + "\nNom: "
+        return "Datos Medico \n___________________ \nNIF: " + this.getNif() + "\nNom: "
                 + this.getNom() + "\nApellidos: " + this.getCognom1() + " "
                 + this.getCognom2() + "\nTelefono: " + this.getTelefon()
                 + "\nNumero Seguridad Social: " + this.getNumSegSocial()
