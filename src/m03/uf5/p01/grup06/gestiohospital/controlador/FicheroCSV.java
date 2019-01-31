@@ -22,7 +22,7 @@ import m03.uf5.p01.grup06.gestiohospital.modelo.*;
  public class FicheroCSV {
 
    
-    public static ArrayList<Pacient> leeCSV(String nombreFichero) throws FileNotFoundException {
+    public static ArrayList<Pacient> leeCsvPacients(String nombreFichero) throws FileNotFoundException {
         File fichero = new File(nombreFichero);
         Scanner sc = new Scanner(fichero);
         ArrayList <Pacient> pacients=new ArrayList();
@@ -55,7 +55,7 @@ import m03.uf5.p01.grup06.gestiohospital.modelo.*;
         return pacients;
     }
 
-    public static ArrayList <Visita>  leeCSV1(String nombreFichero) throws FileNotFoundException {
+    public static ArrayList <Visita>  leeCsvVisita(String nombreFichero) throws FileNotFoundException {
         File fichero = new File(nombreFichero);
         Scanner sc = new Scanner(fichero);
         ArrayList <Visita> visites=new ArrayList();
@@ -99,7 +99,7 @@ import m03.uf5.p01.grup06.gestiohospital.modelo.*;
         return visites;
     }
 
-    public static ArrayList<Metge> leeCSV2(String nombreFichero) throws FileNotFoundException {
+    public static ArrayList<Metge> leeCsvMetge(String nombreFichero) throws FileNotFoundException {
         File fichero = new File(nombreFichero);
         Scanner sc = new Scanner(fichero);
         ArrayList <Metge> metges = new ArrayList();
@@ -135,7 +135,7 @@ import m03.uf5.p01.grup06.gestiohospital.modelo.*;
         return metges;
     }
 
-    public static ArrayList<Malaltia> leeCSV3(String nombreFichero) throws FileNotFoundException {
+    public static ArrayList<Malaltia> leeCsvMalalties(String nombreFichero) throws FileNotFoundException {
         File fichero = new File(nombreFichero);
         Scanner sc = new Scanner(fichero);
         ArrayList<Malaltia> malalties = new ArrayList();
@@ -204,7 +204,7 @@ import m03.uf5.p01.grup06.gestiohospital.modelo.*;
     
     public static boolean existe(String fichero, int tipo){
         try{
-            leeCSV(fichero);
+            leeCsvPacients(fichero);
             return true;
         }catch(FileNotFoundException e){
             System.out.println("No existe el fichero");

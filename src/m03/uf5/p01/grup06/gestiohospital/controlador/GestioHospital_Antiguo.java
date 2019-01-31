@@ -75,32 +75,24 @@ public class GestioHospital_Antiguo {
             
             
             h = new Hospital("Mutua Terrassa", a3);
-           int i=0;
-            do{
-                if(FicheroCSV.leeCSV("pacients.csv").get(i)!=null){
-                    h.addPacient(FicheroCSV.leeCSV("pacients.csv").get(i));
-                }
-              i++ ; 
-            }while(FicheroCSV.leeCSV("pacients.csv").get(i)!=null);  
-            i=0;
+           
+            for (int i = 0; i <FicheroCSV.leeCsvPacients("pacients.csv").size() ; i++) {
+                h.addPacient(FicheroCSV.leeCsvPacients("pacients.csv").get(i));
+                
+            }
+            
             System.out.println("Bucle 1");
-            do{
-                if(FicheroCSV.leeCSV2("metges.csv").get(i)!=null){
-                    h.addMetge(FicheroCSV.leeCSV2("metges.csv").get(i));
-                }
-                i++;
-            }while(FicheroCSV.leeCSV2("metges.csv").get(i)!=null);   
-                i=0;
+            for (int i = 0; i < FicheroCSV.leeCsvMetge("metges.csv").size(); i++) {
+                h.addMetge(FicheroCSV.leeCsvMetge("metges.csv").get(i));
+                
+            }
             
             
             System.out.println("EJECUTA");
-            do{
-                if(FicheroCSV.leeCSV3("malalties.csv").get(i)!=null){
-                   h.addMalaltia(FicheroCSV.leeCSV3("malalties.csv").get(i)); 
-                }
-                i++;
+            for (int i = 0; i < FicheroCSV.leeCsvMalalties("malalties.csv").size(); i++) {
+                h.addMalaltia(FicheroCSV.leeCsvMalalties("malalties.csv").get(i));
                 
-            }while(FicheroCSV.leeCSV3("malalties.csv").get(i)!=null);
+            }
             System.out.println("sadaskjdhakjsdh");
             FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.parse("2007-12-03T10:15:30"), h.getMalaltia(1), h.getMetge("48181321R")) );
             FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.parse("2015-05-15T10:15:30"), h.getMalaltia(3), h.getMetge("78523458D")) );
