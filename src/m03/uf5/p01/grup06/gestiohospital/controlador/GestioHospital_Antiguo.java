@@ -35,14 +35,9 @@ public class GestioHospital_Antiguo {
                     mostrarPacient();
                     break;
                 case 4:
-                    try {
-                    FicheroCSV.leeCSV("metges.csv", 3);
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(GestioHospital_Antiguo.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                    
                     mostrarMetge();
-            
-                
+
             
                     break;
                 case 5:
@@ -59,7 +54,7 @@ public class GestioHospital_Antiguo {
     private static void iniciaHospital() {
         try {
             
-            
+            System.out.println("INCIO");
             
             
             Adreca a1 = new Adreca("Terrassa", 8226, "Pablo Picaso", 45, "Segona", "Primera");
@@ -80,11 +75,44 @@ public class GestioHospital_Antiguo {
             
             
             h = new Hospital("Mutua Terrassa", a3);
+           
+            for (int i = 0; i <FicheroCSV.leeCsvPacients("pacients.csv").size() ; i++) {
+                h.addPacient(FicheroCSV.leeCsvPacients("pacients.csv").get(i));
+                
+            }
+            
+            System.out.println("Bucle 1");
+            for (int i = 0; i < FicheroCSV.leeCsvMetge("metges.csv").size(); i++) {
+                h.addMetge(FicheroCSV.leeCsvMetge("metges.csv").get(i));
+                
+            }
+            
+            
+            System.out.println("EJECUTA");
+            for (int i = 0; i < FicheroCSV.leeCsvMalalties("malalties.csv").size(); i++) {
+                h.addMalaltia(FicheroCSV.leeCsvMalalties("malalties.csv").get(i));
+                
+            }
+            System.out.println("sadaskjdhakjsdh");
+            FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.parse("2007-12-03T10:15:30"), h.getMalaltia(1), h.getMetge("48181321R"),"45990250W", "281234567840") );
+            FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.parse("2015-05-15T10:15:30"), h.getMalaltia(3), h.getMetge("78523458D"),"45990250W", "281234567840") );
+            FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.parse("2018-02-23T10:15:30"), h.getMalaltia(2), h.getMetge("78941245R"),"45872365S", "012345678939") );
+            FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.parse("2012-10-02T10:15:30"), h.getMalaltia(1), h.getMetge("48181321R"),"45872365S", "012345678939") );
+            
+            
+            for (int i = 0; i < FicheroCSV.leeCsvVisita("visites.csv").size(); i++) {
+                if(FicheroCSV.leeCsvVisita("visites.csv").get(i).getDni().equals(h.getPacient("45990250W").getNif())){
+                    h.getPacient("45990250W").getHistorial().addVisita(FicheroCSV.leeCsvVisita("visites.csv").get(i));
+                }
+                if(FicheroCSV.leeCsvVisita("visites.csv").get(i).getDni().equals(h.getPacient("45872365S").getNif())){
+                    h.getPacient("45872365S").getHistorial().addVisita(FicheroCSV.leeCsvVisita("visites.csv").get(i));
+                }
+                
+                
+            }
+            
 
-            h.addPacient(new Pacient("Juan", "Martín", "Pascual", "281234567840", "45990250W", "666555444", a1));
-            h.addPacient(new Pacient("Maria", "Garcia", "Luque", "012345678939", "45872365S", "961247845", a2));
-
-            h.addMetge(new Metge("Gregory", "House", "Smith", "396120465841", "48181321R", "937564023", a2, 11, 3000, "ES35"));
+            /*h.addMetge(new Metge("Gregory", "House", "Smith", "396120465841", "48181321R", "937564023", a2, 11, 3000, "ES35"));
             h.addMetge(new Metge("Margarita", "Robles", "Rojas", "257896321461", "78941245R", "654789123", a1, 12, 2500, "ES97"));
             h.addMetge(new Metge("Jose", "Segura", "Iglesias", "157894523691", "78523458D", "678521478", a3, 13, 2000, "ES52"));
             
@@ -97,12 +125,13 @@ public class GestioHospital_Antiguo {
             h.getPacient("45990250W").getHistorial().addVisita(new Visita(LocalDateTime.parse("2015-05-15T10:15:30"), h.getMalaltia(3), h.getMetge("78523458D")));
             h.getPacient("45872365S").getHistorial().addVisita(new Visita(LocalDateTime.parse("2018-02-23T10:15:30"), h.getMalaltia(2), h.getMetge("78941245R")));
             h.getPacient("45872365S").getHistorial().addVisita(new Visita(LocalDateTime.parse("2012-10-02T10:15:30"), h.getMalaltia(1), h.getMetge("48181321R")));
-
+*/
             
            
             System.out.println("Hospital iniciado con exito.\n\n" + h + "\n");
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            System.out.println("HA FALLADO EL PRGRAMA");
         }
     }
 
@@ -159,7 +188,8 @@ public class GestioHospital_Antiguo {
             }
         }
 
-        h.getHistorial(p.getHistorial().getCodi()).addVisita(new Visita(LocalDateTime.now(), mal, metg));
+        h.getHistorial(p.getHistorial().getCodi()).addVisita(new Visita(LocalDateTime.now(), mal, metg,p.getNif(),p.getNumSegSocial()));
+        FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.now(), mal, metg,p.getNif(),p.getNumSegSocial()));
         System.out.println("Visita añadida con exito.");
     }
 
@@ -193,6 +223,7 @@ public class GestioHospital_Antiguo {
         try {
             Pacient p = new Pacient(nom, ap1, ap2, nSs, nif, tel, new Adreca(ciudad, postal, calle, num, planta, puerta));
             h.addPacient(p);
+            FicheroCSV.escribeCSV("pacients.csv", p);
             System.out.println("Paciente añadido con exito.");
         } catch (Exception e) {
             System.out.println("No se ha podido añadir al paciente: " + e.getMessage());
