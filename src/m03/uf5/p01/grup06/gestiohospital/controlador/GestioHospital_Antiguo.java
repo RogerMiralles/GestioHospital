@@ -94,10 +94,23 @@ public class GestioHospital_Antiguo {
                 
             }
             System.out.println("sadaskjdhakjsdh");
-            FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.parse("2007-12-03T10:15:30"), h.getMalaltia(1), h.getMetge("48181321R")) );
-            FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.parse("2015-05-15T10:15:30"), h.getMalaltia(3), h.getMetge("78523458D")) );
-            FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.parse("2018-02-23T10:15:30"), h.getMalaltia(2), h.getMetge("78941245R")) );
-            FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.parse("2012-10-02T10:15:30"), h.getMalaltia(1), h.getMetge("48181321R")) );
+            FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.parse("2007-12-03T10:15:30"), h.getMalaltia(1), h.getMetge("48181321R"),"45990250W", "281234567840") );
+            FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.parse("2015-05-15T10:15:30"), h.getMalaltia(3), h.getMetge("78523458D"),"45990250W", "281234567840") );
+            FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.parse("2018-02-23T10:15:30"), h.getMalaltia(2), h.getMetge("78941245R"),"45872365S", "012345678939") );
+            FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.parse("2012-10-02T10:15:30"), h.getMalaltia(1), h.getMetge("48181321R"),"45872365S", "012345678939") );
+            
+            
+            for (int i = 0; i < FicheroCSV.leeCsvVisita("visites.csv").size(); i++) {
+                if(FicheroCSV.leeCsvVisita("visites.csv").get(i).getDni().equals(h.getPacient("45990250W").getNif())){
+                    h.getPacient("45990250W").getHistorial().addVisita(FicheroCSV.leeCsvVisita("visites.csv").get(i));
+                }
+                if(FicheroCSV.leeCsvVisita("visites.csv").get(i).getDni().equals(h.getPacient("45872365S").getNif())){
+                    h.getPacient("45872365S").getHistorial().addVisita(FicheroCSV.leeCsvVisita("visites.csv").get(i));
+                }
+                
+                
+            }
+            
 
             /*h.addMetge(new Metge("Gregory", "House", "Smith", "396120465841", "48181321R", "937564023", a2, 11, 3000, "ES35"));
             h.addMetge(new Metge("Margarita", "Robles", "Rojas", "257896321461", "78941245R", "654789123", a1, 12, 2500, "ES97"));
@@ -175,7 +188,8 @@ public class GestioHospital_Antiguo {
             }
         }
 
-        h.getHistorial(p.getHistorial().getCodi()).addVisita(new Visita(LocalDateTime.now(), mal, metg));
+        h.getHistorial(p.getHistorial().getCodi()).addVisita(new Visita(LocalDateTime.now(), mal, metg,p.getNif(),p.getNumSegSocial()));
+        FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.now(), mal, metg,p.getNif(),p.getNumSegSocial()));
         System.out.println("Visita añadida con exito.");
     }
 
@@ -209,6 +223,7 @@ public class GestioHospital_Antiguo {
         try {
             Pacient p = new Pacient(nom, ap1, ap2, nSs, nif, tel, new Adreca(ciudad, postal, calle, num, planta, puerta));
             h.addPacient(p);
+            FicheroCSV.escribeCSV("pacients.csv", p);
             System.out.println("Paciente añadido con exito.");
         } catch (Exception e) {
             System.out.println("No se ha podido añadir al paciente: " + e.getMessage());

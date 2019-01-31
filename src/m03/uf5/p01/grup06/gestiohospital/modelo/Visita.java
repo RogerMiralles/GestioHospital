@@ -16,15 +16,21 @@ public class Visita {
     private final LocalDateTime data;
     private final Malaltia malaltia;
     private final Metge metge;
+    private final String dni;
+    private final String SegSocial;
 
-    public Visita(LocalDateTime data, Malaltia malaltia, Metge metge) {
+    public Visita(LocalDateTime data, Malaltia malaltia, Metge metge, String dni, String SegSocial) {
 
         this.data = data;
         this.malaltia = malaltia;
         this.metge = metge;
+        this.dni=dni;
+        this.SegSocial=SegSocial;
 
     }
 
+    
+    
     public LocalDateTime getData() {
         return data;
     }
@@ -35,5 +41,19 @@ public class Visita {
 
     public Metge getMetge() {
         return metge;
+    }
+
+    /**
+     * @return the dni
+     */
+    public String getDni() {
+        return dni;
+    }
+
+    /**
+     * @return the SegSocial
+     */
+    public String getSegSocial() {
+        return SegSocial;
     }
 }

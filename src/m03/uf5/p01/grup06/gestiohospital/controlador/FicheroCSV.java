@@ -92,7 +92,7 @@ import m03.uf5.p01.grup06.gestiohospital.modelo.*;
                             datos[10], datos[11], new Adreca(datos[12], Long.parseLong(datos[13]),
                                     datos[14], Integer.parseInt(datos[15]), datos[16], datos[17]),
                             Integer.parseInt(datos[18]), Integer.parseInt(datos[19]),
-                            datos[20]));
+                            datos[20]), datos[21],datos[22]);
             visites.add(v);
 
         }
@@ -175,10 +175,10 @@ import m03.uf5.p01.grup06.gestiohospital.modelo.*;
 
     public static void escribeCSV(String nombreFichero, Visita v) {
         try {
-            System.out.println("Hola");
+            
             PrintStream out = new PrintStream(new FileOutputStream(nombreFichero, true));
             out.println(v.getData() + "," + v.getMalaltia().FormatCSVMalaltia() + ","
-                    + v.getMetge().FormatCSVMetge());
+                    + v.getMetge().FormatCSVMetge()+","+v.getSegSocial()+","+v.getDni());
         } catch (FileNotFoundException e) {
             System.out.println("Error al crear el fichero");
         }
