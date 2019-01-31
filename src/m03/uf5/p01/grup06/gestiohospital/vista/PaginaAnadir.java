@@ -2,6 +2,8 @@ package m03.uf5.p01.grup06.gestiohospital.vista;
 
 import java.awt.*;
 import javax.swing.*;
+import m03.uf5.p01.grup06.gestiohospital.controlador.*;
+import m03.uf5.p01.grup06.gestiohospital.modelo.*;
 
 public class PaginaAnadir extends JFrame {
     
@@ -9,13 +11,16 @@ public class PaginaAnadir extends JFrame {
     private JPanel pNorte, pSur, pCentro;
     private JComboBox cbTipo;
     private JButton btnAceptar, btnCancelar;
+    private ControladorAnadir c;
+    private Hospital hospital;
     
-    public PaginaAnadir () {
+    public PaginaAnadir (Hospital hospital) {
         creaGUI();
+        asignaMetodos();
     }
 
     private void creaGUI() {
-             
+        
         this.setMinimumSize(new Dimension(600, 450));
         this.setTitle("Afegeix una nova entrada");
         this.setLocationRelativeTo(null);        
@@ -28,7 +33,7 @@ public class PaginaAnadir extends JFrame {
         pSur = new JPanel(new FlowLayout());
         
         cbTipo = new JComboBox(tipoObjetos);
-        JLabel titulo = new JLabel("<html><h1>Nova entrada</h1>");
+        JLabel titulo = new JLabel("<html><h2>Nova entrada</h2>");
         Font fuente = titulo.getFont().deriveFont(Font.PLAIN);
         titulo.setFont(fuente);
         pNorte.add(titulo);
@@ -37,12 +42,12 @@ public class PaginaAnadir extends JFrame {
         pTipoEntrada.add(new JLabel("Seleccioni el tipus d'entrada:"));
         pTipoEntrada.add(cbTipo);
         pNorte.add(pTipoEntrada);
-        
-        // EL pCENTRO CAMBIARA ENTRE LOS P4 PANELS 
-        
-        //pCentro = new PanelNewVisita();
-        pCentro = new PanelNewPacient();
-        pCentro = new PanelNewMalaltia();
+
+        pCentro = new JPanel(new CardLayout());
+        pCentro.add("Visita", new PanelNewVisita());
+        pCentro.add("Paciente", new PanelNewPacient());
+        pCentro.add("Medico", new PanelNewMetge());
+        pCentro.add("Enfermedad", new PanelNewMalaltia());
         
         pCentro.setBorder(BorderFactory.createTitledBorder("Formulari"));
         
@@ -58,14 +63,38 @@ public class PaginaAnadir extends JFrame {
         this.add(contenido);
         this.pack();
     }
-        
+    
+    private void asignaMetodos() {
+        c = new ControladorAnadir(this, hospital);
+    }  
+    
     // PROVISIONAL PARA TESTEAR
     public static void main(String args[]) {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PaginaAnadir().setVisible(true);
+                new PaginaAnadir(new Hospital()).setVisible(true);
             }
         });
+    }
+
+    public JComboBox getCbTipo() {
+        return cbTipo;
+    }
+
+    public JButton getBtnAceptar() {
+        return btnAceptar;
+    }
+
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+    
+    public JPanel getpNorte() {
+        return pNorte;
+    }
+    
+    public JPanel getpCentro() {
+        return pCentro;
     }
 }
