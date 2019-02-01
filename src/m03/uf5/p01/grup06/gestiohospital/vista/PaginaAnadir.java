@@ -1,10 +1,6 @@
 package m03.uf5.p01.grup06.gestiohospital.vista;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import m03.uf5.p01.grup06.gestiohospital.controlador.*;
 import m03.uf5.p01.grup06.gestiohospital.modelo.*;
@@ -19,8 +15,10 @@ public class PaginaAnadir extends JFrame {
     private Hospital hospital;
 
     public PaginaAnadir(Hospital hospital) {
-        creaGUI();
+        creaGUI(); 
         asignaMetodos();
+        ImageIcon i = new ImageIcon("drawables/ic_hospitalLauncher.png");
+        this.setIconImage(i.getImage());
     }
 
     private void creaGUI() {
@@ -32,16 +30,17 @@ public class PaginaAnadir extends JFrame {
         JPanel contenido = new JPanel(new BorderLayout());
         contenido.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
-        pNorte = new JPanel(new GridLayout(2, 2, 5, 5));
+        pNorte = new JPanel(new GridLayout(2, 1, 5, 5));
         pCentro = new JPanel(new FlowLayout());
         pSur = new JPanel(new FlowLayout());
 
         cbTipo = new JComboBox(tipoObjetos);
         JLabel titulo = new JLabel("<html><h2>Nova entrada</h2>");
+        titulo.setIcon(new ImageIcon("drawables/ic_hospitalHistory.png"));
         Font fuente = titulo.getFont().deriveFont(Font.PLAIN);
         titulo.setFont(fuente);
-        JLabel lblIcono = new JLabel(new ImageIcon("drawables/ic_hospitalHistory.png"));
-        pNorte.add(lblIcono);
+        //JLabel lblIcono = new JLabel(new ImageIcon("drawables/ic_hospitalHistory.png"));
+        //pNorte.add(lblIcono);
         pNorte.add(titulo);
 
         JPanel pTipoEntrada = new JPanel(new FlowLayout());

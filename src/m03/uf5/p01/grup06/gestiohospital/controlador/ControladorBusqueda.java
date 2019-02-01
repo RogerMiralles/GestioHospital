@@ -3,7 +3,7 @@ package m03.uf5.p01.grup06.gestiohospital.controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import m03.uf5.p01.grup06.gestiohospital.modelo.*;
-import m03.uf5.p01.grup06.gestiohospital.vista.PaginaInicio;
+import m03.uf5.p01.grup06.gestiohospital.vista.*;
 
 /**
  *
@@ -17,6 +17,28 @@ public class ControladorBusqueda implements ActionListener {
     public ControladorBusqueda(PaginaInicio ventanaInicio, Hospital h1) {
         ventana1 = ventanaInicio;
         this.h1 = h1;
+        asignarComponentes();
+    }
+
+    public void asignarComponentes() {
+        ventana1.getBtnBuscar().setActionCommand("btnBuscar");
+        ventana1.getBtnBuscar().addActionListener(this);
+
+        ventana1.getBtnNuevo().setActionCommand("btnNuevo");
+        ventana1.getBtnNuevo().addActionListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        cambiaIds();
+
+        if (e.getActionCommand().equals("btnBuscar")) {
+            buscaContenido();
+        }
+
+        if (e.getActionCommand().equals("btnNuevo")) {
+            ventanaNuevo();
+        }
     }
 
     public void cambiaIds() {
@@ -52,64 +74,62 @@ public class ControladorBusqueda implements ActionListener {
     }
 
     public void buscaContenido() {
-        ventana1.getBtnBuscar().addActionListener(new ActionListener() {
-            int tipoDato, tipoId;
-            String dato;
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                tipoDato = ventana1.getCbTipoDato().getSelectedIndex();
-                tipoId = ventana1.getCbTipoId().getSelectedIndex();
-                dato = ventana1.getTfBuscar().getSelectedText();
-                switch (tipoDato) {
+        int tipoDato, tipoId;
+        String dato;
+        tipoDato = ventana1.getCbTipoDato().getSelectedIndex();
+        tipoId = ventana1.getCbTipoId().getSelectedIndex();
+        dato = ventana1.getTfBuscar().getSelectedText();
+        switch (tipoDato) {
+            case 0:
+                ventana1.getTaMostrar().setText(h1.getMalaltia(Integer.parseInt(dato)).toString());
+                break;
+            case 1:
+                switch (tipoId) {
                     case 0:
-                        ventana1.getTaMostrar().setText(h1.getMalaltia(Integer.parseInt(dato)).toString());
+                        ventana1.getTaMostrar().setText(h1.getHistorial(Integer.parseInt(dato)).toString());
                         break;
                     case 1:
-                        switch (tipoId) {
-                            case 0:
-                                ventana1.getTaMostrar().setText(h1.getHistorial(Integer.parseInt(dato)).toString());
-                                break;
-                            case 1:
-                                ventana1.getTaMostrar().setText(h1.getHistorial(dato).toString());
-                                break;
-                            default:
-                        }
-                        break;
-                    case 2:
-                        switch (tipoId) {
-                            case 0:
-                                ventana1.getTaMostrar().setText(h1.getMetge(Long.parseLong(dato)).toString());
-                                break;
-                            case 1:
-                                ventana1.getTaMostrar().setText(h1.getMetge(dato).toString());
-                                break;
-                            default:
-                        }
-                        break;
-                    case 3:
-                        switch (tipoId) {
-                            case 0:
-                                ventana1.getTaMostrar().setText(h1.getPacient(Integer.parseInt(dato)).toString());
-                                break;
-                            case 1:
-                                ventana1.getTaMostrar().setText(h1.getPacient(Long.parseLong(dato)).toString());
-                                break;
-                            case 2:
-                                ventana1.getTaMostrar().setText(h1.getPacient(dato).toString());
-                                break;
-                            default:
-                        }
+                        ventana1.getTaMostrar().setText(h1.getHistorial(dato).toString());
                         break;
                     default:
-
                 }
-            }
-        });
+                break;
+            case 2:
+                switch (tipoId) {
+                    case 0:
+                        ventana1.getTaMostrar().setText(h1.getMetge(Long.parseLong(dato)).toString());
+                        break;
+                    case 1:
+                        ventana1.getTaMostrar().setText(h1.getMetge(dato).toString());
+                        break;
+                    default:
+                }
+                break;
+            case 3:
+                switch (tipoId) {
+                    case 0:
+                        ventana1.getTaMostrar().setText(h1.getPacient(Integer.parseInt(dato)).toString());
+                        break;
+                    case 1:
+                        ventana1.getTaMostrar().setText(h1.getPacient(Long.parseLong(dato)).toString());
+                        break;
+                    case 2:
+                        ventana1.getTaMostrar().setText(h1.getPacient(dato).toString());
+                        break;
+                    default:
+                }
+                break;
+            default:
+
+        }
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        cambiaIds();
+    public void ventanaNuevo() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new PaginaAnadir(h1).setVisible(true);
+            }
+        });
     }
 }
