@@ -16,16 +16,13 @@ public class PaginaInicio extends JFrame {
     private JLabel lblTitulo;
     private JTextField tfBuscar;
     private JTextArea taMostrar;
-    private JButton btnBuscar, btnCancelar, btnNuevo;
+    private JButton btnBuscar, btnNuevo;
     private String[] objetos = {"Enfermedades", "Historiales", "Medicos", "Pacientes"};
     private String[] idsEnfermedad = {"Codigo"};
     private String[] idsHistorial = {"Codigo", "DNI"};
     private String[] idsMedico = {"NºSegSocial", "DNI"};
     private String[] idsPaciente = {"Codigo", "NºSegSocial", "DNI"};
     private Hospital hospital;
-
-    Adreca a2 = new Adreca("Barcelona", 8001, "Plaça Catalunya", 78, "Quarta", "Segona");
-    Metge medico = new Metge("Gregory", "House", "Smith", "396120465841", "48181321R", "937564023", a2, 11, 3000, "ES35");
 
     public PaginaInicio(Hospital hospital) {
         CreaGUI();
@@ -56,7 +53,6 @@ public class PaginaInicio extends JFrame {
         taMostrar = new JTextArea();
         taMostrar.setEditable(false);
         btnBuscar = new JButton("Buscar");
-        btnCancelar = new JButton("Cancelar");
         btnNuevo = new JButton("Nuevo");
 
         pBusqueda.add(tfBuscar);
@@ -66,7 +62,6 @@ public class PaginaInicio extends JFrame {
         pNorte.add(pBusqueda);
         pCentro.add(taMostrar);
         pSur.add(btnBuscar);
-        pSur.add(btnCancelar);
         pSur.add(btnNuevo);
 
         pPrincipal.add(pNorte, BorderLayout.NORTH);
@@ -122,13 +117,7 @@ public class PaginaInicio extends JFrame {
         return btnBuscar;
     }
 
-    public JButton getBtnCancelar() {
-        return btnCancelar;
-    }
-
-    public static void main(String[] args) {
-        Adreca a3 = new Adreca("Terrassa", 8221, "Plaça Doctor Robert", 5, "S/N", "S/N");
-        Hospital h1 = new Hospital("Mutua Terrassa", a3);
-        new PaginaInicio(h1);
+    public JButton getBtnNuevo() {
+        return btnNuevo;
     }
 }
