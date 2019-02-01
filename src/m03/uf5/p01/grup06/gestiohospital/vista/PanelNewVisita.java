@@ -57,4 +57,24 @@ public class PanelNewVisita  extends JPanel {
         pContenido.add(enfermetat);
         this.add(pContenido);
     }
+
+    public JComboBox getCbPacient() {
+        return cbPacient;
+    }
+
+    public JComboBox getCbMetge() {
+        return cbMetge;
+    }
+
+    public JTextField getTfPacient() {
+        return tfPacient;
+    }
+
+    public JTextField getTfMetge() {
+        return tfMetge;
+    }
+
+    public JTextField getTfEnfermetat() {
+        return tfEnfermetat;
+    }
 }

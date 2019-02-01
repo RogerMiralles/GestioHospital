@@ -26,7 +26,6 @@ public class Visita {
         this.metge = metge;
         this.dni=dni;
         this.SegSocial=SegSocial;
-
     }
 
     
@@ -43,16 +42,10 @@ public class Visita {
         return metge;
     }
 
-    /**
-     * @return the dni
-     */
     public String getDni() {
         return dni;
     }
 
-    /**
-     * @return the SegSocial
-     */
     public String getSegSocial() {
         return SegSocial;
     }

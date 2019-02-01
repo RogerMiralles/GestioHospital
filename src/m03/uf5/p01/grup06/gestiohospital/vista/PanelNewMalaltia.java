@@ -55,4 +55,20 @@ public class PanelNewMalaltia extends JPanel {
         pContenido.add(pBaixa);
         this.add(pContenido);
     }
+    
+    public JCheckBox getCbBaixa() {
+        return cbBaixa;
+    }
+
+    public JTextField getTfNom() {
+        return tfNom;
+    }
+
+    public JTextField getTfTractament() {
+        return tfTractament;
+    }
+
+    public JTextField getTfDurada() {
+        return tfDurada;
+    }
 }

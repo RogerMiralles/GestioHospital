@@ -134,4 +134,52 @@ public class PanelNewPacient extends JPanel {
         
         this.add(pContenido);
     }
+
+    public JTextField getTfNom() {
+        return tfNom;
+    }
+
+    public JTextField getTfApellido1() {
+        return tfApellido1;
+    }
+
+    public JTextField getTfApellido2() {
+        return tfApellido2;
+    }
+
+    public JTextField getTfNumSS() {
+        return tfNumSS;
+    }
+
+    public JTextField getTfDNI() {
+        return tfDNI;
+    }
+
+    public JTextField getTfTelf() {
+        return tfTelf;
+    }
+
+    public JTextField getTfCalle() {
+        return tfCalle;
+    }
+
+    public JTextField getTfNum() {
+        return tfNum;
+    }
+
+    public JTextField getTfPlanta() {
+        return tfPlanta;
+    }
+
+    public JTextField getTfPuerta() {
+        return tfPuerta;
+    }
+
+    public JTextField getTfCP() {
+        return tfCP;
+    }
+
+    public JTextField getTfCiutat() {
+        return tfCiutat;
+    }
 }

@@ -8,7 +8,7 @@ import m03.uf5.p01.grup06.gestiohospital.modelo.*;
 public class PaginaAnadir extends JFrame {
     
     private final String[] tipoObjetos = {"Visita", "Paciente", "Medico", "Enfermedad"};
-    private JPanel pNorte, pSur, pCentro;
+    private JPanel pNorte, pSur, pCentro, pVisita, pMedico, pPaciente, pMalaltia;
     private JComboBox cbTipo;
     private JButton btnAceptar, btnCancelar;
     private ControladorAnadir c;
@@ -44,10 +44,15 @@ public class PaginaAnadir extends JFrame {
         pNorte.add(pTipoEntrada);
 
         pCentro = new JPanel(new CardLayout());
-        pCentro.add("Visita", new PanelNewVisita());
-        pCentro.add("Paciente", new PanelNewPacient());
-        pCentro.add("Medico", new PanelNewMetge());
-        pCentro.add("Enfermedad", new PanelNewMalaltia());
+        pVisita = new PanelNewVisita();
+        pPaciente = new PanelNewPacient();
+        pMedico = new PanelNewMetge();
+        pMalaltia = new PanelNewMalaltia();
+                
+        pCentro.add("Visita", pVisita);
+        pCentro.add("Paciente", pPaciente);
+        pCentro.add("Medico", pMedico);
+        pCentro.add("Enfermedad", pMalaltia);
         
         pCentro.setBorder(BorderFactory.createTitledBorder("Formulari"));
         
@@ -63,7 +68,7 @@ public class PaginaAnadir extends JFrame {
         this.add(contenido);
         this.pack();
     }
-    
+
     private void asignaMetodos() {
         c = new ControladorAnadir(this, hospital);
     }  
@@ -73,7 +78,9 @@ public class PaginaAnadir extends JFrame {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PaginaAnadir(new Hospital()).setVisible(true);
+                Adreca a3 = new Adreca("Terrassa", 8221, "Plaça Doctor Robert", 5, "S/N", "S/N");
+                Hospital h = new Hospital("Mutua Terrassa", a3);
+                new PaginaAnadir(h).setVisible(true);
             }
         });
     }
@@ -90,11 +97,22 @@ public class PaginaAnadir extends JFrame {
         return btnCancelar;
     }
     
-    public JPanel getpNorte() {
-        return pNorte;
-    }
-    
     public JPanel getpCentro() {
         return pCentro;
+    }
+    public JPanel getpVisita() {
+        return pVisita;
+    }
+
+    public JPanel getpMedico() {
+        return pMedico;
+    }
+
+    public JPanel getpPaciente() {
+        return pPaciente;
+    }
+
+    public JPanel getpMalaltia() {
+        return pMalaltia;
     }
 }
