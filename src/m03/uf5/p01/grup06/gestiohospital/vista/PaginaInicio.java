@@ -17,12 +17,12 @@ public class PaginaInicio extends JFrame {
     private JTextField tfBuscar;
     private JTextArea taMostrar;
     private JButton btnBuscar, btnCancelar, btnNuevo;
-    private String[] objetos = {"Enfermedades", "Historiales", "Medicos", "Pacientes"};
-    private String[] idsEnfermedad = {"Codigo"};
-    private String[] idsHistorial = {"Codigo", "DNI"};
-    private String[] idsMedico = {"NºSegSocial", "DNI"};
-    private String[] idsPaciente = {"Codigo", "NºSegSocial", "DNI"};
-    private Hospital hospital;
+    private final String[] objetos = {"Enfermedades", "Historiales", "Medicos", "Pacientes"};
+    private final String[] idsEnfermedad = {"Codigo"};
+    private final String[] idsHistorial = {"Codigo", "DNI"};
+    private final String[] idsMedico = {"NºSegSocial", "DNI"};
+    private final String[] idsPaciente = {"Codigo", "NºSegSocial", "DNI"};
+    private final Hospital hospital;
 
     Adreca a2 = new Adreca("Barcelona", 8001, "Plaça Catalunya", 78, "Quarta", "Segona");
     Metge medico = new Metge("Gregory", "House", "Smith", "396120465841", "48181321R", "937564023", a2, 11, 3000, "ES35");
@@ -33,7 +33,7 @@ public class PaginaInicio extends JFrame {
         this.hospital = hospital;
     }
 
-    public void CreaGUI() {
+    private void CreaGUI() {
         JFrame ventana = new JFrame();
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setSize(800, 600);
@@ -78,7 +78,7 @@ public class PaginaInicio extends JFrame {
         ventana.setVisible(true);
     }
 
-    public void crearEventos() {
+    private void crearEventos() {
         cbTipoDato.addActionListener(new ControladorBusqueda(this, hospital));
     }
 
