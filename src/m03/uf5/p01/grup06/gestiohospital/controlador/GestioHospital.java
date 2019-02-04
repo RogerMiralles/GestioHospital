@@ -49,19 +49,19 @@ public class GestioHospital {
                 
             }
             
-            System.out.println("Bucle 1");
+            
             for (int i = 0; i < FicheroCSV.leeCsvMetge("metges.csv").size(); i++) {
                 h.addMetge(FicheroCSV.leeCsvMetge("metges.csv").get(i));
                 
             }
             
             
-            System.out.println("EJECUTA");
+            
             for (int i = 0; i < FicheroCSV.leeCsvMalalties("malalties.csv").size(); i++) {
                 h.addMalaltia(FicheroCSV.leeCsvMalalties("malalties.csv").get(i));
                 
             }
-            System.out.println("sadaskjdhakjsdh");
+            
             FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.parse("2007-12-03T10:15:30"), h.getMalaltia(1), h.getMetge("48181321R"),"45990250W", "281234567840") );
             FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.parse("2015-05-15T10:15:30"), h.getMalaltia(3), h.getMetge("78523458D"),"45990250W", "281234567840") );
             FicheroCSV.escribeCSV("visites.csv",new Visita(LocalDateTime.parse("2018-02-23T10:15:30"), h.getMalaltia(2), h.getMetge("78941245R"),"45872365S", "012345678939") );
