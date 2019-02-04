@@ -14,7 +14,7 @@ public class GestioHospital {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PaginaInicio(h).setVisible(true);
+                new PaginaInicio(h);//.setVisible(true);
             }
         });
     }

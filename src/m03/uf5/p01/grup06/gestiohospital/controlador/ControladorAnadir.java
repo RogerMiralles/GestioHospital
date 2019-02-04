@@ -62,6 +62,20 @@ public class ControladorAnadir implements ActionListener {
                 pagina.dispose();
             }
         }
+        
+        if (ae.getActionCommand().equals("ComboBoxPacient")) {
+            int i = ((PanelNewVisita)pagina.getpVisita()).getCbPacient().getSelectedIndex();
+            if (i != 0) {
+                onlyAllowNumbers(((PanelNewVisita)pagina.getpVisita()).getTfPacient());
+            }
+        }
+        
+        if (ae.getActionCommand().equals("ComboBoxMetge")) {
+            int i = ((PanelNewVisita)pagina.getpVisita()).getCbMetge().getSelectedIndex();
+            if (i != 0) {
+                onlyAllowNumbers(((PanelNewVisita)pagina.getpVisita()).getTfPacient());
+            }
+        }
     }
 
     private void asignaComponentes() {
@@ -73,6 +87,24 @@ public class ControladorAnadir implements ActionListener {
 
         pagina.getBtnCancelar().setActionCommand("btnCancelar");
         pagina.getBtnCancelar().addActionListener(this);
+        
+        ((PanelNewVisita)pagina.getpVisita()).getCbPacient().setActionCommand("ComboBoxPacient");
+        ((PanelNewVisita)pagina.getpVisita()).getCbPacient().addActionListener(this);
+        
+        ((PanelNewVisita)pagina.getpVisita()).getCbMetge().setActionCommand("ComboBoxMetge");
+        ((PanelNewVisita)pagina.getpVisita()).getCbMetge().addActionListener(this);
+        
+        onlyAllowNumbers(((PanelNewVisita)pagina.getpVisita()).getTfEnfermetat());
+        
+        onlyAllowNumbers(((PanelNewPacient) pagina.getpPaciente()).getTfCP());
+        onlyAllowNumbers(((PanelNewPacient) pagina.getpPaciente()).getTfNum());
+        
+        onlyAllowNumbers(((PanelNewMetge) pagina.getpMedico()).getTfCP());
+        onlyAllowNumbers(((PanelNewMetge) pagina.getpMedico()).getTfNum());
+        onlyAllowNumbers(((PanelNewMetge) pagina.getpMedico()).getTfNumEmpleat());
+        onlyAllowNumbers(((PanelNewMetge) pagina.getpMedico()).getTfSalari());
+        
+        onlyAllowNumbers(((PanelNewMalaltia) pagina.getpMalaltia()).getTfDurada());
     }
 
     private boolean createVisita() {
@@ -106,7 +138,7 @@ public class ControladorAnadir implements ActionListener {
                     mtg = hospital.getMetge(Long.parseLong(mtgData));
                     break;
             }
-            
+
             if (pcnt == null) {
                 showErrorMessage(" PACIENT NO TROBAT", "No existeix ningun pacient amb les dades inserides.");
                 return false;
@@ -116,8 +148,8 @@ public class ControladorAnadir implements ActionListener {
             } else if (m == null) {
                 showErrorMessage(" MALALTIA NO TROBADA", "No existeix ninguna malaltia amb el codi inserit.");
                 return false;
-            } 
-            
+            }
+
             LocalDateTime t = LocalDateTime.now();
             Visita v = new Visita(t, m, mtg, pcnt.getNif(), pcnt.getNumSegSocial());
             System.out.println("[INFO]: Visita creada: " + v);
@@ -226,6 +258,18 @@ public class ControladorAnadir implements ActionListener {
             showErrorMessage(" ERROR", e.toString());
             return false;
         }
+    }
+
+    private void onlyAllowNumbers(JTextField txt) {
+        txt.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+                    e.consume();
+                }
+            }
+        });
     }
 
     private boolean showWaringCloseMessage() {
