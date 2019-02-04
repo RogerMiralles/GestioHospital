@@ -19,7 +19,7 @@ public class PanelNewMalaltia extends JPanel {
         
         pNom = new JPanel(new FlowLayout(0));
         tfNom = new JTextField();
-        tfNom.setPreferredSize(new Dimension(175,30));
+        tfNom.setPreferredSize(new Dimension(200,30));
         JLabel lblNom = new JLabel("Nom:");
         lblNom.setPreferredSize(new Dimension(100, 30));
         pNom.add(lblNom);
@@ -27,7 +27,7 @@ public class PanelNewMalaltia extends JPanel {
         
         pTractament = new JPanel(new FlowLayout(0));
         tfTractament = new JTextField();
-        tfTractament.setPreferredSize(new Dimension(175,30));
+        tfTractament.setPreferredSize(new Dimension(200,30));
         JLabel lblTractament = new JLabel("Tractament:");
         lblTractament.setPreferredSize(new Dimension(100, 30));
         pTractament.add(lblTractament);
@@ -35,13 +35,13 @@ public class PanelNewMalaltia extends JPanel {
         
         pDurada = new JPanel(new FlowLayout(0));
         tfDurada = new JTextField();
-        tfDurada.setPreferredSize(new Dimension(175,30));
+        tfDurada.setPreferredSize(new Dimension(200,30));
         JLabel lblDurada = new JLabel("Dies de durada:");
         lblDurada.setPreferredSize(new Dimension(100, 30));
         pDurada.add(lblDurada);
         pDurada.add(tfDurada);
         
-        pBaixa = new JPanel(new FlowLayout(0));
+        pBaixa = new JPanel(new FlowLayout(1));
         cbBaixa = new JCheckBox("Causa de baixa");
         cbBaixa.setPreferredSize(new Dimension(175,30));
         pBaixa.add(cbBaixa);

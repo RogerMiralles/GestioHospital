@@ -28,15 +28,16 @@ public class PaginaInicio extends JFrame {
         CreaGUI();
         crearEventos();
         this.hospital = hospital;
+        this.setTitle("Gestor hospital");
         ImageIcon i = new ImageIcon("drawables/ic_hospitalLauncher.png");
         this.setIconImage(i.getImage());
     }
 
     private void CreaGUI() {
-        JFrame ventana = new JFrame();
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ventana.setSize(800, 600);
-
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(800, 600);
+        this.setMinimumSize(new Dimension(800, 600));
+        
         pPrincipal = new JPanel();
         pPrincipal.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         pNorte = new JPanel();
@@ -70,9 +71,9 @@ public class PaginaInicio extends JFrame {
         pPrincipal.add(pCentro, BorderLayout.CENTER);
         pPrincipal.add(pSur, BorderLayout.SOUTH);
 
-        ventana.add(pPrincipal);
-        ventana.setLocationRelativeTo(null);
-        ventana.setVisible(true);
+        this.add(pPrincipal);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     private void crearEventos() {

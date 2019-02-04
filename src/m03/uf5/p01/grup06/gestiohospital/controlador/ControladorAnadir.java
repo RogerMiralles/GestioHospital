@@ -110,10 +110,12 @@ public class ControladorAnadir implements ActionListener {
     private boolean createVisita() {
         try {
             PanelNewVisita p = (PanelNewVisita) pagina.getpVisita();
-
             int codigoMalaltia = Integer.parseInt(p.getTfEnfermetat().getText());
             Malaltia m = hospital.getMalaltia(codigoMalaltia);
-
+            if (showNullErrorMessage(m, "malaltia")) {
+                return false;
+            }
+            
             Pacient pcnt = null;
             String pcntData = p.getTfPacient().getText();
             switch (p.getCbPacient().getSelectedIndex()) {
@@ -127,6 +129,9 @@ public class ControladorAnadir implements ActionListener {
                     pcnt = hospital.getPacient(Integer.parseInt(pcntData));
                     break;
             }
+            if (showNullErrorMessage(pcnt, "pacient")){
+                return false;
+            }
 
             Metge mtg = null;
             String mtgData = p.getTfPacient().getText();
@@ -138,7 +143,10 @@ public class ControladorAnadir implements ActionListener {
                     mtg = hospital.getMetge(Long.parseLong(mtgData));
                     break;
             }
-
+            if (showNullErrorMessage(mtg, "metge")) {
+                return false;
+            }
+            
             if (pcnt == null) {
                 showErrorMessage(" PACIENT NO TROBAT", "No existeix ningun pacient amb les dades inserides.");
                 return false;
@@ -158,10 +166,10 @@ public class ControladorAnadir implements ActionListener {
             FicheroCSV.escribeCSV("visites.csv", v);
             return true;
         } catch (NumberFormatException e) {
-            showErrorMessage(" ERROR", "Omple tots els camps.");
+            showErrorMessage(" Error", "Omple tots els camps.");
             return false;
         } catch (Exception e) {
-            showErrorMessage(" ERROR", e.toString());
+            showErrorMessage(" Error", e.toString());
             return false;
         }
     }
@@ -192,10 +200,10 @@ public class ControladorAnadir implements ActionListener {
             FicheroCSV.escribeCSV("pacients.csv", pcnt);
             return true;
         } catch (NumberFormatException e) {
-            showErrorMessage(" ERROR", "Omple tots els camps.");
+            showErrorMessage(" Error", "Omple tots els camps.");
             return false;
         } catch (Exception e) {
-            showErrorMessage(" ERROR", e.toString());
+            showErrorMessage(" Error", e.toString());
             return false;
         }
     }
@@ -229,10 +237,10 @@ public class ControladorAnadir implements ActionListener {
             FicheroCSV.escribeCSV("metges.csv", mtg);
             return true;
         } catch (NumberFormatException e) {
-            showErrorMessage(" ERROR", "Omple tots els camps.");
+            showErrorMessage(" Error", "Omple tots els camps.");
             return false;
         } catch (Exception e) {
-            showErrorMessage(" ERROR", e.toString());
+            showErrorMessage(" Error", e.toString());
             return false;
         }
     }
@@ -252,10 +260,10 @@ public class ControladorAnadir implements ActionListener {
             FicheroCSV.escribeCSV("malalties.csv", m);
             return true;
         } catch (NumberFormatException e) {
-            showErrorMessage(" ERROR", "Omple tots els camps.");
+            showErrorMessage(" Error", "Omple tots els camps.");
             return false;
         } catch (Exception e) {
-            showErrorMessage(" ERROR", e.toString());
+            showErrorMessage(" Error", e.toString());
             return false;
         }
     }
@@ -276,9 +284,19 @@ public class ControladorAnadir implements ActionListener {
         Object[] options = {"Continuar aqui", "Sortir sense guardar"};
         int n = JOptionPane.showOptionDialog(pagina,
                 "Si cancela l'operacio les dades del formulari es perdran.\nVols sortir sense guardar?",
-                "Sortir sense guardar?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+                "Sortir sense guardar", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
                 null, options, options[1]);
         return n == JOptionPane.YES_NO_CANCEL_OPTION;
+    }
+    
+     private boolean showNullErrorMessage(Object obj, String objName) {
+        if (obj == null) {
+            String msg = "No s'ha trobat cap " + objName + " amb les dades proporcionades.";
+            JOptionPane.showMessageDialog(pagina, "Instancia no trobada", msg, JOptionPane.ERROR_MESSAGE);
+            System.out.println(objName + " ES NULL ");
+            return true;
+        }
+        return false;
     }
 
     private void showErrorMessage(String titulo, String msg) {

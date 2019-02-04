@@ -5,10 +5,6 @@ import java.awt.event.ActionListener;
 import m03.uf5.p01.grup06.gestiohospital.modelo.*;
 import m03.uf5.p01.grup06.gestiohospital.vista.*;
 
-/**
- *
- * @author david
- */
 public class ControladorBusqueda implements ActionListener {
 
     PaginaInicio ventana1;
@@ -20,7 +16,7 @@ public class ControladorBusqueda implements ActionListener {
         asignarComponentes();
     }
 
-    public void asignarComponentes() {
+    private void asignarComponentes() {
         ventana1.getBtnBuscar().setActionCommand("btnBuscar");
         ventana1.getBtnBuscar().addActionListener(this);
 
