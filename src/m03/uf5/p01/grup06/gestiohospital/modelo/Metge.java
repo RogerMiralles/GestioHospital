@@ -16,13 +16,16 @@ public class Metge extends Persona {
 
     @Override
     public String toString() {
-        return "Datos Medico \n___________________ \nNIF: " + this.getNif() + "\nNom: "
-                + this.getNom() + "\nApellidos: " + this.getCognom1() + " "
-                + this.getCognom2() + "\nTelefono: " + this.getTelefon()
+        return "<html><h3>Datos Medico</h3> \n___________________ "
+                + "\nNIF: " + this.getNif() 
+                + "\nNombre: " + this.getNom() 
+                + "\nApellidos: " + this.getCognom1() + " "+ this.getCognom2() 
+                + "\nTelefono: " + this.getTelefon()
                 + "\nNumero Seguridad Social: " + this.getNumSegSocial()
                 + "\nDirección: " + this.getAdreca().toString()
-                + "\nNumero empleado: " + this.numEmpleat + "\nSueldo mensual: " + this.salariMensual
-                + "\nCodigo cuenta corriente: " + this.codiCompteCorrent;
+                + "\nNumero empleado: " + this.numEmpleat 
+                + "\nSueldo mensual: " + this.salariMensual
+                + "\nCodigo cuenta corriente: " + this.codiCompteCorrent+"</html";
     }
     
     
