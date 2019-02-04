@@ -17,7 +17,7 @@ public class Historial {
     
     @Override
     public String toString() {
-        String s = "HISTORIAL [Codigo " + this.codi + "]\n----------------------------------------------";
+        String s = "<html><h3>HISTORIAL [Codigo " + this.codi + "]</h3>\n----------------------------------------------";
         
         Iterator<Visita> lit = visitas.iterator();
         

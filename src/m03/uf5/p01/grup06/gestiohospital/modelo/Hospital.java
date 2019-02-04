@@ -110,7 +110,7 @@ public class Hospital {
         }
     }
 
-    public Pacient getPacient(double SS) {
+    public Pacient getPacient(long SS) {
         for (Entry<String, Pacient> entrada : pacients.entrySet()) {
             Pacient p = entrada.getValue();
             if (Long.parseLong(p.getNumSegSocial()) == SS) {

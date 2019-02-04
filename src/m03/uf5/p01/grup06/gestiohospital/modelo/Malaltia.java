@@ -30,9 +30,11 @@ public class Malaltia {
     @Override
     public String toString() {
         if (isCausaBaixa()) {
-            return "Tiene la enfermedad " + getNom() + " que causa baja, el tratamiento es " + getTractament() + " y durará " + getDuradaTractament().toDays();
+            return "<html><p>Tiene la enfermedad " + getNom() + " que causa baja</p></br>"
+                    + "<p>, el tratamiento es " + getTractament() + " y durará " + getDuradaTractament().toDays()+"</p></html>";
         } else {
-            return "Tiene la enfermedad " + getNom() + " que no causa baja, el tratamiento es " + getTractament() + " y durará " + getDuradaTractament().toDays();
+            return "<html><p>Tiene la enfermedad " + getNom() + " que no causa baja</p></br>"
+                    + "<p>, el tratamiento es " + getTractament() + " y durará " + getDuradaTractament().toDays()+"</p></html>";
         }
     }
     
