@@ -54,6 +54,8 @@ public class PaginaInicio extends JFrame {
         tfBuscar.setPreferredSize(new Dimension(200, 30));
         taMostrar = new JTextArea();
         taMostrar.setEditable(false);
+        taMostrar.setOpaque(false);
+        pCentro.setBorder(BorderFactory.createTitledBorder("Información Buscada: "));
         btnBuscar = new JButton("Buscar");
         btnNuevo = new JButton("Nuevo");
 

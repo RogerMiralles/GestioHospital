@@ -79,70 +79,53 @@ public class ControladorBusqueda implements ActionListener {
         tipoDato = ventana1.getCbTipoDato().getSelectedIndex();
         tipoId = ventana1.getCbTipoId().getSelectedIndex();
         dato = ventana1.getTfBuscar().getSelectedText();
-        
-        switch (tipoDato) {
-            case 0:
-                try {
+        try {
+            switch (tipoDato) {
+                case 0:
                     ventana1.getTaMostrar().setText(h1.getMalaltia(Integer.parseInt(dato)).toString());
-                    break;
-                } catch (NumberFormatException e) {
-                    ventana1.getTaMostrar().setText("Error, se debe introducir un numero entero");
-                }
-            case 1:
-                switch (tipoId) {
-                    case 0:
-                        try {
+                        break;
+                case 1:
+                    switch (tipoId) {
+                        case 0:
                             ventana1.getTaMostrar().setText(h1.getHistorial(Integer.parseInt(dato)).toString());
+                                break;
+                        case 1:
+                            ventana1.getTaMostrar().setText(h1.getHistorial(dato).toString());
                             break;
-                        } catch (NumberFormatException e) {
-                            ventana1.getTaMostrar().setText("Error, se debe introducir un numero entero");
-                        }
-                    case 1:
-                        ventana1.getTaMostrar().setText(h1.getHistorial(dato).toString());
-                        break;
-                    default:
-                }
-                break;
-            case 2:
-                switch (tipoId) {
-                    case 0:
-                        try {
+                    }
+                    break;
+                case 2:
+                    switch (tipoId) {
+                        case 0:
                             ventana1.getTaMostrar().setText(h1.getMetge(Long.parseLong(dato)).toString());
+                                break;
+                        case 1:
+                            ventana1.getTaMostrar().setText(h1.getMetge(dato).toString());
                             break;
-                        } catch (NumberFormatException e) {
-                            ventana1.getTaMostrar().setText("Error, se debe introducir un numero entero");
-                        }
-                    case 1:
-                        ventana1.getTaMostrar().setText(h1.getMetge(dato).toString());
-                        break;
-                    default:
-                }
-                break;
-            case 3:
-                switch (tipoId) {
-                    case 0:
-                        try {
+                    }
+                    break;
+                case 3:
+                    switch (tipoId) {
+                        case 0:
                             ventana1.getTaMostrar().setText(h1.getPacient(Integer.parseInt(dato)).toString());
-                            break;
-                        } catch (NumberFormatException e) {
-                            ventana1.getTaMostrar().setText("Error, se debe introducir un numero entero");
-                        }
-                    case 1:
-                        try{
+                                break;
+                            case 1:
                             ventana1.getTaMostrar().setText(h1.getPacient(Long.parseLong(dato)).toString());
-                        break;
-                        }catch(NumberFormatException e){
-                            ventana1.getTaMostrar().setText("Error, se debe introducir un numero entero");
-                        }                        
-                    case 2:
-                        ventana1.getTaMostrar().setText(h1.getPacient(dato).toString());
-                        break;
-                    default:
-                }
-                break;
-            default:
-                ventana1.getTaMostrar().setText("No se ha encontrado información a partir de estos datos.");
+                                break;
+                        case 2:
+                            ventana1.getTaMostrar().setText(h1.getPacient(dato).toString());
+                            break;
+                    }
+                    break;
+                default:
+                    ventana1.getTaMostrar().setText("No se ha encontrado información a partir de estos datos.");
+            }
+        }catch(NumberFormatException e){
+            ventana1.getTaMostrar().setText("Error en las variables de busqueda.");
+        }catch(NullPointerException ne){
+            ventana1.getTaMostrar().setText("Información no existente.");
         }
+
     }
 
     public void ventanaNuevo() {
