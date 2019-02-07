@@ -25,12 +25,12 @@ public class PaginaInicio extends JFrame {
     private final Hospital hospital;
 
     public PaginaInicio(Hospital hospital) {
-        CreaGUI();
-        crearEventos();
         this.hospital = hospital;
         this.setTitle("Gestor hospital");
         ImageIcon i = new ImageIcon("drawables/ic_hospitalLauncher.png");
         this.setIconImage(i.getImage());
+        CreaGUI();
+        crearEventos();
     }
 
     private void CreaGUI() {

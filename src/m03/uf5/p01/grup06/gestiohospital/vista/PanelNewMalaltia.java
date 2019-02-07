@@ -5,16 +5,16 @@ import javax.swing.*;
 
 public class PanelNewMalaltia extends JPanel {
     
-    private JPanel pNom, pTractament, pBaixa, pDurada;
+    private JPanel pNom, pTractament, pBaixa, pDurada, pCodi;
     private JCheckBox cbBaixa;
-    private JTextField tfNom, tfTractament, tfDurada;
+    private JTextField tfNom, tfTractament, tfDurada, tfCodi;
     
     public PanelNewMalaltia () {
         generaGUI();
     }
 
     private void generaGUI() {
-        JPanel pContenido = new JPanel(new GridLayout(5,1));
+        JPanel pContenido = new JPanel(new GridLayout(6,1));
         pContenido.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
         pNom = new JPanel(new FlowLayout(0));
@@ -24,6 +24,14 @@ public class PanelNewMalaltia extends JPanel {
         lblNom.setPreferredSize(new Dimension(100, 30));
         pNom.add(lblNom);
         pNom.add(tfNom);
+        
+        pCodi = new JPanel(new FlowLayout(0));
+        tfCodi = new JTextField();
+        tfCodi.setPreferredSize(new Dimension(200,30));
+        JLabel lblCodi = new JLabel("Codi:");
+        lblCodi.setPreferredSize(new Dimension(100, 30));
+        pCodi.add(lblCodi);
+        pCodi.add(tfCodi);
         
         pTractament = new JPanel(new FlowLayout(0));
         tfTractament = new JTextField();
@@ -50,6 +58,7 @@ public class PanelNewMalaltia extends JPanel {
         JLabel lblDesc = new JLabel ("Introdueix les dades de la malaltia.");
         pContenido.add(lblDesc);
         pContenido.add(pNom);
+        pContenido.add(pCodi);
         pContenido.add(pTractament);
         pContenido.add(pDurada);
         pContenido.add(pBaixa);
@@ -70,5 +79,9 @@ public class PanelNewMalaltia extends JPanel {
 
     public JTextField getTfDurada() {
         return tfDurada;
+    }
+    
+    public JTextField getTfCodi() {
+        return tfCodi;
     }
 }

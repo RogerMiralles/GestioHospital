@@ -150,6 +150,22 @@ public class Hospital {
             return null;
         }
     }
+    
+    public int getPacientSize() {
+        return this.pacients.size();
+    }
+    
+    public int getMetgeSize() {
+        return this.metges.size();
+    }
+    
+    public int getMalaltiaSize() {
+        return this.malalties.size();
+    }
+    
+    public String getName() {
+        return this.nomHospital;
+    }
 
     @Override
     public String toString() {

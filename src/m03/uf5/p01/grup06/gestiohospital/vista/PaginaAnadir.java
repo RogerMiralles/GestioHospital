@@ -5,20 +5,22 @@ import javax.swing.*;
 import m03.uf5.p01.grup06.gestiohospital.controlador.*;
 import m03.uf5.p01.grup06.gestiohospital.modelo.*;
 
-public class PaginaAnadir extends JFrame {
-
+public class PaginaAnadir extends JFrame {  
+    
+    private final Hospital hospital;
     private final String[] tipoObjetos = {"Visita", "Paciente", "Medico", "Enfermedad"};
     private JPanel pNorte, pSur, pCentro, pVisita, pMedico, pPaciente, pMalaltia;
     private JComboBox cbTipo;
     private JButton btnAceptar, btnCancelar;
     private ControladorAnadir c;
-    private Hospital hospital;
 
     public PaginaAnadir(Hospital hospital) {
-        creaGUI(); 
-        asignaMetodos();
         ImageIcon i = new ImageIcon("drawables/ic_hospitalLauncher.png");
         this.setIconImage(i.getImage());
+        this.hospital = hospital;
+        creaGUI(); 
+        asignaMetodos();
+        
     }
 
     private void creaGUI() {
