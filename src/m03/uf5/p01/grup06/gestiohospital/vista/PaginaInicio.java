@@ -9,10 +9,9 @@ public class PaginaInicio extends JFrame {
 
     private JPanel pPrincipal, pNorte, pCentro, pSur, pBusqueda;
     private JComboBox cbTipoDato, cbTipoId;
-    private JLabel lblTitulo;
+    private JLabel lblTitulo, taMostrar;
     private JTextField tfBuscar;
-    private JTextArea taMostrar;
-    private JButton btnBuscar,  btnNuevo;
+    private JButton btnBuscar, btnNuevo;
     private final String[] objetos = {"Enfermedades", "Historiales", "Medicos", "Pacientes"};
     private final String[] idsEnfermedad = {"Codigo"};
     private final String[] idsHistorial = {"Codigo", "DNI"};
@@ -33,7 +32,7 @@ public class PaginaInicio extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(800, 600);
         this.setMinimumSize(new Dimension(800, 600));
-        
+
         pPrincipal = new JPanel();
         pPrincipal.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         pNorte = new JPanel();
@@ -49,8 +48,8 @@ public class PaginaInicio extends JFrame {
         cbTipoId = new JComboBox(idsEnfermedad);
         tfBuscar = new JTextField();
         tfBuscar.setPreferredSize(new Dimension(200, 30));
-        taMostrar = new JTextArea();
-        taMostrar.setEditable(false);
+        taMostrar = new JLabel();
+        taMostrar.setFont(new Font("Dialog", Font.PLAIN, 12));
         taMostrar.setOpaque(false);
         pCentro.setBorder(BorderFactory.createTitledBorder("Información Buscada: "));
         btnBuscar = new JButton("Buscar");
@@ -90,7 +89,7 @@ public class PaginaInicio extends JFrame {
         return tfBuscar;
     }
 
-    public JTextArea getTaMostrar() {
+    public JLabel getTaMostrar() {
         return taMostrar;
     }
 

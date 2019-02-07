@@ -29,12 +29,14 @@ public class Malaltia {
 
     @Override
     public String toString() {
-        return "<html><h3>Datos Enfermedad</h3> \n___________________ "
-                + "\nCodigo: " + this.getCodi()
-                + "\nNombre: " + this.getNom()
-                + "\nCausa Baja: " + this.isCausaBaixa()
-                + "\nTratamiento: " + this.getTractament()
-                + "\nDuración tratamiento: " + this.getDuradaTractament() + "</html>";
+        return "<html><h2>Datos Enfermedad</h2>"
+                + "<ul>"
+                + "<li>Codigo: " + this.getCodi()+"</li>"
+                + "<li>Nombre: " + this.getNom()+"</li>"
+                + "<li>Causa Baja: " + this.isCausaBaixa()+"</li>"
+                + "<li>Tratamiento: " + this.getTractament()+"</li>"
+                + "<li>Duración tratamiento: " + this.getDuradaTractament()+"</li>"
+                + "</ul>";
         /*
         if (isCausaBaixa()) {
             return "<html><p>Tiene la enfermedad " + getNom() + " que causa baja</p></br>"
