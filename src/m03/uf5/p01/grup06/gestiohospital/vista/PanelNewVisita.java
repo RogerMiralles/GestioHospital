@@ -23,7 +23,7 @@ public class PanelNewVisita  extends JPanel {
         tfPacient = new JTextField();
         tfPacient.setPreferredSize(new Dimension(200,30));
         cbPacient = new JComboBox(metodoIdentPacient);
-        cbPacient.setPreferredSize(new Dimension(80, 30));
+        cbPacient.setPreferredSize(new Dimension(100, 30));
         JLabel lblPacient = new JLabel("Pacient:");
         lblPacient.setPreferredSize(new Dimension(120, 30));
         pacient.add(lblPacient);
@@ -34,7 +34,7 @@ public class PanelNewVisita  extends JPanel {
         tfMetge = new JTextField();
         tfMetge.setPreferredSize(new Dimension(200,30));
         cbMetge = new JComboBox(metodoIdentMetge);
-        cbMetge.setPreferredSize(new Dimension(80, 30));
+        cbMetge.setPreferredSize(new Dimension(100, 30));
         JLabel lblMetge = new JLabel("Metge:");
         lblMetge.setPreferredSize(new Dimension(120, 30));
         metge.add(lblMetge);

@@ -17,6 +17,7 @@ public class ControladorAnadir implements ActionListener {
         this.pagina = pagina;
         this.hospital = hospital;
         asignaComponentes();
+        System.out.println("[INFO]: Controlador añadir creado (" + hospital.getName() + ").");
     }
 
     @Override
@@ -62,23 +63,24 @@ public class ControladorAnadir implements ActionListener {
                 pagina.dispose();
             }
         }
-        
+
         if (ae.getActionCommand().equals("ComboBoxPacient")) {
-            int i = ((PanelNewVisita)pagina.getpVisita()).getCbPacient().getSelectedIndex();
+            int i = ((PanelNewVisita) pagina.getpVisita()).getCbPacient().getSelectedIndex();
             if (i != 0) {
-                onlyAllowNumbers(((PanelNewVisita)pagina.getpVisita()).getTfPacient());
+                onlyAllowNumbers(((PanelNewVisita) pagina.getpVisita()).getTfPacient());
             }
         }
-        
+
         if (ae.getActionCommand().equals("ComboBoxMetge")) {
-            int i = ((PanelNewVisita)pagina.getpVisita()).getCbMetge().getSelectedIndex();
+            int i = ((PanelNewVisita) pagina.getpVisita()).getCbMetge().getSelectedIndex();
             if (i != 0) {
-                onlyAllowNumbers(((PanelNewVisita)pagina.getpVisita()).getTfPacient());
+                onlyAllowNumbers(((PanelNewVisita) pagina.getpVisita()).getTfPacient());
             }
         }
     }
 
     private void asignaComponentes() {
+
         pagina.getCbTipo().setActionCommand("ComboBoxTipo");
         pagina.getCbTipo().addActionListener(this);
 
@@ -99,13 +101,14 @@ public class ControladorAnadir implements ActionListener {
         
         onlyAllowNumbers(((PanelNewPacient) pagina.getpPaciente()).getTfCP());
         onlyAllowNumbers(((PanelNewPacient) pagina.getpPaciente()).getTfNum());
-        
+
         onlyAllowNumbers(((PanelNewMetge) pagina.getpMedico()).getTfCP());
         onlyAllowNumbers(((PanelNewMetge) pagina.getpMedico()).getTfNum());
         onlyAllowNumbers(((PanelNewMetge) pagina.getpMedico()).getTfNumEmpleat());
         onlyAllowNumbers(((PanelNewMetge) pagina.getpMedico()).getTfSalari());
-        
+
         onlyAllowNumbers(((PanelNewMalaltia) pagina.getpMalaltia()).getTfDurada());
+        onlyAllowNumbers(((PanelNewMalaltia) pagina.getpMalaltia()).getTfCodi());
     }
 
     private boolean createVisita() {
@@ -116,7 +119,7 @@ public class ControladorAnadir implements ActionListener {
             if (showNullErrorMessage(m, "malaltia")) {
                 return false;
             }
-            
+
             Pacient pcnt = null;
             String pcntData = p.getTfPacient().getText();
             switch (p.getCbPacient().getSelectedIndex()) {
@@ -130,7 +133,7 @@ public class ControladorAnadir implements ActionListener {
                     pcnt = hospital.getPacient(Integer.parseInt(pcntData));
                     break;
             }
-            if (showNullErrorMessage(pcnt, "pacient")){
+            if (showNullErrorMessage(pcnt, "pacient")) {
                 return false;
             }
 
@@ -147,7 +150,7 @@ public class ControladorAnadir implements ActionListener {
             if (showNullErrorMessage(mtg, "metge")) {
                 return false;
             }
-            
+
             if (pcnt == null) {
                 showErrorMessage(" PACIENT NO TROBAT", "No existeix ningun pacient amb les dades inserides.");
                 return false;
@@ -249,22 +252,23 @@ public class ControladorAnadir implements ActionListener {
     private boolean createMalaltia() {
         try {
             PanelNewMalaltia p = (PanelNewMalaltia) pagina.getpMalaltia();
+            int codi = Integer.parseInt(p.getTfCodi().getText());
             String name = p.getTfNom().getText();
             String tractament = p.getTfTractament().getText();
             Duration duracion = Duration.ofDays(Integer.parseInt(p.getTfDurada().getText()));
             Boolean causaBaixa = p.getCbBaixa().isSelected();
 
-            Malaltia m = new Malaltia(name, causaBaixa, tractament, duracion);
-            System.out.println("[INFO]: Malaltia creada: " + m);
-
+            Malaltia m = new Malaltia(codi, name, causaBaixa, tractament, duracion);
+            
             hospital.addMalaltia(m);
             FicheroCSV.escribeCSV("malalties.csv", m);
+            System.out.println("[INFO]: Malaltia creada: [" + m.getCodi() + "] " + m.getNom());
             return true;
         } catch (NumberFormatException e) {
             showErrorMessage(" Error", "Omple tots els camps.");
             return false;
         } catch (Exception e) {
-            showErrorMessage(" Error", e.toString());
+            showErrorMessage(" Error", e.getMessage());
             return false;
         }
     }
@@ -279,6 +283,7 @@ public class ControladorAnadir implements ActionListener {
                 }
             }
         });
+        txt.setToolTipText("Inserta solament valors numerics.");
     }
 
     private boolean showWaringCloseMessage() {
@@ -289,12 +294,11 @@ public class ControladorAnadir implements ActionListener {
                 null, options, options[1]);
         return n == JOptionPane.YES_NO_CANCEL_OPTION;
     }
-    
-     private boolean showNullErrorMessage(Object obj, String objName) {
+
+    private boolean showNullErrorMessage(Object obj, String objName) {
         if (obj == null) {
             String msg = "No s'ha trobat cap " + objName + " amb les dades proporcionades.";
-            JOptionPane.showMessageDialog(pagina, "Instancia no trobada", msg, JOptionPane.ERROR_MESSAGE);
-            System.out.println(objName + " ES NULL ");
+            JOptionPane.showMessageDialog(pagina, msg, "Instancia no trobada", JOptionPane.ERROR_MESSAGE);
             return true;
         }
         return false;
