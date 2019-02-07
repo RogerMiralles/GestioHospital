@@ -16,8 +16,7 @@ public class ControladorBusqueda implements ActionListener {
         asignarComponentes();
     }
 
-    private void asignarComponentes() {
-        onlyAllowNumbers(ventana1.getTfBuscar());
+    private void asignarComponentes() {   
 
         ventana1.getBtnBuscar().setActionCommand("btnBuscar");
         ventana1.getBtnBuscar().addActionListener(this);
@@ -48,14 +47,15 @@ public class ControladorBusqueda implements ActionListener {
             cambiaIds(indice);
         }
 
-        if (e.getActionCommand().equals("cbTipoId")) {
+        /*if (e.getActionCommand().equals("cbTipoId")) {
             int index = ventana1.getCbTipoId().getSelectedIndex();
             if (index == 1) {
                 allowDni(ventana1.getTfBuscar());
             } else {
+                onlyAllowNumbers(ventana1.getTfBuscar());
                 ventana1.getTfBuscar().addKeyListener(null);
             }
-        }
+        }*/
     }
 
     public void cambiaIds(int indice) {
@@ -129,10 +129,10 @@ public class ControladorBusqueda implements ActionListener {
                             ventana1.getTaMostrar().setText(h1.getPacient(Integer.parseInt(dato)).toString());
                             break;
                         case 1:
-                            ventana1.getTaMostrar().setText(h1.getPacient(Long.parseLong(dato)).toString());
+                            ventana1.getTaMostrar().setText(h1.getPacient(dato).toString());
                             break;
                         case 2:
-                            ventana1.getTaMostrar().setText(h1.getPacient(dato).toString());
+                            ventana1.getTaMostrar().setText(h1.getPacient(Long.parseLong(dato)).toString());
                             break;
                     }
                     break;
