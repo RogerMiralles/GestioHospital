@@ -137,27 +137,17 @@ public class ControladorAnadir implements ActionListener {
             }
 
             Metge mtg = null;
-            String mtgData = p.getTfPacient().getText();
-            switch (p.getCbPacient().getSelectedIndex()) {
+            String mtgData = p.getTfMetge().getText();
+            switch (p.getCbMetge().getSelectedIndex()) {
                 case 0:
                     mtg = hospital.getMetge(mtgData);
+                    System.out.println("DNI");
                     break;
                 case 1:
                     mtg = hospital.getMetge(Long.parseLong(mtgData));
                     break;
             }
             if (showNullErrorMessage(mtg, "metge")) {
-                return false;
-            }
-
-            if (pcnt == null) {
-                showErrorMessage(" PACIENT NO TROBAT", "No existeix ningun pacient amb les dades inserides.");
-                return false;
-            } else if (mtg == null) {
-                showErrorMessage(" METGE NO TROBAT", "No existeix ningun metge amb les dades inserides.");
-                return false;
-            } else if (m == null) {
-                showErrorMessage(" MALALTIA NO TROBADA", "No existeix ninguna malaltia amb el codi inserit.");
                 return false;
             }
 
@@ -172,7 +162,7 @@ public class ControladorAnadir implements ActionListener {
             showErrorMessage(" Error", "Omple tots els camps.");
             return false;
         } catch (Exception e) {
-            showErrorMessage(" Error", e.toString());
+            showErrorMessage(" Visita Incorrecte", e.getMessage());
             return false;
         }
     }
@@ -206,7 +196,7 @@ public class ControladorAnadir implements ActionListener {
             showErrorMessage(" Error", "Omple tots els camps.");
             return false;
         } catch (Exception e) {
-            showErrorMessage(" Error", e.toString());
+            showErrorMessage(" Pacient Incorrecte", e.getMessage());
             return false;
         }
     }
@@ -243,7 +233,7 @@ public class ControladorAnadir implements ActionListener {
             showErrorMessage(" Error", "Omple tots els camps.");
             return false;
         } catch (Exception e) {
-            showErrorMessage(" Error", e.toString());
+            showErrorMessage(" Metge Incorrecte", e.getMessage());
             return false;
         }
     }
