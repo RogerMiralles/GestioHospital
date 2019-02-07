@@ -5,10 +5,6 @@ import javax.swing.*;
 import m03.uf5.p01.grup06.gestiohospital.controlador.ControladorBusqueda;
 import m03.uf5.p01.grup06.gestiohospital.modelo.*;
 
-/**
- *
- * @author david
- */
 public class PaginaInicio extends JFrame {
 
     private JPanel pPrincipal, pNorte, pCentro, pSur, pBusqueda;

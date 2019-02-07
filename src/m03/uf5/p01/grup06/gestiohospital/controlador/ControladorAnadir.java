@@ -175,7 +175,7 @@ public class ControladorAnadir implements ActionListener {
             String cognom1 = p.getTfApellido1().getText();
             String cognom2 = p.getTfApellido2().getText();
             String numSegSocial = p.getTfNumSS().getText();
-            String nif = p.getTfDNI().getText();
+            String nif = p.getTfDNI().getText().toUpperCase();
             String telefon = p.getTfTelf().getText();
 
             String ciutat = p.getTfCiutat().getText();
@@ -209,7 +209,7 @@ public class ControladorAnadir implements ActionListener {
             String cognom1 = p.getTfApellido1().getText();
             String cognom2 = p.getTfApellido2().getText();
             String numSegSocial = p.getTfNumSS().getText();
-            String nif = p.getTfDNI().getText();
+            String nif = p.getTfDNI().getText().toUpperCase();
             String telefon = p.getTfTelf().getText();
             int numEmpleat = Integer.parseInt(p.getTfNumEmpleat().getText());
             int salari = Integer.parseInt(p.getTfSalari().getText());
@@ -221,12 +221,12 @@ public class ControladorAnadir implements ActionListener {
             int numero = Integer.parseInt(p.getTfNum().getText());
             String planta = p.getTfPlanta().getText();
             String porta = p.getTfPuerta().getText();
-
+            
             Adreca adreca = new Adreca(ciutat, codiPostal, carrer, numero, planta, porta);
 
             Metge mtg = new Metge(nom, cognom1, cognom2, numSegSocial, nif, telefon, adreca, numEmpleat, salari, compteCorrent);
             System.out.println("[INFO]: Metge creat: " + mtg);
-
+            
             hospital.addMetge(mtg);
             FicheroCSV.escribeCSV("metges.csv", mtg);
             return true;

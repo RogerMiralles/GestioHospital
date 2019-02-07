@@ -29,7 +29,7 @@ public abstract class Persona {
             error += "\n - Numero de telefono incorrecto ";
         }
         
-        if (!error.equals("")){
+        if (!error.equals("Datos erroeneos:")){
             throw(new IllegalArgumentException(error));
         } else {
             this.nom = nom;
