@@ -16,16 +16,18 @@ public class Metge extends Persona {
 
     @Override
     public String toString() {
-        return "<html><h3>Datos Medico</h3> \n___________________ "
-                + "\nNIF: " + this.getNif() 
-                + "\nNombre: " + this.getNom() 
-                + "\nApellidos: " + this.getCognom1() + " "+ this.getCognom2() 
-                + "\nTelefono: " + this.getTelefon()
-                + "\nNumero Seguridad Social: " + this.getNumSegSocial()
-                + "\nDirección: " + this.getAdreca().toString()
-                + "\nNumero empleado: " + this.numEmpleat 
-                + "\nSueldo mensual: " + this.salariMensual
-                + "\nCodigo cuenta corriente: " + this.codiCompteCorrent+"</html>";
+        return "<html><h2>Datos Medico</h2>"
+                + "<ul>"
+                + "<li>NIF: " + this.getNif()+"</li>" 
+                + "<li>Nombre: " + this.getNom()+"</li>"  
+                + "<li>Apellidos: " + this.getCognom1() + " "+ this.getCognom2()+"</li>"  
+                + "<li>Telefono: " + this.getTelefon()+"</li>" 
+                + "<li>Numero Seguridad Social: " + this.getNumSegSocial()+"</li>" 
+                + "<li>Dirección: " + this.getAdreca().toString()+"</li>" 
+                + "<li>Numero empleado: " + this.numEmpleat+"</li>"  
+                + "<li>Sueldo mensual: " + this.salariMensual+"</li>" 
+                + "<li>Codigo cuenta corriente: " + this.codiCompteCorrent+"</li>"
+                + "</ul></html>";
     }
     
     
