@@ -21,31 +21,31 @@ public class PanelNewVisita  extends JPanel {
                
         pacient = new JPanel(new FlowLayout(0));
         tfPacient = new JTextField();
-        tfPacient.setPreferredSize(new Dimension(175,30));
+        tfPacient.setPreferredSize(new Dimension(200,30));
         cbPacient = new JComboBox(metodoIdentPacient);
         cbPacient.setPreferredSize(new Dimension(80, 30));
         JLabel lblPacient = new JLabel("Pacient:");
-        lblPacient.setPreferredSize(new Dimension(100, 30));
+        lblPacient.setPreferredSize(new Dimension(120, 30));
         pacient.add(lblPacient);
         pacient.add(tfPacient);
         pacient.add(cbPacient);
         
         metge = new JPanel(new FlowLayout(0));        
         tfMetge = new JTextField();
-        tfMetge.setPreferredSize(new Dimension(175,30));
+        tfMetge.setPreferredSize(new Dimension(200,30));
         cbMetge = new JComboBox(metodoIdentMetge);
         cbMetge.setPreferredSize(new Dimension(80, 30));
         JLabel lblMetge = new JLabel("Metge:");
-        lblMetge.setPreferredSize(new Dimension(100, 30));
+        lblMetge.setPreferredSize(new Dimension(120, 30));
         metge.add(lblMetge);
         metge.add(tfMetge);
         metge.add(cbMetge);
         
         enfermetat = new JPanel(new FlowLayout(0));
         tfEnfermetat = new JTextField();
-        tfEnfermetat.setPreferredSize(new Dimension(175,30));
+        tfEnfermetat.setPreferredSize(new Dimension(200,30));
         JLabel lblEnfermetat = new JLabel("Codi enfermetat:");
-        lblEnfermetat.setMinimumSize(new Dimension(100, 30));
+        lblEnfermetat.setPreferredSize(new Dimension(120, 30));
         enfermetat.add(lblEnfermetat);
         enfermetat.add(tfEnfermetat);
         

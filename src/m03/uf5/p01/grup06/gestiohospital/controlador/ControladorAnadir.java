@@ -62,6 +62,20 @@ public class ControladorAnadir implements ActionListener {
                 pagina.dispose();
             }
         }
+        
+        if (ae.getActionCommand().equals("ComboBoxPacient")) {
+            int i = ((PanelNewVisita)pagina.getpVisita()).getCbPacient().getSelectedIndex();
+            if (i != 0) {
+                onlyAllowNumbers(((PanelNewVisita)pagina.getpVisita()).getTfPacient());
+            }
+        }
+        
+        if (ae.getActionCommand().equals("ComboBoxMetge")) {
+            int i = ((PanelNewVisita)pagina.getpVisita()).getCbMetge().getSelectedIndex();
+            if (i != 0) {
+                onlyAllowNumbers(((PanelNewVisita)pagina.getpVisita()).getTfPacient());
+            }
+        }
     }
 
     private void asignaComponentes() {
@@ -73,15 +87,36 @@ public class ControladorAnadir implements ActionListener {
 
         pagina.getBtnCancelar().setActionCommand("btnCancelar");
         pagina.getBtnCancelar().addActionListener(this);
+        
+        
+        ((PanelNewVisita)pagina.getpVisita()).getCbPacient().setActionCommand("ComboBoxPacient");
+        ((PanelNewVisita)pagina.getpVisita()).getCbPacient().addActionListener(this);
+        
+        ((PanelNewVisita)pagina.getpVisita()).getCbMetge().setActionCommand("ComboBoxMetge");
+        ((PanelNewVisita)pagina.getpVisita()).getCbMetge().addActionListener(this);
+        
+        onlyAllowNumbers(((PanelNewVisita)pagina.getpVisita()).getTfEnfermetat());
+        
+        onlyAllowNumbers(((PanelNewPacient) pagina.getpPaciente()).getTfCP());
+        onlyAllowNumbers(((PanelNewPacient) pagina.getpPaciente()).getTfNum());
+        
+        onlyAllowNumbers(((PanelNewMetge) pagina.getpMedico()).getTfCP());
+        onlyAllowNumbers(((PanelNewMetge) pagina.getpMedico()).getTfNum());
+        onlyAllowNumbers(((PanelNewMetge) pagina.getpMedico()).getTfNumEmpleat());
+        onlyAllowNumbers(((PanelNewMetge) pagina.getpMedico()).getTfSalari());
+        
+        onlyAllowNumbers(((PanelNewMalaltia) pagina.getpMalaltia()).getTfDurada());
     }
 
     private boolean createVisita() {
         try {
             PanelNewVisita p = (PanelNewVisita) pagina.getpVisita();
-
             int codigoMalaltia = Integer.parseInt(p.getTfEnfermetat().getText());
             Malaltia m = hospital.getMalaltia(codigoMalaltia);
-
+            if (showNullErrorMessage(m, "malaltia")) {
+                return false;
+            }
+            
             Pacient pcnt = null;
             String pcntData = p.getTfPacient().getText();
             switch (p.getCbPacient().getSelectedIndex()) {
@@ -95,6 +130,9 @@ public class ControladorAnadir implements ActionListener {
                     pcnt = hospital.getPacient(Integer.parseInt(pcntData));
                     break;
             }
+            if (showNullErrorMessage(pcnt, "pacient")){
+                return false;
+            }
 
             Metge mtg = null;
             String mtgData = p.getTfPacient().getText();
@@ -106,6 +144,9 @@ public class ControladorAnadir implements ActionListener {
                     mtg = hospital.getMetge(Long.parseLong(mtgData));
                     break;
             }
+            if (showNullErrorMessage(mtg, "metge")) {
+                return false;
+            }
             
             if (pcnt == null) {
                 showErrorMessage(" PACIENT NO TROBAT", "No existeix ningun pacient amb les dades inserides.");
@@ -116,8 +157,8 @@ public class ControladorAnadir implements ActionListener {
             } else if (m == null) {
                 showErrorMessage(" MALALTIA NO TROBADA", "No existeix ninguna malaltia amb el codi inserit.");
                 return false;
-            } 
-            
+            }
+
             LocalDateTime t = LocalDateTime.now();
             Visita v = new Visita(t, m, mtg, pcnt.getNif(), pcnt.getNumSegSocial());
             System.out.println("[INFO]: Visita creada: " + v);
@@ -126,10 +167,10 @@ public class ControladorAnadir implements ActionListener {
             FicheroCSV.escribeCSV("visites.csv", v);
             return true;
         } catch (NumberFormatException e) {
-            showErrorMessage(" ERROR", "Omple tots els camps.");
+            showErrorMessage(" Error", "Omple tots els camps.");
             return false;
         } catch (Exception e) {
-            showErrorMessage(" ERROR", e.toString());
+            showErrorMessage(" Error", e.toString());
             return false;
         }
     }
@@ -160,10 +201,10 @@ public class ControladorAnadir implements ActionListener {
             FicheroCSV.escribeCSV("pacients.csv", pcnt);
             return true;
         } catch (NumberFormatException e) {
-            showErrorMessage(" ERROR", "Omple tots els camps.");
+            showErrorMessage(" Error", "Omple tots els camps.");
             return false;
         } catch (Exception e) {
-            showErrorMessage(" ERROR", e.toString());
+            showErrorMessage(" Error", e.toString());
             return false;
         }
     }
@@ -197,10 +238,10 @@ public class ControladorAnadir implements ActionListener {
             FicheroCSV.escribeCSV("metges.csv", mtg);
             return true;
         } catch (NumberFormatException e) {
-            showErrorMessage(" ERROR", "Omple tots els camps.");
+            showErrorMessage(" Error", "Omple tots els camps.");
             return false;
         } catch (Exception e) {
-            showErrorMessage(" ERROR", e.toString());
+            showErrorMessage(" Error", e.toString());
             return false;
         }
     }
@@ -220,21 +261,43 @@ public class ControladorAnadir implements ActionListener {
             FicheroCSV.escribeCSV("malalties.csv", m);
             return true;
         } catch (NumberFormatException e) {
-            showErrorMessage(" ERROR", "Omple tots els camps.");
+            showErrorMessage(" Error", "Omple tots els camps.");
             return false;
         } catch (Exception e) {
-            showErrorMessage(" ERROR", e.toString());
+            showErrorMessage(" Error", e.toString());
             return false;
         }
+    }
+
+    private void onlyAllowNumbers(JTextField txt) {
+        txt.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+                    e.consume();
+                }
+            }
+        });
     }
 
     private boolean showWaringCloseMessage() {
         Object[] options = {"Continuar aqui", "Sortir sense guardar"};
         int n = JOptionPane.showOptionDialog(pagina,
                 "Si cancela l'operacio les dades del formulari es perdran.\nVols sortir sense guardar?",
-                "Sortir sense guardar?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+                "Sortir sense guardar", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
                 null, options, options[1]);
         return n == JOptionPane.YES_NO_CANCEL_OPTION;
+    }
+    
+     private boolean showNullErrorMessage(Object obj, String objName) {
+        if (obj == null) {
+            String msg = "No s'ha trobat cap " + objName + " amb les dades proporcionades.";
+            JOptionPane.showMessageDialog(pagina, "Instancia no trobada", msg, JOptionPane.ERROR_MESSAGE);
+            System.out.println(objName + " ES NULL ");
+            return true;
+        }
+        return false;
     }
 
     private void showErrorMessage(String titulo, String msg) {

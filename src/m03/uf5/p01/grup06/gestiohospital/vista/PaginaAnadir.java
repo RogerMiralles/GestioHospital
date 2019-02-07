@@ -23,8 +23,8 @@ public class PaginaAnadir extends JFrame {
 
     private void creaGUI() {
 
-        this.setMinimumSize(new Dimension(600, 450));
-        this.setTitle("Afegeix una nova entrada");
+        this.setMinimumSize(new Dimension(666, 611));
+        this.setTitle("Nova entrada");
         this.setLocationRelativeTo(null);
 
         JPanel contenido = new JPanel(new BorderLayout());
@@ -37,10 +37,6 @@ public class PaginaAnadir extends JFrame {
         cbTipo = new JComboBox(tipoObjetos);
         JLabel titulo = new JLabel("<html><h2>Nova entrada</h2>");
         titulo.setIcon(new ImageIcon("drawables/ic_hospitalHistory.png"));
-        Font fuente = titulo.getFont().deriveFont(Font.PLAIN);
-        titulo.setFont(fuente);
-        //JLabel lblIcono = new JLabel(new ImageIcon("drawables/ic_hospitalHistory.png"));
-        //pNorte.add(lblIcono);
         pNorte.add(titulo);
 
         JPanel pTipoEntrada = new JPanel(new FlowLayout());
@@ -72,7 +68,6 @@ public class PaginaAnadir extends JFrame {
 
         this.add(contenido);
         this.pack();
-
     }
 
     private void asignaMetodos() {
