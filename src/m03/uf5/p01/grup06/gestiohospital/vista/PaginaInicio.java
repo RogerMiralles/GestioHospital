@@ -21,7 +21,7 @@ public class PaginaInicio extends JFrame {
     private final String[] idsEnfermedad = {"Codigo"};
     private final String[] idsHistorial = {"Codigo", "DNI"};
     private final String[] idsMedico = {"NºSegSocial", "DNI"};
-    private final String[] idsPaciente = {"Codigo", "NºSegSocial", "DNI"};
+    private final String[] idsPaciente = {"Codigo", "DNI", "NºSegSocial"};
     private final Hospital hospital;
 
     public PaginaInicio(Hospital hospital) {
@@ -55,6 +55,8 @@ public class PaginaInicio extends JFrame {
         tfBuscar.setPreferredSize(new Dimension(200, 30));
         taMostrar = new JTextArea();
         taMostrar.setEditable(false);
+        taMostrar.setOpaque(false);
+        pCentro.setBorder(BorderFactory.createTitledBorder("Información Buscada: "));
         btnBuscar = new JButton("Buscar");
         btnNuevo = new JButton("Nuevo");
 

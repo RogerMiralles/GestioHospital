@@ -26,7 +26,7 @@ public class Historial {
             s += "\n Visita " + v.getData().toString();
             s += "\n Medico: " + v.getMetge().getNom() + " " + v.getMetge().getCognom1();
             s += "\n Enfermedad: " + v.getMalaltia().toString();
-            s += "\n----------------------------------------------";
+            s += "\n----------------------------------------------</html>";
         }
         return s;
     }

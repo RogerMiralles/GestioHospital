@@ -89,15 +89,16 @@ public class ControladorAnadir implements ActionListener {
 
         pagina.getBtnCancelar().setActionCommand("btnCancelar");
         pagina.getBtnCancelar().addActionListener(this);
-
-        ((PanelNewVisita) pagina.getpVisita()).getCbPacient().setActionCommand("ComboBoxPacient");
-        ((PanelNewVisita) pagina.getpVisita()).getCbPacient().addActionListener(this);
-
-        ((PanelNewVisita) pagina.getpVisita()).getCbMetge().setActionCommand("ComboBoxMetge");
-        ((PanelNewVisita) pagina.getpVisita()).getCbMetge().addActionListener(this);
-
-        onlyAllowNumbers(((PanelNewVisita) pagina.getpVisita()).getTfEnfermetat());
-
+        
+        
+        ((PanelNewVisita)pagina.getpVisita()).getCbPacient().setActionCommand("ComboBoxPacient");
+        ((PanelNewVisita)pagina.getpVisita()).getCbPacient().addActionListener(this);
+        
+        ((PanelNewVisita)pagina.getpVisita()).getCbMetge().setActionCommand("ComboBoxMetge");
+        ((PanelNewVisita)pagina.getpVisita()).getCbMetge().addActionListener(this);
+        
+        onlyAllowNumbers(((PanelNewVisita)pagina.getpVisita()).getTfEnfermetat());
+        
         onlyAllowNumbers(((PanelNewPacient) pagina.getpPaciente()).getTfCP());
         onlyAllowNumbers(((PanelNewPacient) pagina.getpPaciente()).getTfNum());
 

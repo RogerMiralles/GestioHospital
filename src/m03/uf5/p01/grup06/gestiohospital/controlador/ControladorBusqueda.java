@@ -1,33 +1,39 @@
 package m03.uf5.p01.grup06.gestiohospital.controlador;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import javax.swing.JTextField;
 import m03.uf5.p01.grup06.gestiohospital.modelo.*;
 import m03.uf5.p01.grup06.gestiohospital.vista.*;
 
 public class ControladorBusqueda implements ActionListener {
 
-    private final PaginaInicio ventana;
-    private final Hospital hospital;
+    PaginaInicio ventana1;
+    Hospital h1;
 
     public ControladorBusqueda(PaginaInicio ventanaInicio, Hospital h1) {
-        this.ventana = ventanaInicio;
-        this.hospital = h1;
+        ventana1 = ventanaInicio;
+        this.h1 = h1;
         asignarComponentes();
-        System.out.println("[INFO]: Controlador busca creado (" + hospital.getName() + ").");
     }
 
     private void asignarComponentes() {
-        ventana.getBtnBuscar().setActionCommand("btnBuscar");
-        ventana.getBtnBuscar().addActionListener(this);
+        onlyAllowNumbers(ventana1.getTfBuscar());
 
-        ventana.getBtnNuevo().setActionCommand("btnNuevo");
-        ventana.getBtnNuevo().addActionListener(this);
+        ventana1.getBtnBuscar().setActionCommand("btnBuscar");
+        ventana1.getBtnBuscar().addActionListener(this);
+
+        ventana1.getBtnNuevo().setActionCommand("btnNuevo");
+        ventana1.getBtnNuevo().addActionListener(this);
+
+        ventana1.getCbTipoDato().setActionCommand("cbTipoDato");
+        ventana1.getCbTipoDato().addActionListener(this);
+
+        ventana1.getCbTipoId().setActionCommand("cbTipoId");
+        ventana1.getCbTipoId().addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        cambiaIds();
 
         if (e.getActionCommand().equals("btnBuscar")) {
             buscaContenido();
@@ -36,117 +42,140 @@ public class ControladorBusqueda implements ActionListener {
         if (e.getActionCommand().equals("btnNuevo")) {
             ventanaNuevo();
         }
+
+        if (e.getActionCommand().equals("cbTipoDato")) {
+            int indice = ventana1.getCbTipoDato().getSelectedIndex();
+            cambiaIds(indice);
+        }
+
+        if (e.getActionCommand().equals("cbTipoId")) {
+            int index = ventana1.getCbTipoId().getSelectedIndex();
+            if (index == 1) {
+                allowDni(ventana1.getTfBuscar());
+            } else {
+                ventana1.getTfBuscar().addKeyListener(null);
+            }
+        }
     }
 
-    public void cambiaIds() {
-        int indice = ventana.getCbTipoDato().getSelectedIndex();
+    public void cambiaIds(int indice) {
         switch (indice) {
             case 0:
-                ventana.getCbTipoId().removeAllItems();
-                for (int i = 0; i < ventana.getIdsEnfermedad().length; i++) {
-                    ventana.getCbTipoId().addItem(ventana.getIdsEnfermedad()[i]);
+                ventana1.getCbTipoId().removeAllItems();
+                for (int i = 0; i < ventana1.getIdsEnfermedad().length; i++) {
+                    ventana1.getCbTipoId().addItem(ventana1.getIdsEnfermedad()[i]);
                 }
                 break;
             case 1:
-                ventana.getCbTipoId().removeAllItems();
-                for (int i = 0; i < ventana.getIdsHistorial().length; i++) {
-                    ventana.getCbTipoId().addItem(ventana.getIdsHistorial()[i]);
+                ventana1.getCbTipoId().removeAllItems();
+                for (int i = 0; i < ventana1.getIdsHistorial().length; i++) {
+                    ventana1.getCbTipoId().addItem(ventana1.getIdsHistorial()[i]);
                 }
                 break;
             case 2:
-                ventana.getCbTipoId().removeAllItems();
-                for (int i = 0; i < ventana.getIdsMedico().length; i++) {
-                    ventana.getCbTipoId().addItem(ventana.getIdsMedico()[i]);
+                ventana1.getCbTipoId().removeAllItems();
+                for (int i = 0; i < ventana1.getIdsMedico().length; i++) {
+                    ventana1.getCbTipoId().addItem(ventana1.getIdsMedico()[i]);
                 }
                 break;
             case 3:
-                ventana.getCbTipoId().removeAllItems();
-                for (int i = 0; i < ventana.getIdsPaciente().length; i++) {
-                    ventana.getCbTipoId().addItem(ventana.getIdsPaciente()[i]);
+                ventana1.getCbTipoId().removeAllItems();
+                for (int i = 0; i < ventana1.getIdsPaciente().length; i++) {
+                    ventana1.getCbTipoId().addItem(ventana1.getIdsPaciente()[i]);
                 }
                 break;
             default:
-                ventana.getCbTipoId().removeAllItems();
+                ventana1.getCbTipoId().removeAllItems();
         }
     }
 
     public void buscaContenido() {
         int tipoDato, tipoId;
-        String dato;
-        tipoDato = ventana.getCbTipoDato().getSelectedIndex();
-        tipoId = ventana.getCbTipoId().getSelectedIndex();
-        dato = ventana.getTfBuscar().getSelectedText();
-        
-        switch (tipoDato) {
-            case 0:
-                try {
-                    ventana.getTaMostrar().setText(hospital.getMalaltia(Integer.parseInt(dato)).toString());
+        String dato, cadena;
+        tipoDato = ventana1.getCbTipoDato().getSelectedIndex();
+        tipoId = ventana1.getCbTipoId().getSelectedIndex();
+        dato = ventana1.getTfBuscar().getText();
+        cadena = tipoDato+" "+tipoId+" "+dato;
+        System.out.println(cadena);
+        //ventana1.getTaMostrar().setText(cadena);
+        try {
+            switch (tipoDato) {
+                case 0:
+                    ventana1.getTaMostrar().setText(h1.getMalaltia(Integer.parseInt(dato)).toString());
                     break;
-                } catch (NumberFormatException e) {
-                    ventana.getTaMostrar().setText("Error, se debe introducir un numero entero");
-                }
-            case 1:
-                switch (tipoId) {
-                    case 0:
-                        try {
-                            ventana.getTaMostrar().setText(hospital.getHistorial(Integer.parseInt(dato)).toString());
+                case 1:
+                    switch (tipoId) {
+                        case 0:
+                            ventana1.getTaMostrar().setText(h1.getHistorial(Integer.parseInt(dato)).toString());
                             break;
-                        } catch (NumberFormatException e) {
-                            ventana.getTaMostrar().setText("Error, se debe introducir un numero entero");
-                        }
-                    case 1:
-                        ventana.getTaMostrar().setText(hospital.getHistorial(dato).toString());
-                        break;
-                    default:
-                }
-                break;
-            case 2:
-                switch (tipoId) {
-                    case 0:
-                        try {
-                            ventana.getTaMostrar().setText(hospital.getMetge(Long.parseLong(dato)).toString());
+                        case 1:
+                            ventana1.getTaMostrar().setText(h1.getHistorial(dato).toString());
                             break;
-                        } catch (NumberFormatException e) {
-                            ventana.getTaMostrar().setText("Error, se debe introducir un numero entero");
-                        }
-                    case 1:
-                        ventana.getTaMostrar().setText(hospital.getMetge(dato).toString());
-                        break;
-                    default:
-                }
-                break;
-            case 3:
-                switch (tipoId) {
-                    case 0:
-                        try {
-                            ventana.getTaMostrar().setText(hospital.getPacient(Integer.parseInt(dato)).toString());
+                    }
+                    break;
+                case 2:
+                    switch (tipoId) {
+                        case 0:
+                            ventana1.getTaMostrar().setText(h1.getMetge(Long.parseLong(dato)).toString());
                             break;
-                        } catch (NumberFormatException e) {
-                            ventana.getTaMostrar().setText("Error, se debe introducir un numero entero");
-                        }
-                    case 1:
-                        try{
-                            ventana.getTaMostrar().setText(hospital.getPacient(Long.parseLong(dato)).toString());
-                        break;
-                        }catch(NumberFormatException e){
-                            ventana.getTaMostrar().setText("Error, se debe introducir un numero entero");
-                        }                        
-                    case 2:
-                        ventana.getTaMostrar().setText(hospital.getPacient(dato).toString());
-                        break;
-                    default:
-                }
-                break;
-            default:
-                ventana.getTaMostrar().setText("No se ha encontrado información a partir de estos datos.");
+                        case 1:
+                            ventana1.getTaMostrar().setText(h1.getMetge(dato).toString());
+                            break;
+                    }
+                    break;
+                case 3:
+                    switch (tipoId) {
+                        case 0:
+                            ventana1.getTaMostrar().setText(h1.getPacient(Integer.parseInt(dato)).toString());
+                            break;
+                        case 1:
+                            ventana1.getTaMostrar().setText(h1.getPacient(Long.parseLong(dato)).toString());
+                            break;
+                        case 2:
+                            ventana1.getTaMostrar().setText(h1.getPacient(dato).toString());
+                            break;
+                    }
+                    break;
+                default:
+                    ventana1.getTaMostrar().setText("No se ha encontrado información a partir de estos datos.");
+            }
+        } catch (NumberFormatException e) {
+            ventana1.getTaMostrar().setText("Error en las variables de busqueda.");
+        } catch (NullPointerException ne) {
+            ventana1.getTaMostrar().setText("Información no existente.");
         }
+
     }
 
     public void ventanaNuevo() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new PaginaAnadir(hospital).setVisible(true);
+                new PaginaAnadir(h1).setVisible(true);
+            }
+        });
+    }
+
+    private void onlyAllowNumbers(JTextField txt) {
+        txt.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+                    e.consume();
+                }
+            }
+        });
+    }
+    
+    private void allowDni(JTextField txt){
+        txt.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyTyped(KeyEvent e){
+                char c = e.getKeyChar();
+                if(!((c >= '0') && (c <= '9') || ((c >= 'A') && (c <= 'Z')) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))){
+                    e.consume();
+                }
             }
         });
     }

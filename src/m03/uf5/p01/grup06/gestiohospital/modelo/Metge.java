@@ -25,7 +25,7 @@ public class Metge extends Persona {
                 + "\nDirección: " + this.getAdreca().toString()
                 + "\nNumero empleado: " + this.numEmpleat 
                 + "\nSueldo mensual: " + this.salariMensual
-                + "\nCodigo cuenta corriente: " + this.codiCompteCorrent+"</html";
+                + "\nCodigo cuenta corriente: " + this.codiCompteCorrent+"</html>";
     }
     
     
