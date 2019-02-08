@@ -1,6 +1,7 @@
 package m03.uf5.p01.grup06.gestiohospital.controlador;
 
 import java.awt.event.*;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import m03.uf5.p01.grup06.gestiohospital.modelo.*;
 import m03.uf5.p01.grup06.gestiohospital.vista.*;
@@ -16,8 +17,7 @@ public class ControladorBusqueda implements ActionListener {
         asignarComponentes();
     }
 
-    private void asignarComponentes() {   
-
+    private void asignarComponentes() {
         ventana1.getBtnBuscar().setActionCommand("btnBuscar");
         ventana1.getBtnBuscar().addActionListener(this);
 
@@ -29,6 +29,8 @@ public class ControladorBusqueda implements ActionListener {
 
         ventana1.getCbTipoId().setActionCommand("cbTipoId");
         ventana1.getCbTipoId().addActionListener(this);
+
+        onlyAllowNumbers(ventana1.getTfBuscar());
     }
 
     @Override
@@ -47,15 +49,17 @@ public class ControladorBusqueda implements ActionListener {
             cambiaIds(indice);
         }
 
-        /*if (e.getActionCommand().equals("cbTipoId")) {
+        if (e.getActionCommand().equals("cbTipoId")) {
             int index = ventana1.getCbTipoId().getSelectedIndex();
+            ventana1.getTfBuscar().setText("");
+            ventana1.getTfBuscar().removeKeyListener(numbersListener);
+            ventana1.getTfBuscar().removeKeyListener(dniListener);
             if (index == 1) {
                 allowDni(ventana1.getTfBuscar());
             } else {
                 onlyAllowNumbers(ventana1.getTfBuscar());
-                ventana1.getTfBuscar().addKeyListener(null);
             }
-        }*/
+        }
     }
 
     public void cambiaIds(int indice) {
@@ -95,7 +99,7 @@ public class ControladorBusqueda implements ActionListener {
         tipoDato = ventana1.getCbTipoDato().getSelectedIndex();
         tipoId = ventana1.getCbTipoId().getSelectedIndex();
         dato = ventana1.getTfBuscar().getText();
-        cadena = tipoDato+" "+tipoId+" "+dato;
+        cadena = tipoDato + " " + tipoId + " " + dato;
         System.out.println(cadena);
         //ventana1.getTaMostrar().setText(cadena);
         try {
@@ -140,9 +144,11 @@ public class ControladorBusqueda implements ActionListener {
                     ventana1.getTaMostrar().setText("No se ha encontrado información a partir de estos datos.");
             }
         } catch (NumberFormatException e) {
-            ventana1.getTaMostrar().setText("Error en las variables de busqueda.");
-        } catch (NullPointerException ne) {
-            ventana1.getTaMostrar().setText("Información no existente.");
+            showErrorMessage("Campos vacios", "No deje el formulario en blanco");
+            ventana1.getTaMostrar().setText(" ");
+        } catch (NullPointerException e) {
+            showErrorMessage("Error de Busqueda", "Información no existente.");
+            ventana1.getTaMostrar().setText(" ");
         }
 
     }
@@ -156,8 +162,10 @@ public class ControladorBusqueda implements ActionListener {
         });
     }
 
+    KeyListener numbersListener;
+
     private void onlyAllowNumbers(JTextField txt) {
-        txt.addKeyListener(new KeyAdapter() {
+        numbersListener = new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
@@ -165,18 +173,26 @@ public class ControladorBusqueda implements ActionListener {
                     e.consume();
                 }
             }
-        });
+        };
+        txt.addKeyListener(numbersListener);
     }
-    
-    private void allowDni(JTextField txt){
-        txt.addKeyListener(new KeyAdapter(){
+
+    KeyListener dniListener;
+
+    private void allowDni(JTextField txt) {
+        dniListener = new KeyAdapter() {
             @Override
-            public void keyTyped(KeyEvent e){
+            public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
-                if(!((c >= '0') && (c <= '9') || ((c >= 'A') && (c <= 'Z')) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))){
+                if (!((c >= '0') && (c <= '9') || ((c >= 'A') && (c <= 'Z')) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
                     e.consume();
                 }
             }
-        });
+        };
+        txt.addKeyListener(dniListener);
+    }
+
+    private void showErrorMessage(String titulo, String msg) {
+        JOptionPane.showMessageDialog(ventana1, msg, titulo, JOptionPane.ERROR_MESSAGE);
     }
 }
