@@ -17,16 +17,16 @@ public class Historial {
     
     @Override
     public String toString() {
-        String s = "<html><h3>HISTORIAL [Codigo " + this.codi + "]</h3>\n----------------------------------------------";
+        String s = "<html><h2>HISTORIAL [Codigo " + this.codi + "]</h2><br>----------------------------------------------";
         
         Iterator<Visita> lit = visitas.iterator();
         
         while (lit.hasNext()) {
             Visita v = lit.next();
-            s += "\n Visita " + v.getData().toString();
-            s += "\n Medico: " + v.getMetge().getNom() + " " + v.getMetge().getCognom1();
-            s += "\n Enfermedad: " + v.getMalaltia().toString();
-            s += "\n----------------------------------------------</html>";
+            s += "<br> Visita " + v.getData().toString();
+            s += "<br> Medico: " + v.getMetge().getNom() + " " + v.getMetge().getCognom1();
+            s += "<br> Enfermedad: " + v.getMalaltia().getNom();
+            s += "<br>----------------------------------------------";
         }
         return s;
     }

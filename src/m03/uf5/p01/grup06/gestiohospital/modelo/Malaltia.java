@@ -33,18 +33,10 @@ public class Malaltia {
                 + "<ul>"
                 + "<li>Codigo: " + this.getCodi()+"</li>"
                 + "<li>Nombre: " + this.getNom()+"</li>"
-                + "<li>Causa Baja: " + this.isCausaBaixa()+"</li>"
+                + "<li>Causa Baja: " + this.isCausaBaixastr()+"</li>"
                 + "<li>Tratamiento: " + this.getTractament()+"</li>"
-                + "<li>Duración tratamiento: " + this.getDuradaTractament()+"</li>"
+                + "<li>Duración tratamiento: " + this.getDuradaTractament().toDays()+" dias.</li>"
                 + "</ul>";
-        /*
-        if (isCausaBaixa()) {
-            return "<html><p>Tiene la enfermedad " + getNom() + " que causa baja</p></br>"
-                    + "<p>, el tratamiento es " + getTractament() + " y durará " + getDuradaTractament().toDays()+"</p></html>";
-        } else {
-            return "<html><p>Tiene la enfermedad " + getNom() + " que no causa baja</p></br>"
-                    + "<p>, el tratamiento es " + getTractament() + " y durará " + getDuradaTractament().toDays()+"</p></html>";
-        }*/
     }
 
     public int getCodi() {
@@ -65,6 +57,15 @@ public class Malaltia {
         return causaBaixa;
     }
 
+    public String isCausaBaixastr() {
+        if(this.isCausaBaixa()){
+            return "Si";
+        }
+        else{
+            return "No";
+        }
+    }
+    
     /**
      * @return the tractament
      */
