@@ -20,6 +20,18 @@ public class ControladorBusqueda implements ActionListener {
 
         ventana1.getBtnBuscar().setActionCommand("btnBuscar");
         ventana1.getBtnBuscar().addActionListener(this);
+        
+        
+        ventana1.getTfBuscar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                
+              buscaContenido();
+                
+            }
+        });
+        
+        
 
         ventana1.getBtnNuevo().setActionCommand("btnNuevo");
         ventana1.getBtnNuevo().addActionListener(this);
@@ -179,4 +191,6 @@ public class ControladorBusqueda implements ActionListener {
             }
         });
     }
+
+    
 }
