@@ -49,6 +49,7 @@ public class PaginaInicio extends JFrame {
         tfBuscar = new JTextField();
         tfBuscar.setPreferredSize(new Dimension(200, 30));
         taMostrar = new JLabel();
+        taMostrar.setMinimumSize(pCentro.getSize());
         taMostrar.setFont(new Font("Dialog", Font.PLAIN, 12));
         taMostrar.setOpaque(false);
         pCentro.setBorder(BorderFactory.createTitledBorder("Información Buscada: "));

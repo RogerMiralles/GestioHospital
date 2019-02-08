@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class PanelNewVisita  extends JPanel {
-    private final String[] metodoIdentPacient = {"NIF" , "Numero SS", "Codi historial"};
+    private final String[] metodoIdentPacient = {"NIF" , "Numero SS", "Codigo historial"};
     private final String[] metodoIdentMetge = {"NIF" , "Numero SS"};
     
     private JPanel pacient, metge, enfermetat;
@@ -24,7 +24,7 @@ public class PanelNewVisita  extends JPanel {
         tfPacient.setPreferredSize(new Dimension(200,30));
         cbPacient = new JComboBox(metodoIdentPacient);
         cbPacient.setPreferredSize(new Dimension(100, 30));
-        JLabel lblPacient = new JLabel("Pacient:");
+        JLabel lblPacient = new JLabel("Paciente:");
         lblPacient.setPreferredSize(new Dimension(120, 30));
         pacient.add(lblPacient);
         pacient.add(tfPacient);
@@ -35,7 +35,7 @@ public class PanelNewVisita  extends JPanel {
         tfMetge.setPreferredSize(new Dimension(200,30));
         cbMetge = new JComboBox(metodoIdentMetge);
         cbMetge.setPreferredSize(new Dimension(100, 30));
-        JLabel lblMetge = new JLabel("Metge:");
+        JLabel lblMetge = new JLabel("Medico:");
         lblMetge.setPreferredSize(new Dimension(120, 30));
         metge.add(lblMetge);
         metge.add(tfMetge);
@@ -44,12 +44,12 @@ public class PanelNewVisita  extends JPanel {
         enfermetat = new JPanel(new FlowLayout(0));
         tfEnfermetat = new JTextField();
         tfEnfermetat.setPreferredSize(new Dimension(200,30));
-        JLabel lblEnfermetat = new JLabel("Codi enfermetat:");
+        JLabel lblEnfermetat = new JLabel("Codigo enfermedad:");
         lblEnfermetat.setPreferredSize(new Dimension(120, 30));
         enfermetat.add(lblEnfermetat);
         enfermetat.add(tfEnfermetat);
         
-        JLabel lblDesc = new JLabel ("Introdueix les dades de la visita. ");
+        JLabel lblDesc = new JLabel ("Introduce los datos de la visita.");
         
         pContenido.add(lblDesc);
         pContenido.add(pacient);

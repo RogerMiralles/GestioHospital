@@ -60,6 +60,7 @@ public class ControladorAnadir implements ActionListener {
             }
             if (creacionCorrecta) {
                 showConfirmationMessage("Añadido correctamente", "La entidad ha sido creada con exito!");
+                System.out.println("[INFO]: Entidad creada con exito.");
                 pagina.dispose();
             }
         }
@@ -68,13 +69,17 @@ public class ControladorAnadir implements ActionListener {
             int i = ((PanelNewVisita) pagina.getpVisita()).getCbPacient().getSelectedIndex();
             if (i != 0) {
                 onlyAllowNumbers(((PanelNewVisita) pagina.getpVisita()).getTfPacient());
+            } else if (i == 0) {
+                ((PanelNewVisita) pagina.getpVisita()).getTfPacient().removeKeyListener(charLisener);
             }
         }
 
         if (ae.getActionCommand().equals("ComboBoxMetge")) {
             int i = ((PanelNewVisita) pagina.getpVisita()).getCbMetge().getSelectedIndex();
             if (i != 0) {
-                onlyAllowNumbers(((PanelNewVisita) pagina.getpVisita()).getTfPacient());
+                onlyAllowNumbers(((PanelNewVisita) pagina.getpVisita()).getTfMetge());
+            } else if (i == 0) {
+                (((PanelNewVisita) pagina.getpVisita()).getTfMetge()).removeKeyListener(charLisener);
             }
         }
     }
@@ -89,16 +94,15 @@ public class ControladorAnadir implements ActionListener {
 
         pagina.getBtnCancelar().setActionCommand("btnCancelar");
         pagina.getBtnCancelar().addActionListener(this);
-        
-        
-        ((PanelNewVisita)pagina.getpVisita()).getCbPacient().setActionCommand("ComboBoxPacient");
-        ((PanelNewVisita)pagina.getpVisita()).getCbPacient().addActionListener(this);
-        
-        ((PanelNewVisita)pagina.getpVisita()).getCbMetge().setActionCommand("ComboBoxMetge");
-        ((PanelNewVisita)pagina.getpVisita()).getCbMetge().addActionListener(this);
-        
-        onlyAllowNumbers(((PanelNewVisita)pagina.getpVisita()).getTfEnfermetat());
-        
+
+        ((PanelNewVisita) pagina.getpVisita()).getCbPacient().setActionCommand("ComboBoxPacient");
+        ((PanelNewVisita) pagina.getpVisita()).getCbPacient().addActionListener(this);
+
+        ((PanelNewVisita) pagina.getpVisita()).getCbMetge().setActionCommand("ComboBoxMetge");
+        ((PanelNewVisita) pagina.getpVisita()).getCbMetge().addActionListener(this);
+
+        onlyAllowNumbers(((PanelNewVisita) pagina.getpVisita()).getTfEnfermetat());
+
         onlyAllowNumbers(((PanelNewPacient) pagina.getpPaciente()).getTfCP());
         onlyAllowNumbers(((PanelNewPacient) pagina.getpPaciente()).getTfNum());
 
@@ -116,7 +120,7 @@ public class ControladorAnadir implements ActionListener {
             PanelNewVisita p = (PanelNewVisita) pagina.getpVisita();
             int codigoMalaltia = Integer.parseInt(p.getTfEnfermetat().getText());
             Malaltia m = hospital.getMalaltia(codigoMalaltia);
-            if (showNullErrorMessage(m, "malaltia")) {
+            if (showNullErrorMessage(m, "enfermedad")) {
                 return false;
             }
 
@@ -133,7 +137,7 @@ public class ControladorAnadir implements ActionListener {
                     pcnt = hospital.getPacient(Integer.parseInt(pcntData));
                     break;
             }
-            if (showNullErrorMessage(pcnt, "pacient")) {
+            if (showNullErrorMessage(pcnt, "paciente")) {
                 return false;
             }
 
@@ -142,13 +146,12 @@ public class ControladorAnadir implements ActionListener {
             switch (p.getCbMetge().getSelectedIndex()) {
                 case 0:
                     mtg = hospital.getMetge(mtgData);
-                    System.out.println("DNI");
                     break;
                 case 1:
                     mtg = hospital.getMetge(Long.parseLong(mtgData));
                     break;
             }
-            if (showNullErrorMessage(mtg, "metge")) {
+            if (showNullErrorMessage(mtg, "medico")) {
                 return false;
             }
 
@@ -160,10 +163,10 @@ public class ControladorAnadir implements ActionListener {
             FicheroCSV.escribeCSV("visites.csv", v);
             return true;
         } catch (NumberFormatException e) {
-            showErrorMessage(" Error", "Omple tots els camps.");
+            showErrorMessage(" Error", "Llena todos los campos.");
             return false;
         } catch (Exception e) {
-            showErrorMessage(" Visita Incorrecte", e.getMessage());
+            showErrorMessage(" Visita incorrecta:", e.getMessage());
             return false;
         }
     }
@@ -194,10 +197,10 @@ public class ControladorAnadir implements ActionListener {
             FicheroCSV.escribeCSV("pacients.csv", pcnt);
             return true;
         } catch (NumberFormatException e) {
-            showErrorMessage(" Error", "Omple tots els camps.");
+            showErrorMessage(" Error", "Llena todos los campos.");
             return false;
         } catch (Exception e) {
-            showErrorMessage(" Pacient Incorrecte", e.getMessage());
+            showErrorMessage(" Paciente incorrecto:", e.getMessage());
             return false;
         }
     }
@@ -221,20 +224,20 @@ public class ControladorAnadir implements ActionListener {
             int numero = Integer.parseInt(p.getTfNum().getText());
             String planta = p.getTfPlanta().getText();
             String porta = p.getTfPuerta().getText();
-            
+
             Adreca adreca = new Adreca(ciutat, codiPostal, carrer, numero, planta, porta);
 
             Metge mtg = new Metge(nom, cognom1, cognom2, numSegSocial, nif, telefon, adreca, numEmpleat, salari, compteCorrent);
             System.out.println("[INFO]: Metge creat: " + mtg);
-            
+
             hospital.addMetge(mtg);
             FicheroCSV.escribeCSV("metges.csv", mtg);
             return true;
         } catch (NumberFormatException e) {
-            showErrorMessage(" Error", "Omple tots els camps.");
+            showErrorMessage(" Error", "Llena todos los campos.");
             return false;
         } catch (Exception e) {
-            showErrorMessage(" Metge Incorrecte", e.getMessage());
+            showErrorMessage(" Medico incorrecto", e.getMessage());
             return false;
         }
     }
@@ -249,13 +252,13 @@ public class ControladorAnadir implements ActionListener {
             Boolean causaBaixa = p.getCbBaixa().isSelected();
 
             Malaltia m = new Malaltia(codi, name, causaBaixa, tractament, duracion);
-            
+
             hospital.addMalaltia(m);
             FicheroCSV.escribeCSV("malalties.csv", m);
             System.out.println("[INFO]: Malaltia creada: [" + m.getCodi() + "] " + m.getNom());
             return true;
         } catch (NumberFormatException e) {
-            showErrorMessage(" Error", "Omple tots els camps.");
+            showErrorMessage(" Error", "Llena todos los campos.");
             return false;
         } catch (Exception e) {
             showErrorMessage(" Error", e.getMessage());
@@ -263,8 +266,9 @@ public class ControladorAnadir implements ActionListener {
         }
     }
 
+    KeyAdapter charLisener;
     private void onlyAllowNumbers(JTextField txt) {
-        txt.addKeyListener(new KeyAdapter() {
+        charLisener = new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
@@ -272,23 +276,27 @@ public class ControladorAnadir implements ActionListener {
                     e.consume();
                 }
             }
-        });
-        txt.setToolTipText("Inserta solament valors numerics.");
+        };
+        txt.addKeyListener(charLisener);
+        if (!(txt.getText().matches("[0-9]"))) {
+            txt.setText(txt.getText().replaceAll("[^0-9]", ""));
+        }
+        txt.setToolTipText("Inserta solamente valores numericos.");
     }
 
     private boolean showWaringCloseMessage() {
-        Object[] options = {"Continuar aqui", "Sortir sense guardar"};
+        Object[] options = {"Continuar aqui", "Salir sin guardar"};
         int n = JOptionPane.showOptionDialog(pagina,
-                "Si cancela l'operacio les dades del formulari es perdran.\nVols sortir sense guardar?",
-                "Sortir sense guardar", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+                "Si cancela la operacion los datos del formulario se perderan.\nQuieres salir sin guardar?",
+                "Salir sin guardar", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
                 null, options, options[1]);
         return n == JOptionPane.YES_NO_CANCEL_OPTION;
     }
 
     private boolean showNullErrorMessage(Object obj, String objName) {
         if (obj == null) {
-            String msg = "No s'ha trobat cap " + objName + " amb les dades proporcionades.";
-            JOptionPane.showMessageDialog(pagina, msg, "Instancia no trobada", JOptionPane.ERROR_MESSAGE);
+            String msg = "No se ha encontrado ningun " + objName + " con los datos insertado.";
+            JOptionPane.showMessageDialog(pagina, msg, "Instancia no encontrada", JOptionPane.ERROR_MESSAGE);
             return true;
         }
         return false;
