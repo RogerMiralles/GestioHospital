@@ -26,7 +26,7 @@ public class PaginaAnadir extends JFrame {
     private void creaGUI() {
 
         this.setMinimumSize(new Dimension(666, 611));
-        this.setTitle("Nova entrada");
+        this.setTitle("Nueva entrada");
         this.setLocationRelativeTo(null);
 
         JPanel contenido = new JPanel(new BorderLayout());
@@ -37,12 +37,12 @@ public class PaginaAnadir extends JFrame {
         pSur = new JPanel(new FlowLayout());
 
         cbTipo = new JComboBox(tipoObjetos);
-        JLabel titulo = new JLabel("<html><h2>Nova entrada</h2>");
+        JLabel titulo = new JLabel("<html><h2>Nueva entrada</h2>");
         titulo.setIcon(new ImageIcon("drawables/ic_hospitalHistory.png"));
         pNorte.add(titulo);
 
         JPanel pTipoEntrada = new JPanel(new FlowLayout());
-        pTipoEntrada.add(new JLabel("Seleccioni el tipus d'entrada:"));
+        pTipoEntrada.add(new JLabel("Seleccione el tipo de entrada:"));
         pTipoEntrada.add(cbTipo);
         pNorte.add(pTipoEntrada);
 
@@ -57,9 +57,9 @@ public class PaginaAnadir extends JFrame {
         pCentro.add("Medico", pMedico);
         pCentro.add("Enfermedad", pMalaltia);
 
-        pCentro.setBorder(BorderFactory.createTitledBorder("Formulari"));
+        pCentro.setBorder(BorderFactory.createTitledBorder("Formulario"));
 
-        btnAceptar = new JButton("Acceptar");
+        btnAceptar = new JButton("Aceptar");
         btnCancelar = new JButton("Cancelar");
         pSur.add(btnAceptar);
         pSur.add(btnCancelar);

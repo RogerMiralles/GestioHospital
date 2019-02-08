@@ -20,6 +20,18 @@ public class ControladorBusqueda implements ActionListener {
     private void asignarComponentes() {
         ventana1.getBtnBuscar().setActionCommand("btnBuscar");
         ventana1.getBtnBuscar().addActionListener(this);
+        
+        
+        ventana1.getTfBuscar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                
+              buscaContenido();
+                
+            }
+        });
+        
+        
 
         ventana1.getBtnNuevo().setActionCommand("btnNuevo");
         ventana1.getBtnNuevo().addActionListener(this);
@@ -195,4 +207,6 @@ public class ControladorBusqueda implements ActionListener {
     private void showErrorMessage(String titulo, String msg) {
         JOptionPane.showMessageDialog(ventana1, msg, titulo, JOptionPane.ERROR_MESSAGE);
     }
+
+    
 }

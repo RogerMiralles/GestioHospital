@@ -5,10 +5,6 @@ import javax.swing.*;
 import m03.uf5.p01.grup06.gestiohospital.controlador.ControladorBusqueda;
 import m03.uf5.p01.grup06.gestiohospital.modelo.*;
 
-/**
- *
- * @author david
- */
 public class PaginaInicio extends JFrame {
 
     private JPanel pPrincipal, pNorte, pCentro, pSur, pBusqueda;
@@ -53,6 +49,7 @@ public class PaginaInicio extends JFrame {
         tfBuscar = new JTextField();
         tfBuscar.setPreferredSize(new Dimension(200, 30));
         taMostrar = new JLabel();
+        taMostrar.setMinimumSize(pCentro.getSize());
         taMostrar.setFont(new Font("Dialog", Font.PLAIN, 12));
         taMostrar.setOpaque(false);
         pCentro.setBorder(BorderFactory.createTitledBorder("Información Buscada: "));
