@@ -14,22 +14,22 @@ public abstract class Persona {
     private Adreca adreca;
     
     public Persona (String nom, String cognom1, String cognom2, String numSegSocial, String nif, String telefon, Adreca adreca) {
-        String error = "";
+        String error = "Datos erroeneos:";
         
         if (!nifCorrecto(nif)) {
-            error += "- NIF incorrecto ";
+            error += "\n - NIF incorrecto ";
         }
         if (!cumplePatron("^[A-zçñàáéèíóòúÇÑÁÀÉÈÍÒÓÚ·üÜïÏ]*", nom, cognom1, cognom2)){
-            error += "- Nombre o apellido incorrecto ";
+            error += "\n - Nombre o apellido incorrecto ";
         }
         if (!segSocialCorrecto(numSegSocial)) {
-            error += "- Numero de la seguridad social incorrecto ";
+            error += "\n - Numero de la seguridad social incorrecto ";
         }
         if (!cumplePatron("^[967][0-9]{8}$", telefon)) {
-            error += "- Numero de telefono incorrecto ";
+            error += "\n - Numero de telefono incorrecto ";
         }
         
-        if (!error.equals("")){
+        if (!error.equals("Datos erroeneos:")){
             throw(new IllegalArgumentException(error));
         } else {
             this.nom = nom;

@@ -21,7 +21,7 @@ public class PanelNewMetge extends JPanel {
         nom = new JPanel(new FlowLayout(0));
         tfNom = new JTextField();
         tfNom.setPreferredSize(new Dimension(175, 30));
-        JLabel lblNom = new JLabel("Nom:");
+        JLabel lblNom = new JLabel("Nombre:");
         lblNom.setPreferredSize(new Dimension(100, 30));
         nom.add(lblNom);
         nom.add(tfNom);
@@ -29,7 +29,7 @@ public class PanelNewMetge extends JPanel {
         apellido1 = new JPanel(new FlowLayout(0));
         tfApellido1 = new JTextField();
         tfApellido1.setPreferredSize(new Dimension(175, 30));
-        JLabel lblApellido1 = new JLabel("Primer cognom:");
+        JLabel lblApellido1 = new JLabel("Primer apellido:");
         lblApellido1.setPreferredSize(new Dimension(100, 30));
         apellido1.add(lblApellido1);
         apellido1.add(tfApellido1);
@@ -37,7 +37,7 @@ public class PanelNewMetge extends JPanel {
         apellido2 = new JPanel(new FlowLayout(0));
         tfApellido2 = new JTextField();
         tfApellido2.setPreferredSize(new Dimension(175, 30));
-        JLabel lblApellido2 = new JLabel("Segon cognom:");
+        JLabel lblApellido2 = new JLabel("Segundo apellido:");
         lblApellido2.setPreferredSize(new Dimension(100, 30));
         apellido2.add(lblApellido2);
         apellido2.add(tfApellido2);
@@ -61,7 +61,7 @@ public class PanelNewMetge extends JPanel {
         telf = new JPanel(new FlowLayout(0));
         tfTelf = new JTextField();
         tfTelf.setPreferredSize(new Dimension(175, 30));
-        JLabel lblTelf = new JLabel("Telefon:");
+        JLabel lblTelf = new JLabel("Telefono:");
         lblTelf.setPreferredSize(new Dimension(100, 30));
         telf.add(lblTelf);
         telf.add(tfTelf);
@@ -69,7 +69,7 @@ public class PanelNewMetge extends JPanel {
         numEmpleat = new JPanel(new FlowLayout(0));
         tfNumEmpleat = new JTextField();
         tfNumEmpleat.setPreferredSize(new Dimension(175, 30));
-        JLabel lblNumEmpleat = new JLabel("Num d'empleat:");
+        JLabel lblNumEmpleat = new JLabel("Nº Empleado:");
         lblNumEmpleat.setPreferredSize(new Dimension(100, 30));
         numEmpleat.add(lblNumEmpleat);
         numEmpleat.add(tfNumEmpleat);
@@ -77,7 +77,7 @@ public class PanelNewMetge extends JPanel {
         salari = new JPanel(new FlowLayout(0));
         tfSalari = new JTextField();
         tfSalari.setPreferredSize(new Dimension(175, 30));
-        JLabel lblSalari = new JLabel("Salari mensual:");
+        JLabel lblSalari = new JLabel("Salario mensual:");
         lblSalari.setPreferredSize(new Dimension(100, 30));
         salari.add(lblSalari);
         salari.add(tfSalari);
@@ -85,7 +85,7 @@ public class PanelNewMetge extends JPanel {
         compteCorrent = new JPanel(new FlowLayout(0));
         tfCompteCorrent = new JTextField();
         tfCompteCorrent.setPreferredSize(new Dimension(175, 30));
-        JLabel lblCompte = new JLabel("Compte corrent:");
+        JLabel lblCompte = new JLabel("Cuenta corriente:");
         lblCompte.setPreferredSize(new Dimension(100, 30));
         compteCorrent.add(lblCompte);
         compteCorrent.add(tfCompteCorrent);
@@ -93,7 +93,7 @@ public class PanelNewMetge extends JPanel {
         calle = new JPanel(new FlowLayout(0));
         tfCalle = new JTextField();
         tfCalle.setPreferredSize(new Dimension(175, 30));
-        JLabel lblCalle = new JLabel("Carrer:");
+        JLabel lblCalle = new JLabel("Calle:");
         lblCalle.setPreferredSize(new Dimension(100, 30));
         calle.add(lblCalle);
         calle.add(tfCalle);
@@ -119,7 +119,7 @@ public class PanelNewMetge extends JPanel {
         puerta = new JPanel(new FlowLayout(0));
         tfPuerta = new JTextField();
         tfPuerta.setPreferredSize(new Dimension(175, 30));
-        JLabel lblPuerta = new JLabel("Porta:");
+        JLabel lblPuerta = new JLabel("Puerta:");
         lblPuerta.setPreferredSize(new Dimension(100, 30));
         puerta.add(lblPuerta);
         puerta.add(tfPuerta);
@@ -135,12 +135,12 @@ public class PanelNewMetge extends JPanel {
         ciutat = new JPanel(new FlowLayout(0));
         tfCiutat = new JTextField();
         tfCiutat.setPreferredSize(new Dimension(175, 30));
-        JLabel lblCiutat = new JLabel("Ciutat:");
+        JLabel lblCiutat = new JLabel("Ciudad:");
         lblCiutat.setPreferredSize(new Dimension(100, 30));
         ciutat.add(lblCiutat);
         ciutat.add(tfCiutat);
 
-        JLabel lblDesc = new JLabel("Introdueix les dades del metge. ");
+        JLabel lblDesc = new JLabel("Introduce los datos del medico.");
 
         pContenido.add(lblDesc);
         pContenido.add(new JLabel(""));
