@@ -9,8 +9,10 @@ public class PaginaInicio extends JFrame {
 
     private JPanel pPrincipal, pNorte, pCentro, pSur, pBusqueda;
     private JComboBox cbTipoDato, cbTipoId;
-    private JLabel lblTitulo, taMostrar;
+    private JLabel lblTitulo, lblFiltros;
+    private JTable tblDatos;
     private JTextField tfBuscar;
+    private JCheckBox chkFiltrar;
     private JButton btnBuscar, btnNuevo;
     private final String[] objetos = {"Enfermedades", "Historiales", "Medicos", "Pacientes"};
     private final String[] idsEnfermedad = {"Codigo"};
@@ -38,30 +40,53 @@ public class PaginaInicio extends JFrame {
         pNorte = new JPanel();
         pCentro = new JPanel();
         pSur = new JPanel();
-        pBusqueda = new JPanel();
+        pBusqueda = new JPanel(new GridLayout(2,1,10,10));
         pBusqueda.setBorder(BorderFactory.createTitledBorder("Opciones de Búsqueda: "));
+        chkFiltrar = new JCheckBox("Filtrar datos");
         pPrincipal.setLayout(new BorderLayout());
         pNorte.setLayout(new GridLayout(0, 1));
         lblTitulo = new JLabel("<html><h1>Pantalla de Visualización<h1>");
-        lblTitulo.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        lblTitulo.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         cbTipoDato = new JComboBox(objetos);
+        cbTipoDato.setPreferredSize(new Dimension(300, 30));
         cbTipoId = new JComboBox(idsEnfermedad);
+        cbTipoId.setPreferredSize(new Dimension(100, 30));
         tfBuscar = new JTextField();
-        tfBuscar.setPreferredSize(new Dimension(200, 30));
-        taMostrar = new JLabel();
-        taMostrar.setMinimumSize(pCentro.getSize());
-        taMostrar.setFont(new Font("Dialog", Font.PLAIN, 12));
-        taMostrar.setOpaque(false);
+        tfBuscar.setPreferredSize(new Dimension(300, 30));
+        
+        JPanel pTabla = new JPanel(new BorderLayout());
+        tblDatos = new JTable();
+        tblDatos.setMinimumSize(pCentro.getSize());
+        pTabla.add(tblDatos, BorderLayout.CENTER);
+        pTabla.add(tblDatos.getTableHeader(), BorderLayout.NORTH);
+        
         pCentro.setBorder(BorderFactory.createTitledBorder("Información Buscada: "));
-        btnBuscar = new JButton("Buscar");
+        
+        btnBuscar = new JButton("Filtrar");
+        btnBuscar.setEnabled(false);
         btnNuevo = new JButton("Nuevo");
-
-        pBusqueda.add(tfBuscar);
-        pBusqueda.add(cbTipoDato);
-        pBusqueda.add(cbTipoId);
+        
+        JPanel pBarraBusqueda = new JPanel(new FlowLayout());
+        JPanel pFiltros = new JPanel(new FlowLayout());
+        pBarraBusqueda.add(new JLabel("Buscar en: "));
+        pBarraBusqueda.add(cbTipoDato);
+        pBarraBusqueda.add(chkFiltrar);
+        lblFiltros = new JLabel("Filtrar por: ");
+        lblFiltros.setEnabled(false);
+        pFiltros.add(lblFiltros);
+        tfBuscar.setEnabled(false);
+        cbTipoId.setEnabled(false);
+        pFiltros.add(tfBuscar);
+        pFiltros.add(cbTipoId);
+        pBusqueda.add(pBarraBusqueda);
+        pBusqueda.add(pFiltros);
+        
+        pFiltros.add(tfBuscar);
+        pFiltros.add(cbTipoId);
+        pBusqueda.add(pFiltros);
         pNorte.add(lblTitulo);
         pNorte.add(pBusqueda);
-        pCentro.add(taMostrar);
+        pCentro.add(pTabla);
         pSur.add(btnBuscar);
         pSur.add(btnNuevo);
 
@@ -90,8 +115,8 @@ public class PaginaInicio extends JFrame {
         return tfBuscar;
     }
 
-    public JLabel getTaMostrar() {
-        return taMostrar;
+    public JTable getTblDatpos() {
+        return tblDatos;
     }
 
     public String[] getObjetos() {
@@ -120,5 +145,13 @@ public class PaginaInicio extends JFrame {
 
     public JButton getBtnNuevo() {
         return btnNuevo;
+    }
+
+    public JCheckBox getChkFiltrar() {
+        return chkFiltrar;
+    }
+
+    public JLabel getLblFiltros() {
+        return lblFiltros;
     }
 }

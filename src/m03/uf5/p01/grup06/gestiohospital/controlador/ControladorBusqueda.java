@@ -8,8 +8,9 @@ import m03.uf5.p01.grup06.gestiohospital.vista.*;
 
 public class ControladorBusqueda implements ActionListener {
 
-    PaginaInicio ventana1;
-    Hospital h1;
+    private final PaginaInicio ventana1;
+    private final Hospital h1;
+    private KeyListener dniListener, numbersListener;
 
     public ControladorBusqueda(PaginaInicio ventanaInicio, Hospital h1) {
         ventana1 = ventanaInicio;
@@ -25,13 +26,9 @@ public class ControladorBusqueda implements ActionListener {
         ventana1.getTfBuscar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                
-              buscaContenido();
-                
+                //buscaContenido();
             }
-        });
-        
-        
+        });        
 
         ventana1.getBtnNuevo().setActionCommand("btnNuevo");
         ventana1.getBtnNuevo().addActionListener(this);
@@ -41,7 +38,10 @@ public class ControladorBusqueda implements ActionListener {
 
         ventana1.getCbTipoId().setActionCommand("cbTipoId");
         ventana1.getCbTipoId().addActionListener(this);
-
+        
+        ventana1.getChkFiltrar().setActionCommand("chkFiltrar");
+        ventana1.getChkFiltrar().addActionListener(this);
+        
         onlyAllowNumbers(ventana1.getTfBuscar());
     }
 
@@ -49,7 +49,7 @@ public class ControladorBusqueda implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getActionCommand().equals("btnBuscar")) {
-            buscaContenido();
+            //buscaContenido();
         }
 
         if (e.getActionCommand().equals("btnNuevo")) {
@@ -71,6 +71,14 @@ public class ControladorBusqueda implements ActionListener {
             } else {
                 onlyAllowNumbers(ventana1.getTfBuscar());
             }
+        }
+        
+        if (e.getActionCommand().equals("chkFiltrar")) {
+            boolean enabled = ventana1.getChkFiltrar().isSelected();
+            ventana1.getBtnBuscar().setEnabled(enabled);
+            ventana1.getCbTipoId().setEnabled(enabled);
+            ventana1.getTfBuscar().setEnabled(enabled);
+            ventana1.getLblFiltros().setEnabled(enabled);
         }
     }
 
@@ -105,7 +113,7 @@ public class ControladorBusqueda implements ActionListener {
         }
     }
 
-    public void buscaContenido() {
+    /*public void buscaContenido() {
         int tipoDato, tipoId;
         String dato, cadena;
         tipoDato = ventana1.getCbTipoDato().getSelectedIndex();
@@ -160,8 +168,7 @@ public class ControladorBusqueda implements ActionListener {
             showErrorMessage("Error de Busqueda", "Información no existente.");
             ventana1.getTaMostrar().setText(" ");
         }
-
-    }
+    }*/
 
     public void ventanaNuevo() {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -171,9 +178,7 @@ public class ControladorBusqueda implements ActionListener {
             }
         });
     }
-
-    KeyListener numbersListener;
-
+    
     private void onlyAllowNumbers(JTextField txt) {
         numbersListener = new KeyAdapter() {
             @Override
@@ -186,8 +191,6 @@ public class ControladorBusqueda implements ActionListener {
         };
         txt.addKeyListener(numbersListener);
     }
-
-    KeyListener dniListener;
 
     private void allowDni(JTextField txt) {
         dniListener = new KeyAdapter() {
@@ -205,6 +208,4 @@ public class ControladorBusqueda implements ActionListener {
     private void showErrorMessage(String titulo, String msg) {
         JOptionPane.showMessageDialog(ventana1, msg, titulo, JOptionPane.ERROR_MESSAGE);
     }
-
-    
 }
