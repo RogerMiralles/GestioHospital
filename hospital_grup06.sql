@@ -13,7 +13,7 @@ CREATE TABLE METGES (
 	nomMetge VARCHAR(10),
 	cognom1Metge VARCHAR(40),
     cognom2Metge VARCHAR(40),
-    numSegSoc CHAR(12) UNIQUE NOT NULL,
+    numSegSoc INT UNIQUE NOT NULL,
     telefon INT UNIQUE NOT NULL,
     salariMensual INT,
     codiCompte CHAR(4),
@@ -28,7 +28,7 @@ CREATE TABLE METGES (
 
 CREATE TABLE PACIENTS (
 	nifPacient CHAR(9),
-    nomMetge VARCHAR(10),
+    nomPacient VARCHAR(10),
 	cognom1Pacient VARCHAR(40),
     cognom2Pacient VARCHAR(40),
     numSegSoc CHAR(12) UNIQUE NOT NULL,
