@@ -3,7 +3,6 @@ package m03.uf5.p01.grup06.gestiohospital.controlador;
 import java.awt.CardLayout;
 import java.awt.event.*;
 import java.time.Duration;
-import java.time.LocalDateTime;
 import javax.swing.*;
 import m03.uf5.p01.grup06.gestiohospital.modelo.*;
 import m03.uf5.p01.grup06.gestiohospital.vista.*;
@@ -65,23 +64,23 @@ public class ControladorAnadir implements ActionListener {
             }
         }
 
-        if (ae.getActionCommand().equals("ComboBoxPacient")) {
+        /*if (ae.getActionCommand().equals("ComboBoxPacient")) {
             int i = ((PanelNewVisita) pagina.getpVisita()).getCbPacient().getSelectedIndex();
             if (i != 0) {
                 onlyAllowNumbers(((PanelNewVisita) pagina.getpVisita()).getTfPacient());
             } else if (i == 0) {
                 ((PanelNewVisita) pagina.getpVisita()).getTfPacient().removeKeyListener(charLisener);
             }
-        }
+        }*/
 
-        if (ae.getActionCommand().equals("ComboBoxMetge")) {
+        /*if (ae.getActionCommand().equals("ComboBoxMetge")) {
             int i = ((PanelNewVisita) pagina.getpVisita()).getCbMetge().getSelectedIndex();
             if (i != 0) {
                 onlyAllowNumbers(((PanelNewVisita) pagina.getpVisita()).getTfMetge());
             } else if (i == 0) {
                 (((PanelNewVisita) pagina.getpVisita()).getTfMetge()).removeKeyListener(charLisener);
             }
-        }
+        }*/
     }
 
     private void asignaComponentes() {
@@ -95,13 +94,13 @@ public class ControladorAnadir implements ActionListener {
         pagina.getBtnCancelar().setActionCommand("btnCancelar");
         pagina.getBtnCancelar().addActionListener(this);
 
-        ((PanelNewVisita) pagina.getpVisita()).getCbPacient().setActionCommand("ComboBoxPacient");
+        /*((PanelNewVisita) pagina.getpVisita()).getCbPacient().setActionCommand("ComboBoxPacient");
         ((PanelNewVisita) pagina.getpVisita()).getCbPacient().addActionListener(this);
 
         ((PanelNewVisita) pagina.getpVisita()).getCbMetge().setActionCommand("ComboBoxMetge");
-        ((PanelNewVisita) pagina.getpVisita()).getCbMetge().addActionListener(this);
+        ((PanelNewVisita) pagina.getpVisita()).getCbMetge().addActionListener(this);*/
 
-        onlyAllowNumbers(((PanelNewVisita) pagina.getpVisita()).getTfEnfermetat());
+        //onlyAllowNumbers(((PanelNewVisita) pagina.getpVisita()).getTfEnfermetat());
 
         onlyAllowNumbers(((PanelNewPacient) pagina.getpPaciente()).getTfCP());
         onlyAllowNumbers(((PanelNewPacient) pagina.getpPaciente()).getTfNum());
@@ -116,7 +115,7 @@ public class ControladorAnadir implements ActionListener {
     }
 
     private boolean createVisita() {
-        try {
+        /*try {
             PanelNewVisita p = (PanelNewVisita) pagina.getpVisita();
             int codigoMalaltia = Integer.parseInt(p.getTfEnfermetat().getText());
             Malaltia m = hospital.getMalaltia(codigoMalaltia);
@@ -168,7 +167,8 @@ public class ControladorAnadir implements ActionListener {
         } catch (Exception e) {
             showErrorMessage(" Visita incorrecta:", e.getMessage());
             return false;
-        }
+        }*/
+        return true;
     }
 
     private boolean createPacient() {
@@ -193,8 +193,8 @@ public class ControladorAnadir implements ActionListener {
             Pacient pcnt = new Pacient(nom, cognom1, cognom2, numSegSocial, nif, telefon, adreca);
             System.out.println("[INFO]: Pacient creat: " + pcnt);
 
-            hospital.addPacient(pcnt);
-            FicheroCSV.escribeCSV("pacients.csv", pcnt);
+            //hospital.addPacient(pcnt);
+            //FicheroCSV.escribeCSV("pacients.csv", pcnt);
             return true;
         } catch (NumberFormatException e) {
             showErrorMessage(" Error", "Llena todos los campos.");
@@ -230,8 +230,8 @@ public class ControladorAnadir implements ActionListener {
             Metge mtg = new Metge(nom, cognom1, cognom2, numSegSocial, nif, telefon, adreca, numEmpleat, salari, compteCorrent);
             System.out.println("[INFO]: Metge creat: " + mtg);
 
-            hospital.addMetge(mtg);
-            FicheroCSV.escribeCSV("metges.csv", mtg);
+            //hospital.addMetge(mtg);
+            //FicheroCSV.escribeCSV("metges.csv", mtg);
             return true;
         } catch (NumberFormatException e) {
             showErrorMessage(" Error", "Llena todos los campos.");
@@ -253,8 +253,8 @@ public class ControladorAnadir implements ActionListener {
 
             Malaltia m = new Malaltia(codi, name, causaBaixa, tractament, duracion);
 
-            hospital.addMalaltia(m);
-            FicheroCSV.escribeCSV("malalties.csv", m);
+            //hospital.addMalaltia(m);
+            //FicheroCSV.escribeCSV("malalties.csv", m);
             System.out.println("[INFO]: Malaltia creada: [" + m.getCodi() + "] " + m.getNom());
             return true;
         } catch (NumberFormatException e) {

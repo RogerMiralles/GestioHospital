@@ -29,30 +29,17 @@ public class Malaltia {
 
     @Override
     public String toString() {
-        return "<html><h2>Datos Enfermedad</h2>"
-                + "<ul>"
-                + "<li>Codigo: " + this.getCodi()+"</li>"
-                + "<li>Nombre: " + this.getNom()+"</li>"
-                + "<li>Causa Baja: " + this.isCausaBaixastr()+"</li>"
-                + "<li>Tratamiento: " + this.getTractament()+"</li>"
-                + "<li>Duración tratamiento: " + this.getDuradaTractament().toDays()+" dias.</li>"
-                + "</ul>";
+        return "[" + this.codi + "]: " + nom;
     }
 
     public int getCodi() {
         return this.codi;
     }
-
-    /**
-     * @return the nom
-     */
+    
     public String getNom() {
         return nom;
     }
-
-    /**
-     * @return the causaBaixa
-     */
+    
     public boolean isCausaBaixa() {
         return causaBaixa;
     }
@@ -66,16 +53,12 @@ public class Malaltia {
         }
     }
     
-    /**
-     * @return the tractament
-     */
+    
     public String getTractament() {
         return tractament;
     }
 
-    /**
-     * @return the duradaTractament
-     */
+   
     public Duration getDuradaTractament() {
         return duradaTractament;
     }
@@ -83,5 +66,4 @@ public class Malaltia {
     public String FormatCSVMalaltia() {
         return codi + "," + nom + "," + causaBaixa + "," + tractament + "," + duradaTractament.toDays();
     }
-
 }

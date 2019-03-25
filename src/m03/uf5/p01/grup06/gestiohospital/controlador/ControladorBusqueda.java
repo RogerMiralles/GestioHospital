@@ -119,11 +119,9 @@ public class ControladorBusqueda implements ActionListener {
     }
 
     public void buscaContenido() {
-        int tipoDato, tipoId;
-        String dato, cadena;
-        tipoDato = ventana1.getCbTipoDato().getSelectedIndex();
-        tipoId = ventana1.getCbTipoId().getSelectedIndex();
-        dato = ventana1.getTfBuscar().getText();
+        int tipoDato = ventana1.getCbTipoDato().getSelectedIndex();
+        int tipoId = ventana1.getCbTipoId().getSelectedIndex();
+        String dato = ventana1.getTfBuscar().getText();
         
         try {
             ResultSet rsDatos = null;

@@ -17,7 +17,7 @@ public abstract class Persona {
         String error = "Datos erroeneos:";
         
         if (!nifCorrecto(nif)) {
-            error += "\n - NIF incorrecto ";
+            error += "\n - NIF incorrecto (" + nif + ")";
         }
         if (!cumplePatron("^[A-zçñàáéèíóòúÇÑÁÀÉÈÍÒÓÚ·üÜïÏ]*", nom, cognom1, cognom2)){
             error += "\n - Nombre o apellido incorrecto ";

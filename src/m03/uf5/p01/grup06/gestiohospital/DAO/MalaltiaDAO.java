@@ -5,11 +5,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Duration;
+import java.util.ArrayList;
 import m03.uf5.p01.grup06.gestiohospital.modelo.Malaltia;
 import m03.uf5.p01.grup06.gestiohospital.utils.GestorConnexioJDBC;
 
 public class MalaltiaDAO {
-    
+
     public static ResultSet getAllMalaltiesRS() {
         try {
             Connection conn = GestorConnexioJDBC.getConnection();
@@ -21,7 +23,23 @@ public class MalaltiaDAO {
             return null;
         }
     }
-    
+
+    public static Malaltia[] getAllMalalties() {
+        try {
+            ArrayList<Malaltia> listMalalties = new ArrayList<>();
+            ResultSet rs = getAllMalaltiesRS();
+            while (rs.next()) {
+                listMalalties.add(createMalaltia(rs));
+            }
+            Malaltia[] arrayMalalties = new Malaltia[listMalalties.size()];
+            return listMalalties.toArray(arrayMalalties);
+
+        } catch (SQLException ex) {
+            System.out.println("ERROR CONSULTA SQL: " + ex.getMessage());
+            return null;
+        }
+    }
+
     public static ResultSet getMalaltiesByCodiRS(int codi) {
         try {
             Connection conn = GestorConnexioJDBC.getConnection();
@@ -34,7 +52,7 @@ public class MalaltiaDAO {
             return null;
         }
     }
-    
+
     public static boolean updateMalaltia(Malaltia malaltia) {
         try {
             Connection conn = GestorConnexioJDBC.getConnection();
@@ -43,12 +61,22 @@ public class MalaltiaDAO {
             cStmt.setString(2, malaltia.getNom());
             cStmt.setString(3, malaltia.isCausaBaixastr());
             cStmt.setString(4, malaltia.getTractament());
-            cStmt.setInt(5, (int)malaltia.getDuradaTractament().toDays());
+            cStmt.setInt(5, (int) malaltia.getDuradaTractament().toDays());
             cStmt.execute();
             return true;
         } catch (SQLException ex) {
             System.out.println("ERROR CONSULTA SQL: " + ex.getMessage());
             return false;
         }
+    }
+
+    private static Malaltia createMalaltia(ResultSet rs) throws SQLException {
+        int codi = rs.getInt("codiMalaltia");
+        String nom = rs.getString("nomMalaltia");
+        boolean causaBaixa = rs.getString("causaBaixa").toLowerCase().equals("si");
+        String tractament = rs.getString("tractament");
+        Duration duracio = Duration.ofDays(rs.getInt("duracio"));
+
+        return new Malaltia(codi, nom, causaBaixa, tractament, duracio);
     }
 }
