@@ -14,7 +14,7 @@ public class PaginaInicio extends JFrame {
     private JTextField tfBuscar;
     private JCheckBox chkFiltrar;
     private JButton btnBuscar, btnNuevo;
-    private final String[] objetos = {"Enfermedades", "Historiales", "Medicos", "Pacientes"};
+    private final String[] objetos = {"Enfermedades", "Visitas", "Medicos", "Pacientes"};
     private final String[] idsEnfermedad = {"Codigo"};
     private final String[] idsHistorial = {"Codigo", "DNI"};
     private final String[] idsMedico = {"NºSegSocial", "DNI"};
@@ -55,9 +55,12 @@ public class PaginaInicio extends JFrame {
         tfBuscar.setPreferredSize(new Dimension(300, 30));
         
         JPanel pTabla = new JPanel(new BorderLayout());
+        
         tblDatos = new JTable();
         tblDatos.setMinimumSize(pCentro.getSize());
-        pTabla.add(tblDatos, BorderLayout.CENTER);
+        tblDatos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        JScrollPane scrollTable = new JScrollPane(tblDatos);
+        pTabla.add(scrollTable, BorderLayout.CENTER);
         pTabla.add(tblDatos.getTableHeader(), BorderLayout.NORTH);
         
         pCentro.setBorder(BorderFactory.createTitledBorder("Información Buscada: "));

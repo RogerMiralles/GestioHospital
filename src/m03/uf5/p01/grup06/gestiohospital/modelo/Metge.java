@@ -37,4 +37,16 @@ public class Metge extends Persona {
                ","+this.getAdreca().FormCSVAdreca()+","+numEmpleat+","+salariMensual+
                ","+codiCompteCorrent;
     }
+
+    public int getNumEmpleat() {
+        return numEmpleat;
+    }
+
+    public int getSalariMensual() {
+        return salariMensual;
+    }
+
+    public String getCodiCompteCorrent() {
+        return codiCompteCorrent;
+    }
 }
