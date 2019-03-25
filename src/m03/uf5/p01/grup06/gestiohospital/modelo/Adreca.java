@@ -37,7 +37,30 @@ public class Adreca {
     }
     
     public String  FormCSVAdreca(){
-        return  ciutat + "," + codiPostal + "," + carrer + "," + numero + "," + planta + "," + porta; 
-        
+        return  ciutat + "," + codiPostal + "," + carrer + "," + numero + "," + planta + "," + porta;   
+    }
+
+    public String getCiutat() {
+        return ciutat;
+    }
+
+    public long getCodiPostal() {
+        return codiPostal;
+    }
+
+    public String getCarrer() {
+        return carrer;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public String getPlanta() {
+        return planta;
+    }
+
+    public String getPorta() {
+        return porta;
     }
 }
