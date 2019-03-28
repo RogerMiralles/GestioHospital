@@ -73,7 +73,7 @@ public class PaginaAnadir extends JFrame {
     }
 
     private void asignaMetodos() {
-        c = new ControladorAnadir(this, hospital);
+        c = new ControladorAnadir(this);
     }
 
     public JComboBox getCbTipo() {

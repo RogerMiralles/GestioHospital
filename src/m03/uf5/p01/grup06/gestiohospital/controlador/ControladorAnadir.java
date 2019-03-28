@@ -2,21 +2,20 @@ package m03.uf5.p01.grup06.gestiohospital.controlador;
 
 import java.awt.CardLayout;
 import java.awt.event.*;
-import java.time.Duration;
-import javax.swing.*;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import m03.uf5.p01.grup06.gestiohospital.DAO.MetgeDAO;
 import m03.uf5.p01.grup06.gestiohospital.modelo.*;
 import m03.uf5.p01.grup06.gestiohospital.vista.*;
 
 public class ControladorAnadir implements ActionListener {
 
     private final PaginaAnadir pagina;
-    private final Hospital hospital;
 
-    public ControladorAnadir(PaginaAnadir pagina, Hospital hospital) {
+    public ControladorAnadir(PaginaAnadir pagina) {
         this.pagina = pagina;
-        this.hospital = hospital;
         asignaComponentes();
-        System.out.println("[INFO]: Controlador añadir creado (" + hospital.getName() + ").");
+        System.out.println("[INFO]: Controlador añadir creado.");
     }
 
     @Override
@@ -63,24 +62,6 @@ public class ControladorAnadir implements ActionListener {
                 pagina.dispose();
             }
         }
-
-        /*if (ae.getActionCommand().equals("ComboBoxPacient")) {
-            int i = ((PanelNewVisita) pagina.getpVisita()).getCbPacient().getSelectedIndex();
-            if (i != 0) {
-                onlyAllowNumbers(((PanelNewVisita) pagina.getpVisita()).getTfPacient());
-            } else if (i == 0) {
-                ((PanelNewVisita) pagina.getpVisita()).getTfPacient().removeKeyListener(charLisener);
-            }
-        }*/
-
-        /*if (ae.getActionCommand().equals("ComboBoxMetge")) {
-            int i = ((PanelNewVisita) pagina.getpVisita()).getCbMetge().getSelectedIndex();
-            if (i != 0) {
-                onlyAllowNumbers(((PanelNewVisita) pagina.getpVisita()).getTfMetge());
-            } else if (i == 0) {
-                (((PanelNewVisita) pagina.getpVisita()).getTfMetge()).removeKeyListener(charLisener);
-            }
-        }*/
     }
 
     private void asignaComponentes() {
@@ -93,15 +74,7 @@ public class ControladorAnadir implements ActionListener {
 
         pagina.getBtnCancelar().setActionCommand("btnCancelar");
         pagina.getBtnCancelar().addActionListener(this);
-
-        /*((PanelNewVisita) pagina.getpVisita()).getCbPacient().setActionCommand("ComboBoxPacient");
-        ((PanelNewVisita) pagina.getpVisita()).getCbPacient().addActionListener(this);
-
-        ((PanelNewVisita) pagina.getpVisita()).getCbMetge().setActionCommand("ComboBoxMetge");
-        ((PanelNewVisita) pagina.getpVisita()).getCbMetge().addActionListener(this);*/
-
-        //onlyAllowNumbers(((PanelNewVisita) pagina.getpVisita()).getTfEnfermetat());
-
+        
         onlyAllowNumbers(((PanelNewPacient) pagina.getpPaciente()).getTfCP());
         onlyAllowNumbers(((PanelNewPacient) pagina.getpPaciente()).getTfNum());
 
@@ -117,7 +90,10 @@ public class ControladorAnadir implements ActionListener {
     private boolean createVisita() {
         /*try {
             PanelNewVisita p = (PanelNewVisita) pagina.getpVisita();
-            int codigoMalaltia = Integer.parseInt(p.getTfEnfermetat().getText());
+            
+            int codigoMalaltia = p.getC
+            
+            
             Malaltia m = hospital.getMalaltia(codigoMalaltia);
             if (showNullErrorMessage(m, "enfermedad")) {
                 return false;
@@ -230,9 +206,7 @@ public class ControladorAnadir implements ActionListener {
             Metge mtg = new Metge(nom, cognom1, cognom2, numSegSocial, nif, telefon, adreca, numEmpleat, salari, compteCorrent);
             System.out.println("[INFO]: Metge creat: " + mtg);
 
-            //hospital.addMetge(mtg);
-            //FicheroCSV.escribeCSV("metges.csv", mtg);
-            return true;
+            return MetgeDAO.createMetge(mtg);
         } catch (NumberFormatException e) {
             showErrorMessage(" Error", "Llena todos los campos.");
             return false;
@@ -243,7 +217,7 @@ public class ControladorAnadir implements ActionListener {
     }
 
     private boolean createMalaltia() {
-        try {
+        /*try {
             PanelNewMalaltia p = (PanelNewMalaltia) pagina.getpMalaltia();
             int codi = Integer.parseInt(p.getTfCodi().getText());
             String name = p.getTfNom().getText();
@@ -263,7 +237,8 @@ public class ControladorAnadir implements ActionListener {
         } catch (Exception e) {
             showErrorMessage(" Error", e.getMessage());
             return false;
-        }
+        }*/
+        return true;
     }
 
     KeyAdapter charLisener;

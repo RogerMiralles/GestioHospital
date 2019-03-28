@@ -108,4 +108,35 @@ public class MetgeDAO {
             return false;
         }
     }
+    
+    public static boolean createMetge(Metge metge) {
+        try {
+            Connection conn = GestorConnexioJDBC.getConnection();
+            PreparedStatement sentencia = conn.prepareStatement("INSERT INTO METGES "
+                    + "(nomMetge, cognom1Metge, cognom2Metge, numSegSoc, nifMetge, telefon, ciutat, codiPostal, carrer, numero, planta, porta, numEmpleat, salariMensual, codiCompte) "
+                    + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            
+            sentencia.setString(1, metge.getNom());
+            sentencia.setString(2, metge.getCognom1());
+            sentencia.setString(3, metge.getCognom2());
+            sentencia.setString(4, metge.getNumSegSocial());
+            sentencia.setString(5, metge.getNif());
+            sentencia.setString(6, metge.getTelefon());
+            sentencia.setString(7, metge.getAdreca().getCiutat());
+            sentencia.setLong(8, metge.getAdreca().getCodiPostal());
+            sentencia.setString(9, metge.getAdreca().getCarrer());
+            sentencia.setInt(10, metge.getAdreca().getNumero());
+            sentencia.setString(11, metge.getAdreca().getPlanta());
+            sentencia.setString(12, metge.getAdreca().getPorta());
+            sentencia.setInt(13, metge.getNumEmpleat());
+            sentencia.setInt(14, metge.getSalariMensual());
+            sentencia.setString(15, metge.getCodiCompteCorrent());
+            
+            sentencia.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("ERROR INSERT SQL: " + ex.getMessage());
+            return false;
+        }
+    }
 }

@@ -11,7 +11,7 @@ public class PanelNewVisita extends JPanel {
     private JComboBox cbPacient, cbMetge, cbEnfermedad;
     
     public PanelNewVisita () {
-        listaPacients = null; 
+        listaPacients = objetsToString(PacienteDAO.getAllPacients()); 
         listaMetges = objetsToString(MetgeDAO.getAllMetges());
         listaEnfermetats = objetsToString(MalaltiaDAO.getAllMalalties());   
         creaPanel();            
@@ -22,12 +22,12 @@ public class PanelNewVisita extends JPanel {
         pContenido.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
                
         pacient = new JPanel(new FlowLayout(0));
-        /*cbPacient = new JComboBox(listaPacients);
-        cbPacient.setPreferredSize(new Dimension(300, 30));*/
+        cbPacient = new JComboBox(listaPacients);
+        cbPacient.setPreferredSize(new Dimension(300, 30));
         JLabel lblPacient = new JLabel("Paciente:");
         lblPacient.setPreferredSize(new Dimension(120, 30));
         pacient.add(lblPacient);
-        //pacient.add(cbPacient);
+        pacient.add(cbPacient);
         
         metge = new JPanel(new FlowLayout(0));
         cbMetge = new JComboBox(listaMetges);

@@ -8,6 +8,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import m03.uf5.p01.grup06.gestiohospital.DAO.MalaltiaDAO;
 import m03.uf5.p01.grup06.gestiohospital.DAO.MetgeDAO;
+import m03.uf5.p01.grup06.gestiohospital.DAO.PacienteDAO;
 import m03.uf5.p01.grup06.gestiohospital.DAO.VisitaDAO;
 import m03.uf5.p01.grup06.gestiohospital.modelo.*;
 import m03.uf5.p01.grup06.gestiohospital.utils.ResultSetModelTableData;
@@ -149,20 +150,19 @@ public class ControladorBusqueda implements ActionListener {
                             break;
                     }
                     break;
-                /*case 3: // Pacient
+                case 3: // Pacient
                     switch (tipoId) {
                         case 0:
-                            rsDatos = PacientDAO
-                            ventana1.getTaMostrar().setText(h1.getPacient(Integer.parseInt(dato)).toString());
+                            rsDatos = PacienteDAO.pacienteByCodiHistorial(Integer.parseInt(dato));
                             break;
                         case 1:
-                            ventana1.getTaMostrar().setText(h1.getPacient(dato).toString());
+                            rsDatos = PacienteDAO.pacienteByNif(dato);
                             break;
                         case 2:
-                            ventana1.getTaMostrar().setText(h1.getPacient(Long.parseLong(dato)).toString());
+                            rsDatos = PacienteDAO.pacienteByNSS(dato);
                             break;
                     }
-                    break;*/
+                    break;
             }
             if (rsDatos != null) {
                 tblDades.setModel(new ResultSetModelTableData(rsDatos));
@@ -226,7 +226,7 @@ public class ControladorBusqueda implements ActionListener {
                     dadesRS = MetgeDAO.getAllMetgesRS();
                     break;
                 case "Pacient" :
-                    dadesRS = null;
+                    dadesRS = PacienteDAO.getAllPacientsRS();
                     break;
                 case "Visita" :
                     dadesRS = VisitaDAO.getAllVisitesRS();
