@@ -34,6 +34,9 @@ public class ResultSetModelTableData extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int row, int column) {
+        if(column==0){
+            return false;
+        }
         return true;
     }
     
