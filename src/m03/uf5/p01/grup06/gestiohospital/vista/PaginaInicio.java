@@ -10,7 +10,7 @@ public class PaginaInicio extends JFrame {
     private JPanel pPrincipal, pNorte, pCentro, pSur, pBusqueda;
     private JComboBox cbTipoDato, cbTipoId;
     private JLabel lblTitulo, lblFiltros;
-    private JTable tblDatos;
+    private javax.swing.JTable tblDatos;
     private JTextField tfBuscar;
     private JCheckBox chkFiltrar;
     private JButton btnBuscar, btnNuevo;
@@ -32,8 +32,8 @@ public class PaginaInicio extends JFrame {
 
     private void CreaGUI() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(800, 600);
-        this.setMinimumSize(new Dimension(800, 600));
+        this.setSize(1200, 600);
+        this.setMinimumSize(new Dimension(1200, 600));
 
         pPrincipal = new JPanel();
         pPrincipal.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -57,10 +57,11 @@ public class PaginaInicio extends JFrame {
         JPanel pTabla = new JPanel(new BorderLayout());
         
         tblDatos = new JTable();
+        
         tblDatos.setMinimumSize(pCentro.getSize());
         tblDatos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        JScrollPane scrollTable = new JScrollPane(tblDatos);
-        pTabla.add(scrollTable, BorderLayout.CENTER);
+        
+        pTabla.add(tblDatos, BorderLayout.CENTER);
         pTabla.add(tblDatos.getTableHeader(), BorderLayout.NORTH);
         
         pCentro.setBorder(BorderFactory.createTitledBorder("Información Buscada: "));

@@ -6,11 +6,13 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.TableModel;
 import m03.uf5.p01.grup06.gestiohospital.DAO.MalaltiaDAO;
 import m03.uf5.p01.grup06.gestiohospital.DAO.MetgeDAO;
 import m03.uf5.p01.grup06.gestiohospital.DAO.PacienteDAO;
 import m03.uf5.p01.grup06.gestiohospital.DAO.VisitaDAO;
 import m03.uf5.p01.grup06.gestiohospital.modelo.*;
+import m03.uf5.p01.grup06.gestiohospital.utils.CellRender;
 import m03.uf5.p01.grup06.gestiohospital.utils.ResultSetModelTableData;
 import m03.uf5.p01.grup06.gestiohospital.vista.*;
 
@@ -118,6 +120,14 @@ public class ControladorBusqueda implements ActionListener {
                 ventana1.getCbTipoId().removeAllItems();
         }
     }
+    
+     private void actualitzaTaula(JTable taula, TableModel model){
+        taula.setModel(model);
+        CellRender renderizador = new CellRender();
+        for (int i = 0; i < taula.getColumnCount(); i++) {
+            taula.getColumnModel().getColumn(i).setCellRenderer(renderizador);
+        }
+     }
 
     public void buscaContenido() {
         int tipoDato = ventana1.getCbTipoDato().getSelectedIndex();
@@ -165,7 +175,9 @@ public class ControladorBusqueda implements ActionListener {
                     break;
             }
             if (rsDatos != null) {
-                tblDades.setModel(new ResultSetModelTableData(rsDatos));
+                ResultSetModelTableData model = new ResultSetModelTableData(rsDatos);
+                actualitzaTaula(tblDades, model);
+        
             }
         } catch (NumberFormatException e) {
             showErrorMessage("Campos vacios", "No deje el formulario en blanco");
@@ -233,8 +245,10 @@ public class ControladorBusqueda implements ActionListener {
                     break;
             } 
             if (dadesRS != null) {
-                ResultSetModelTableData datosTabla = new ResultSetModelTableData(dadesRS);
-                tblDades.setModel(datosTabla);
+                ResultSetModelTableData model = new ResultSetModelTableData(dadesRS);
+                actualitzaTaula(tblDades, model);
+        
+                
             }
         } catch (Exception ex) {
             showErrorMessage("ERROR", ex.getMessage());
