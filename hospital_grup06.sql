@@ -54,7 +54,7 @@ CREATE TABLE MALALTIES(
 );
 
 CREATE TABLE VISITES(
-    codiVisita INT,
+    codiVisita INT auto_increment,
     fecha DATETIME,
     codiMalaltia INT,
     dniMetge CHAR(9),

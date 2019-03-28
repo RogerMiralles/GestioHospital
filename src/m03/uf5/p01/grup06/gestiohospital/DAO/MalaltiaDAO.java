@@ -29,7 +29,7 @@ public class MalaltiaDAO {
             ArrayList<Malaltia> listMalalties = new ArrayList<>();
             ResultSet rs = getAllMalaltiesRS();
             while (rs.next()) {
-                listMalalties.add(createMalaltia(rs));
+                listMalalties.add(createMalaltiaObj(rs));
             }
             Malaltia[] arrayMalalties = new Malaltia[listMalalties.size()];
             return listMalalties.toArray(arrayMalalties);
@@ -47,6 +47,17 @@ public class MalaltiaDAO {
             sentencia.setInt(1, codi);
             sentencia.executeQuery();
             return sentencia.getResultSet();
+        } catch (SQLException ex) {
+            System.out.println("ERROR CONSULTA SQL: " + ex.getMessage());
+            return null;
+        }
+    }
+    
+    public static Malaltia getMalaltiesByCodi(int codi) {
+        try {
+            ResultSet rs = getMalaltiesByCodiRS(codi);
+            rs.next();
+            return createMalaltiaObj(rs);            
         } catch (SQLException ex) {
             System.out.println("ERROR CONSULTA SQL: " + ex.getMessage());
             return null;
@@ -70,7 +81,7 @@ public class MalaltiaDAO {
         }
     }
 
-    private static Malaltia createMalaltia(ResultSet rs) throws SQLException {
+    private static Malaltia createMalaltiaObj(ResultSet rs) throws SQLException {
         int codi = rs.getInt("codiMalaltia");
         String nom = rs.getString("nomMalaltia");
         boolean causaBaixa = rs.getString("causaBaixa").toLowerCase().equals("si");
@@ -78,5 +89,19 @@ public class MalaltiaDAO {
         Duration duracio = Duration.ofDays(rs.getInt("duracio"));
 
         return new Malaltia(codi, nom, causaBaixa, tractament, duracio);
+    }
+
+    public static boolean createMalaltia(Malaltia malaltia) throws SQLException {
+        Connection con = GestorConnexioJDBC.getConnection();
+        PreparedStatement sentencia = null;
+        String consulta = "INSERT INTO MALALTIES VALUES(?,?,?,?,?)";
+        sentencia = con.prepareStatement(consulta);
+        sentencia.setInt(1, malaltia.getCodi());
+        sentencia.setString(2, malaltia.getNom());
+        sentencia.setString(3, malaltia.isCausaBaixastr());
+        sentencia.setString(4, malaltia.getTractament());
+        sentencia.setInt(5, (int) malaltia.getDuradaTractament().toDays());
+        sentencia.executeUpdate();
+        return true;
     }
 }

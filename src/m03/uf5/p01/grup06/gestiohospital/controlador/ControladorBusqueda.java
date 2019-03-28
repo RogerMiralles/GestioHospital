@@ -156,7 +156,7 @@ public class ControladorBusqueda implements ActionListener {
                             rsDatos = PacienteDAO.pacienteByCodiHistorial(Integer.parseInt(dato));
                             break;
                         case 1:
-                            rsDatos = PacienteDAO.pacienteByNif(dato);
+                            rsDatos = PacienteDAO.pacienteByNifRS(dato);
                             break;
                         case 2:
                             rsDatos = PacienteDAO.pacienteByNSS(dato);

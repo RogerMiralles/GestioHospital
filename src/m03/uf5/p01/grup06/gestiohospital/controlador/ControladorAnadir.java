@@ -2,9 +2,15 @@ package m03.uf5.p01.grup06.gestiohospital.controlador;
 
 import java.awt.CardLayout;
 import java.awt.event.*;
+import java.sql.SQLException;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import m03.uf5.p01.grup06.gestiohospital.DAO.MalaltiaDAO;
 import m03.uf5.p01.grup06.gestiohospital.DAO.MetgeDAO;
+import m03.uf5.p01.grup06.gestiohospital.DAO.PacienteDAO;
+import m03.uf5.p01.grup06.gestiohospital.DAO.VisitaDAO;
 import m03.uf5.p01.grup06.gestiohospital.modelo.*;
 import m03.uf5.p01.grup06.gestiohospital.vista.*;
 
@@ -88,63 +94,34 @@ public class ControladorAnadir implements ActionListener {
     }
 
     private boolean createVisita() {
-        /*try {
+        try {
             PanelNewVisita p = (PanelNewVisita) pagina.getpVisita();
             
-            int codigoMalaltia = p.getC
+            String malOption = p.getCbEnfermedad().getSelectedItem().toString();
+            int idMal = Integer.parseInt(String.valueOf(malOption.charAt(1)));
+            Malaltia m = MalaltiaDAO.getMalaltiesByCodi(idMal);
             
+            String pcntOption = p.getCbPacient().getSelectedItem().toString();
+            String dniPcnt = pcntOption.substring(1, 10);
+            Pacient pcnt = PacienteDAO.getPacientByNif(dniPcnt);
             
-            Malaltia m = hospital.getMalaltia(codigoMalaltia);
-            if (showNullErrorMessage(m, "enfermedad")) {
-                return false;
-            }
-
-            Pacient pcnt = null;
-            String pcntData = p.getTfPacient().getText();
-            switch (p.getCbPacient().getSelectedIndex()) {
-                case 0:
-                    pcnt = hospital.getPacient(pcntData);
-                    break;
-                case 1:
-                    pcnt = hospital.getPacient(Long.parseLong(pcntData));
-                    break;
-                case 2:
-                    pcnt = hospital.getPacient(Integer.parseInt(pcntData));
-                    break;
-            }
-            if (showNullErrorMessage(pcnt, "paciente")) {
-                return false;
-            }
-
-            Metge mtg = null;
-            String mtgData = p.getTfMetge().getText();
-            switch (p.getCbMetge().getSelectedIndex()) {
-                case 0:
-                    mtg = hospital.getMetge(mtgData);
-                    break;
-                case 1:
-                    mtg = hospital.getMetge(Long.parseLong(mtgData));
-                    break;
-            }
-            if (showNullErrorMessage(mtg, "medico")) {
-                return false;
-            }
-
+            String mtgOption = p.getCbMetge().getSelectedItem().toString();
+            String dniMtg = mtgOption.substring(1, 10);
+            Metge mtg = MetgeDAO.getMetgeByDNI(dniMtg);
+            
             LocalDateTime t = LocalDateTime.now();
+            
             Visita v = new Visita(t, m, mtg, pcnt.getNif(), pcnt.getNumSegSocial());
             System.out.println("[INFO]: Visita creada: " + v);
-
-            hospital.getHistorial(pcnt.getHistorial().getCodi()).addVisita(v);
-            FicheroCSV.escribeCSV("visites.csv", v);
-            return true;
+            
+            return VisitaDAO.createVisita(v);
         } catch (NumberFormatException e) {
             showErrorMessage(" Error", "Llena todos los campos.");
             return false;
         } catch (Exception e) {
-            showErrorMessage(" Visita incorrecta:", e.getMessage());
+            showErrorMessage(" Error", e.getMessage());
             return false;
-        }*/
-        return true;
+        }
     }
 
     private boolean createPacient() {
@@ -169,14 +146,13 @@ public class ControladorAnadir implements ActionListener {
             Pacient pcnt = new Pacient(nom, cognom1, cognom2, numSegSocial, nif, telefon, adreca);
             System.out.println("[INFO]: Pacient creat: " + pcnt);
 
-            //hospital.addPacient(pcnt);
-            //FicheroCSV.escribeCSV("pacients.csv", pcnt);
-            return true;
+            return PacienteDAO.createPaciente(pcnt);
+            
         } catch (NumberFormatException e) {
             showErrorMessage(" Error", "Llena todos los campos.");
             return false;
-        } catch (Exception e) {
-            showErrorMessage(" Paciente incorrecto:", e.getMessage());
+        } catch (SQLException | IllegalArgumentException e) {
+            showErrorMessage(" Error", e.getMessage());
             return false;
         }
     }
@@ -210,14 +186,14 @@ public class ControladorAnadir implements ActionListener {
         } catch (NumberFormatException e) {
             showErrorMessage(" Error", "Llena todos los campos.");
             return false;
-        } catch (Exception e) {
-            showErrorMessage(" Medico incorrecto", e.getMessage());
+        } catch (SQLException | IllegalArgumentException e) {
+            showErrorMessage(" Error", e.getMessage());
             return false;
         }
     }
 
     private boolean createMalaltia() {
-        /*try {
+        try {
             PanelNewMalaltia p = (PanelNewMalaltia) pagina.getpMalaltia();
             int codi = Integer.parseInt(p.getTfCodi().getText());
             String name = p.getTfNom().getText();
@@ -226,19 +202,15 @@ public class ControladorAnadir implements ActionListener {
             Boolean causaBaixa = p.getCbBaixa().isSelected();
 
             Malaltia m = new Malaltia(codi, name, causaBaixa, tractament, duracion);
-
-            //hospital.addMalaltia(m);
-            //FicheroCSV.escribeCSV("malalties.csv", m);
             System.out.println("[INFO]: Malaltia creada: [" + m.getCodi() + "] " + m.getNom());
-            return true;
+            return MalaltiaDAO.createMalaltia(m);
         } catch (NumberFormatException e) {
             showErrorMessage(" Error", "Llena todos los campos.");
             return false;
-        } catch (Exception e) {
+        } catch (SQLException | IllegalArgumentException e) {
             showErrorMessage(" Error", e.getMessage());
             return false;
-        }*/
-        return true;
+        }
     }
 
     KeyAdapter charLisener;
