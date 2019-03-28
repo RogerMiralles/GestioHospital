@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import m03.uf5.p01.grup06.gestiohospital.modelo.Pacient;
 import m03.uf5.p01.grup06.gestiohospital.utils.GestorConnexioJDBC;
 
@@ -90,5 +92,32 @@ public class PacienteDAO {
             System.out.println("ERROR CONSULTA SQL: " + ex.getMessage());
             return false;
         }
+    }
+    
+    public static boolean createPaciente(Pacient pacient){
+        try {
+            Connection con = GestorConnexioJDBC.getConnection();
+            PreparedStatement sentencia = null;
+            String consulta = "INSERT INTO PACIENTS VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+            sentencia = con.prepareStatement(consulta);
+            sentencia.setString(1, pacient.getNif());
+            sentencia.setInt(2, pacient.getHistorial().getCodi());
+            sentencia.setString(3, pacient.getNumSegSocial());
+            sentencia.setString(4, pacient.getNom());
+            sentencia.setString(5, pacient.getCognom1());
+            sentencia.setString(6, pacient.getCognom2());            
+            sentencia.setString(7, pacient.getTelefon());
+            sentencia.setString(8, pacient.getAdreca().getCiutat());
+            sentencia.setLong(9, pacient.getAdreca().getCodiPostal());
+            sentencia.setString(10, pacient.getAdreca().getCarrer());
+            sentencia.setInt(11, pacient.getAdreca().getNumero());
+            sentencia.setString(12, pacient.getAdreca().getPlanta());
+            sentencia.setString(13, pacient.getAdreca().getPorta());
+            sentencia.executeQuery();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("ERROR CONSULTA SQL: " + ex.getMessage());
+            return false;
+        }        
     }
 }
