@@ -135,6 +135,7 @@ public class ControladorBusqueda implements ActionListener {
     }
     
      private void actualitzaTaula(JTable taula, TableModel model){
+        taula.getTableHeader().setDefaultRenderer(new CellRender("Header"));
         taula.setModel(model);
         CellRender renderizador = new CellRender();
         for (int i = 0; i < taula.getColumnCount(); i++) {

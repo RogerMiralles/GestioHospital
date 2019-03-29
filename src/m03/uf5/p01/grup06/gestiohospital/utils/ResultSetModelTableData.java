@@ -49,7 +49,7 @@ public class ResultSetModelTableData extends AbstractTableModel {
 
     @Override
     public String getColumnName(int i) {
-        return nomsColumnes.get(i);
+        return formatTitle(nomsColumnes.get(i));
     }
 
     @Override
@@ -66,4 +66,18 @@ public class ResultSetModelTableData extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         return dadesFiles.get(rowIndex).get(columnIndex);
     }
+    
+    private String formatTitle(String title) {
+        String formatedTitle = String.valueOf(title.charAt(0)).toUpperCase();
+        
+        for(int i = 1; i < title.length(); i++) {
+            if (Character.isUpperCase(title.charAt(i))) {
+                formatedTitle += " " + title.charAt(i);
+            } else {
+                formatedTitle += title.charAt(i);
+            }
+        }
+        return formatedTitle;
+    }
+        
 }
