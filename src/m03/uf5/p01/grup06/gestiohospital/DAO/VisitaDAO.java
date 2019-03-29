@@ -61,6 +61,7 @@ public class VisitaDAO {
             sentencia.setString(4, visita.getDni());
             sentencia.executeUpdate();
             return true;
+            
         } catch (NullPointerException ex) {
             System.out.println("ERROR NULL OBJ VISITA: " + ex.getMessage());
             return false;

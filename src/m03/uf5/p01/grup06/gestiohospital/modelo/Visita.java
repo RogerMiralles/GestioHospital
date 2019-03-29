@@ -5,7 +5,6 @@
  */
 package m03.uf5.p01.grup06.gestiohospital.modelo;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 /**
