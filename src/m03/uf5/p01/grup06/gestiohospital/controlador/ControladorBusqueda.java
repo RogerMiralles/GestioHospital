@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Duration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -28,6 +29,7 @@ public class ControladorBusqueda implements ActionListener {
     private final Hospital h1;
     private final JTable tblDades;
     private KeyListener dniListener, numbersListener;
+    private String tablaActual;
 
     public ControladorBusqueda(PaginaInicio ventanaInicio, Hospital h1) {
         this.ventana1 = ventanaInicio;
@@ -101,6 +103,7 @@ public class ControladorBusqueda implements ActionListener {
                     ventana1.getCbTipoId().addItem(ventana1.getIdsEnfermedad()[i]);
                 }
                 loadAllData("Malaltia");
+                tablaActual="Malaltia";
                 break;
             case 1:
                 ventana1.getCbTipoId().removeAllItems();
@@ -108,6 +111,7 @@ public class ControladorBusqueda implements ActionListener {
                     ventana1.getCbTipoId().addItem(ventana1.getIdsHistorial()[i]);
                 }
                 loadAllData("Visita");
+                 tablaActual="Visita";
                 break;
             case 2:
                 ventana1.getCbTipoId().removeAllItems();
@@ -115,6 +119,7 @@ public class ControladorBusqueda implements ActionListener {
                     ventana1.getCbTipoId().addItem(ventana1.getIdsMedico()[i]);
                 }
                 loadAllData("Metge");
+                 tablaActual="Metge";
                 break;
             case 3:
                 ventana1.getCbTipoId().removeAllItems();
@@ -122,6 +127,7 @@ public class ControladorBusqueda implements ActionListener {
                     ventana1.getCbTipoId().addItem(ventana1.getIdsPaciente()[i]);
                 }
                 loadAllData("Pacient");
+                 tablaActual="Pacient";
                 break;
             default:
                 ventana1.getCbTipoId().removeAllItems();
@@ -146,12 +152,31 @@ public class ControladorBusqueda implements ActionListener {
      
      
      private void actualitzaTaulaUpdate(TableModelEvent e){
-        System.out.println("MODIFICACION");
+        System.out.println("MODIFICACION "+ tablaActual);
         int fila = e.getFirstRow();
+        
         PreparedStatement sentencia = null;
         Connection con = null;
         TableModel dades = tblDades.getModel();
         
+        if(tablaActual.equals("Malaltia")){
+            boolean tractament=false;
+            if(dades.getValueAt(fila, 2)=="Si"){
+                tractament=true;
+                
+            }
+            updateMalaltia(new Malaltia(Integer.parseInt(dades.getValueAt(fila, 0).toString()), 
+                    dades.getValueAt(fila, 1).toString(),tractament,
+                    new Duration(dades.getValueAt(fila, 3).toString()) ));
+            
+        }else if(tablaActual.equals("Visita")){
+            
+            
+        }else if(tablaActual.equals("Metge")){
+            
+        }else {
+            
+        }
     }
 
     public void buscaContenido() {
