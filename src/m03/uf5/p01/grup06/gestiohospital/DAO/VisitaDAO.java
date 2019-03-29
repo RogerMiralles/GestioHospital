@@ -47,22 +47,22 @@ public class VisitaDAO {
         }
     }
     
-    public static boolean createVisita(Visita visita) {
+    public static boolean createVisita(Visita visita) throws SQLException {
         try {
             Connection con = GestorConnexioJDBC.getConnection();
             PreparedStatement sentencia = null;
-            String consulta = "INSERT INTO MALALTIES VALUES"
-                    + "(fecha, codiMalaltia, dniMetge, dniPacient)"
-                    + "VALUES (?,?,?,?)";
+            String consulta = "INSERT INTO VISITES"
+                    + " (fecha, codiMalaltia, dniMetge, dniPacient)"
+                    + " VALUES (?,?,?,?)";
             sentencia = con.prepareStatement(consulta);
             sentencia.setString(1, visita.getData().format(DateTimeFormatter.ofPattern("uuuu-MM-d HH:mm:ss")));
             sentencia.setInt(2, visita.getMalaltia().getCodi());
             sentencia.setString(3, visita.getMetge().getNif());
             sentencia.setString(4, visita.getDni());
-            sentencia.executeQuery();
+            sentencia.executeUpdate();
             return true;
-        } catch (SQLException ex) {
-            System.out.println("ERROR CONSULTA SQL: " + ex.getMessage());
+        } catch (NullPointerException ex) {
+            System.out.println("ERROR NULL OBJ VISITA: " + ex.getMessage());
             return false;
         }
     }

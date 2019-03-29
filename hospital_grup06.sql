@@ -3,7 +3,7 @@ CREATE DATABASE hospital_grup06;
 CREATE USER IF NOT EXISTS admin_hospital_grup06 IDENTIFIED BY 'admin';
 GRANT ALL PRIVILEGES ON hospital_grup06.* TO admin_hospital_grup06 WITH GRANT OPTION;
 CREATE USER IF NOT EXISTS usuario_hospital_grup06 IDENTIFIED BY 'usuari';
-GRANT SELECT ON hospital_grup06.* TO usuario_hospital_grup06;
+GRANT SELECT, INSERT ON hospital_grup06.* TO usuario_hospital_grup06;
 SET GLOBAL log_bin_trust_function_creators = 1;
 
 USE hospital_grup06;
@@ -15,7 +15,7 @@ CREATE TABLE METGES (
     cognom1Metge VARCHAR(40),
     cognom2Metge VARCHAR(40),
     numSegSoc CHAR(12) UNIQUE NOT NULL,
-    telefon INT UNIQUE NOT NULL,
+    telefon CHAR(9) UNIQUE NOT NULL,
     salariMensual INT,
     codiCompte CHAR(4),
     ciutat VARCHAR(20),
@@ -34,7 +34,7 @@ CREATE TABLE PACIENTS (
     cognom1Pacient VARCHAR(40),
     cognom2Pacient VARCHAR(40),
     numSegSoc CHAR(12) UNIQUE NOT NULL,
-    telefon INT UNIQUE NOT NULL,
+    telefon CHAR(9) UNIQUE NOT NULL,
     ciutat VARCHAR(20),
     codiPostal BIGINT,
     carrer VARCHAR(20),
@@ -54,7 +54,7 @@ CREATE TABLE MALALTIES(
 );
 
 CREATE TABLE VISITES(
-    codiVisita INT,
+    codiVisita INT auto_increment,
     fecha DATETIME,
     codiMalaltia INT,
     dniMetge CHAR(9),
@@ -151,14 +151,14 @@ GRANT EXECUTE ON FUNCTION hospital_grup06.actualizaMalaltia TO usuario_hospital_
 
 # DADES INICIALS
 INSERT INTO METGES (nomMetge, cognom1Metge, cognom2Metge, numSegSoc, nifMetge, telefon, ciutat, codiPostal, carrer, numero, planta, porta, numEmpleat, salariMensual, codiCompte)VALUES 
-	("Gregory","House","Smith","396120465841","48181321R",937564023,"Barcelona",8001,"Plaça Catalunya",78,"Quarta","Segona",11,3000,"ES35"),
-	("Margarita","Robles","Rojas","257896321461","78941245R",654789123,"Terrassa",8226,"Pablo Picaso",45,"Segona","Primera",12,2500,"ES97"),
-	("Jose","Segura","Iglesias","157894523691","78523458D",678521478,"Terrassa",8221,"Plaça Doctor Robert",5,"S/N","S/N",13,2000,"ES52");
+	("Gregory","House","Smith","396120465841","48181321R", "937564023","Barcelona",8001,"Plaça Catalunya",78,"Quarta","Segona",11,3000,"ES35"),
+	("Margarita","Robles","Rojas","257896321461","78941245R","654789123","Terrassa",8226,"Pablo Picaso",45,"Segona","Primera",12,2500,"ES97"),
+	("Jose","Segura","Iglesias","157894523691","78523458D","678521478","Terrassa",8221,"Plaça Doctor Robert",5,"S/N","S/N",13,2000,"ES52");
 
 
 INSERT INTO PACIENTS (nifPacient, codiHistorial, numSegSoc, nomPacient, cognom1Pacient, cognom2Pacient, telefon, ciutat, codiPostal, carrer, numero, planta, porta) VALUES
-	("45990250W", 1, "281234567840","Juan","Martín","Pascual",666555444,"Terrassa",8226,"Pablo Picaso",45,"Segona","Primera"),
-	("45872365S", 2, "012345678939","Maria","Garcia","Luque",961247845,"Barcelona",8001,"Plaça Catalunya",78,"Quarta","Segona");
+	("45990250W", 1, "281234567840","Juan","Martín","Pascual","666555444","Terrassa",8226,"Pablo Picaso",45,"Segona","Primera"),
+	("45872365S", 2, "012345678939","Maria","Garcia","Luque","961247845","Barcelona",8001,"Plaça Catalunya",78,"Quarta","Segona");
 
 
 INSERT INTO MALALTIES (codiMalaltia, nomMalaltia, causaBaixa, tractament, duracio) VALUES

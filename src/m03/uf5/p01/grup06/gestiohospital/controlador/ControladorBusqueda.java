@@ -154,11 +154,9 @@ public class ControladorBusqueda implements ActionListener {
     }
 
     public void buscaContenido() {
-        int tipoDato, tipoId;
-        String dato;
-        tipoDato = ventana1.getCbTipoDato().getSelectedIndex();
-        tipoId = ventana1.getCbTipoId().getSelectedIndex();
-        dato = ventana1.getTfBuscar().getText();
+        int tipoDato = ventana1.getCbTipoDato().getSelectedIndex();
+        int tipoId = ventana1.getCbTipoId().getSelectedIndex();
+        String dato = ventana1.getTfBuscar().getText();
         
         try {
             ResultSet rsDatos = null;
@@ -192,7 +190,7 @@ public class ControladorBusqueda implements ActionListener {
                             rsDatos = PacienteDAO.pacienteByCodiHistorial(Integer.parseInt(dato));
                             break;
                         case 1:
-                            rsDatos = PacienteDAO.pacienteByNif(dato);
+                            rsDatos = PacienteDAO.pacienteByNifRS(dato);
                             break;
                         case 2:
                             rsDatos = PacienteDAO.pacienteByNSS(dato);

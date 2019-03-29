@@ -2,17 +2,19 @@ package m03.uf5.p01.grup06.gestiohospital.vista;
 
 import java.awt.*;
 import javax.swing.*;
+import m03.uf5.p01.grup06.gestiohospital.DAO.*;
 
-public class PanelNewVisita  extends JPanel {
-    private final String[] metodoIdentPacient = {"NIF" , "Numero SS", "Codigo historial"};
-    private final String[] metodoIdentMetge = {"NIF" , "Numero SS"};
+public class PanelNewVisita extends JPanel {
+    private final String[] listaEnfermetats, listaMetges, listaPacients;
     
     private JPanel pacient, metge, enfermetat;
-    private JComboBox cbPacient, cbMetge;
-    private JTextField tfPacient, tfMetge, tfEnfermetat;
+    private JComboBox cbPacient, cbMetge, cbEnfermedad;
     
     public PanelNewVisita () {
-        creaPanel();
+        listaPacients = objetsToString(PacienteDAO.getAllPacients()); 
+        listaMetges = objetsToString(MetgeDAO.getAllMetges());
+        listaEnfermetats = objetsToString(MalaltiaDAO.getAllMalalties());   
+        creaPanel();            
     } 
 
     private void creaPanel() {        
@@ -20,34 +22,28 @@ public class PanelNewVisita  extends JPanel {
         pContenido.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
                
         pacient = new JPanel(new FlowLayout(0));
-        tfPacient = new JTextField();
-        tfPacient.setPreferredSize(new Dimension(200,30));
-        cbPacient = new JComboBox(metodoIdentPacient);
-        cbPacient.setPreferredSize(new Dimension(100, 30));
+        cbPacient = new JComboBox(listaPacients);
+        cbPacient.setPreferredSize(new Dimension(300, 30));
         JLabel lblPacient = new JLabel("Paciente:");
         lblPacient.setPreferredSize(new Dimension(120, 30));
         pacient.add(lblPacient);
-        pacient.add(tfPacient);
         pacient.add(cbPacient);
         
-        metge = new JPanel(new FlowLayout(0));        
-        tfMetge = new JTextField();
-        tfMetge.setPreferredSize(new Dimension(200,30));
-        cbMetge = new JComboBox(metodoIdentMetge);
-        cbMetge.setPreferredSize(new Dimension(100, 30));
+        metge = new JPanel(new FlowLayout(0));
+        cbMetge = new JComboBox(listaMetges);
+        cbMetge.setPreferredSize(new Dimension(300, 30));
         JLabel lblMetge = new JLabel("Medico:");
         lblMetge.setPreferredSize(new Dimension(120, 30));
         metge.add(lblMetge);
-        metge.add(tfMetge);
         metge.add(cbMetge);
         
         enfermetat = new JPanel(new FlowLayout(0));
-        tfEnfermetat = new JTextField();
-        tfEnfermetat.setPreferredSize(new Dimension(200,30));
-        JLabel lblEnfermetat = new JLabel("Codigo enfermedad:");
+        cbEnfermedad = new JComboBox(listaEnfermetats);
+        cbEnfermedad.setPreferredSize(new Dimension(300, 30));
+        JLabel lblEnfermetat = new JLabel("Enfermedad:");
         lblEnfermetat.setPreferredSize(new Dimension(120, 30));
         enfermetat.add(lblEnfermetat);
-        enfermetat.add(tfEnfermetat);
+        enfermetat.add(cbEnfermedad);
         
         JLabel lblDesc = new JLabel ("Introduce los datos de la visita.");
         
@@ -66,15 +62,15 @@ public class PanelNewVisita  extends JPanel {
         return cbMetge;
     }
 
-    public JTextField getTfPacient() {
-        return tfPacient;
+    public JComboBox getCbEnfermedad() {
+        return cbEnfermedad;
     }
-
-    public JTextField getTfMetge() {
-        return tfMetge;
-    }
-
-    public JTextField getTfEnfermetat() {
-        return tfEnfermetat;
+    
+    private String[] objetsToString (Object[] objs) {
+        String[] strings = new String[objs.length];
+        for (int i = 0; i < objs.length; i++) {
+            strings[i] = objs[i].toString();
+        }
+        return strings;
     }
 }
