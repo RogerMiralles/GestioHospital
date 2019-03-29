@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS hospital_grup06;
 CREATE DATABASE hospital_grup06;
 CREATE USER IF NOT EXISTS admin_hospital_grup06 IDENTIFIED BY 'admin';
 GRANT ALL PRIVILEGES ON hospital_grup06.* TO admin_hospital_grup06 WITH GRANT OPTION;
-CREATE USER IF NOT EXISTS usuario_hospital_grup06 IDENTIFIED BY 'usuari';
+CREATE USER IF NOT EXISTS 'usuario_hospital_grup06'@'localhost' IDENTIFIED BY 'usuari';
 GRANT SELECT, INSERT ON hospital_grup06.* TO usuario_hospital_grup06;
 SET GLOBAL log_bin_trust_function_creators = 1;
 
@@ -93,7 +93,7 @@ END;
 // 
 DELIMITER ;
 
-GRANT EXECUTE ON FUNCTION hospital_grup06.actualizaPacient TO usuario_hospital_grup06;
+GRANT EXECUTE ON FUNCTION hospital_grup06.actualizaPacient TO 'usuario_hospital_grup06'@'localhost';
 
 # FUNCION PARA ACTUALIZAR METGES (DNI NO ACTUALIZABLE)
 
@@ -126,7 +126,7 @@ END;
 // 
 DELIMITER ;
 
-GRANT EXECUTE ON FUNCTION hospital_grup06.actualizaMetge TO usuario_hospital_grup06;
+GRANT EXECUTE ON FUNCTION hospital_grup06.actualizaMetge TO 'usuario_hospital_grup06'@'localhost';
 
 # FUNCION PARA ACTUALIZAR MALALTIA
 
@@ -147,7 +147,7 @@ END;
 // 
 DELIMITER ;
 
-GRANT EXECUTE ON FUNCTION hospital_grup06.actualizaMalaltia TO usuario_hospital_grup06;
+GRANT EXECUTE ON FUNCTION hospital_grup06.actualizaMalaltia TO 'usuario_hospital_grup06'@'localhost';
 
 # DADES INICIALS
 INSERT INTO METGES (nomMetge, cognom1Metge, cognom2Metge, numSegSoc, nifMetge, telefon, ciutat, codiPostal, carrer, numero, planta, porta, numEmpleat, salariMensual, codiCompte)VALUES 

@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Duration;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -26,6 +27,7 @@ public class ControladorBusqueda implements ActionListener {
     private final Hospital h1;
     private final JTable tblDades;
     private KeyListener dniListener, numbersListener;
+    private String tablaActual;
 
     public ControladorBusqueda(PaginaInicio ventanaInicio, Hospital h1) {
         this.ventana1 = ventanaInicio;
@@ -98,6 +100,7 @@ public class ControladorBusqueda implements ActionListener {
                     ventana1.getCbTipoId().addItem(ventana1.getIdsEnfermedad()[i]);
                 }
                 loadAllData("Malaltia");
+                tablaActual="Malaltia";
                 break;
             case 1:
                 ventana1.getCbTipoId().removeAllItems();
@@ -105,6 +108,7 @@ public class ControladorBusqueda implements ActionListener {
                     ventana1.getCbTipoId().addItem(ventana1.getIdsHistorial()[i]);
                 }
                 loadAllData("Visita");
+                 tablaActual="Visita";
                 break;
             case 2:
                 ventana1.getCbTipoId().removeAllItems();
@@ -112,6 +116,7 @@ public class ControladorBusqueda implements ActionListener {
                     ventana1.getCbTipoId().addItem(ventana1.getIdsMedico()[i]);
                 }
                 loadAllData("Metge");
+                 tablaActual="Metge";
                 break;
             case 3:
                 ventana1.getCbTipoId().removeAllItems();
@@ -119,6 +124,7 @@ public class ControladorBusqueda implements ActionListener {
                     ventana1.getCbTipoId().addItem(ventana1.getIdsPaciente()[i]);
                 }
                 loadAllData("Pacient");
+                 tablaActual="Pacient";
                 break;
             default:
                 ventana1.getCbTipoId().removeAllItems();
@@ -140,15 +146,48 @@ public class ControladorBusqueda implements ActionListener {
                 actualitzaTaulaUpdate(e);
             }
         });
-    }
-
-    private void actualitzaTaulaUpdate(TableModelEvent e) {
-        System.out.println("MODIFICACION");
+     }
+     
+     
+     private void actualitzaTaulaUpdate(TableModelEvent e){
+        System.out.println("MODIFICACION "+ tablaActual);
         int fila = e.getFirstRow();
+        
         PreparedStatement sentencia = null;
         Connection con = null;
         TableModel dades = tblDades.getModel();
-
+        
+        if(tablaActual.equals("Malaltia")){
+            MalaltiaDAO.updateMalaltia(new Malaltia(
+                    Integer.parseInt(dades.getValueAt(fila, 0).toString()), 
+                    dades.getValueAt(fila, 1).toString(),
+                    (dades.getValueAt(fila, 2)=="Si"),
+                    dades.getValueAt(fila, 3).toString(),
+                    Duration.ofDays(Integer.parseInt(dades.getValueAt(fila, 4).toString()))));
+            
+        }else if(tablaActual.equals("Metge")){
+            
+            MetgeDAO.updateMetge(new Metge(dades.getValueAt(fila, 2).toString(), 
+                    dades.getValueAt(fila, 3).toString(), dades.getValueAt(fila, 4).toString(),
+                    dades.getValueAt(fila, 5).toString(), dades.getValueAt(fila, 1).toString(),
+                    dades.getValueAt(fila, 6).toString(), new Adreca(dades.getValueAt(fila, 9).toString(), 
+                            Long.parseLong(dades.getValueAt(fila, 10).toString()), 
+                            dades.getValueAt(fila, 11).toString(), 
+                            Integer.parseInt(dades.getValueAt(fila, 12).toString()),dades.getValueAt(fila, 13).toString()
+                            ,dades.getValueAt(fila, 14).toString()), Integer.parseInt(dades.getValueAt(fila, 0).toString()),
+                            Integer.parseInt(dades.getValueAt(fila, 7).toString()), dades.getValueAt(fila, 8).toString()));
+            
+        }else {
+            PacienteDAO.modificaPacient(new Pacient(dades.getValueAt(fila, 2).toString(),
+            dades.getValueAt(fila, 3).toString(), dades.getValueAt(fila, 4).toString(), 
+                    dades.getValueAt(fila, 5).toString(),dades.getValueAt(fila, 0).toString(),
+            dades.getValueAt(fila, 6).toString(), new Adreca(dades.getValueAt(fila, 7).toString(), 
+                            Long.parseLong(dades.getValueAt(fila, 8).toString()), 
+                            dades.getValueAt(fila, 9).toString(), 
+                            Integer.parseInt(dades.getValueAt(fila, 10).toString()),dades.getValueAt(fila, 11).toString()
+                            ,dades.getValueAt(fila, 12).toString())));
+            
+        }
     }
 
     public void buscaContenido() {
