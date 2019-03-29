@@ -1,11 +1,17 @@
 package m03.uf5.p01.grup06.gestiohospital.controlador;
 
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 import m03.uf5.p01.grup06.gestiohospital.DAO.MalaltiaDAO;
 import m03.uf5.p01.grup06.gestiohospital.DAO.MetgeDAO;
@@ -45,6 +51,7 @@ public class ControladorBusqueda implements ActionListener {
         
         ventana1.getChkFiltrar().setActionCommand("chkFiltrar");
         ventana1.getChkFiltrar().addActionListener(this);
+        
         
         onlyAllowNumbers(ventana1.getTfBuscar());
     }
@@ -126,9 +133,27 @@ public class ControladorBusqueda implements ActionListener {
         taula.setModel(model);
         CellRender renderizador = new CellRender();
         for (int i = 0; i < taula.getColumnCount(); i++) {
+            
             taula.getColumnModel().getColumn(i).setCellRenderer(renderizador);
         }
+        
+        tblDades.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                actualitzaTaulaUpdate(e);
+            }
+        });
      }
+     
+     
+     private void actualitzaTaulaUpdate(TableModelEvent e){
+        System.out.println("MODIFICACION");
+        int fila = e.getFirstRow();
+        PreparedStatement sentencia = null;
+        Connection con = null;
+        TableModel dades = tblDades.getModel();
+        
+    }
 
     public void buscaContenido() {
         int tipoDato = ventana1.getCbTipoDato().getSelectedIndex();
@@ -177,6 +202,8 @@ public class ControladorBusqueda implements ActionListener {
             }
             if (rsDatos != null) {
                 ResultSetModelTableData model = new ResultSetModelTableData(rsDatos);
+                
+                
                 actualitzaTaula(tblDades, model);
         
             }
@@ -247,6 +274,7 @@ public class ControladorBusqueda implements ActionListener {
             } 
             if (dadesRS != null) {
                 ResultSetModelTableData model = new ResultSetModelTableData(dadesRS);
+                
                 actualitzaTaula(tblDades, model);
         
                 
