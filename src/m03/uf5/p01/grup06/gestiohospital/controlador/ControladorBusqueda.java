@@ -170,12 +170,30 @@ public class ControladorBusqueda implements ActionListener {
                     dades.getValueAt(fila, 1).toString(),tractament,
                     new Duration(dades.getValueAt(fila, 3).toString()) ));
             
-        }else if(tablaActual.equals("Visita")){
+        
             
             
         }else if(tablaActual.equals("Metge")){
             
+            MetgeDAO.updateMetge(new Metge(dades.getValueAt(fila, 2).toString(), 
+                    dades.getValueAt(fila, 3).toString(), dades.getValueAt(fila, 4).toString(),
+                    dades.getValueAt(fila, 5).toString(), dades.getValueAt(fila, 1).toString(),
+                    dades.getValueAt(fila, 6).toString(), new Adreca(dades.getValueAt(fila, 9).toString(), 
+                            Long.parseLong(dades.getValueAt(fila, 10).toString()), 
+                            dades.getValueAt(fila, 11).toString(), 
+                            Integer.parseInt(dades.getValueAt(fila, 12).toString()),dades.getValueAt(fila, 13).toString()
+                            ,dades.getValueAt(fila, 14).toString()), Integer.parseInt(dades.getValueAt(fila, 0).toString()),
+                            Integer.parseInt(dades.getValueAt(fila, 7).toString()), dades.getValueAt(fila, 8).toString()));
+            
         }else {
+            PacienteDAO.modificaPacient(new Pacient(dades.getValueAt(fila, 2).toString(),
+            dades.getValueAt(fila, 3).toString(), dades.getValueAt(fila, 4).toString(), 
+                    dades.getValueAt(fila, 5).toString(),dades.getValueAt(fila, 0).toString(),
+            dades.getValueAt(fila, 6).toString(), new Adreca(dades.getValueAt(fila, 7).toString(), 
+                            Long.parseLong(dades.getValueAt(fila, 8).toString()), 
+                            dades.getValueAt(fila, 9).toString(), 
+                            Integer.parseInt(dades.getValueAt(fila, 10).toString()),dades.getValueAt(fila, 11).toString()
+                            ,dades.getValueAt(fila, 12).toString())));
             
         }
     }
