@@ -51,13 +51,7 @@ public class ControladorBusqueda implements ActionListener {
         
         ventana1.getChkFiltrar().setActionCommand("chkFiltrar");
         ventana1.getChkFiltrar().addActionListener(this);
-        ventana1.getTblDatpos().getModel().addTableModelListener(new TableModelListener() {
-                    @Override
-                    public void tableChanged(TableModelEvent e) {
-                        actualitzaTaulaUpdate(e);
-                    }
-                });
-                
+        
         
         onlyAllowNumbers(ventana1.getTfBuscar());
     }
@@ -141,11 +135,18 @@ public class ControladorBusqueda implements ActionListener {
             
             taula.getColumnModel().getColumn(i).setCellRenderer(renderizador);
         }
+        
+        tblDades.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                actualitzaTaulaUpdate(e);
+            }
+        });
      }
      
      
      private void actualitzaTaulaUpdate(TableModelEvent e){
-         System.out.println("MODIFICACION");
+        System.out.println("MODIFICACION");
         int fila = e.getFirstRow();
         PreparedStatement sentencia = null;
         Connection con = null;

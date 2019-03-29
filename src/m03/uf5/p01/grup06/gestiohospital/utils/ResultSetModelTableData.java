@@ -42,7 +42,8 @@ public class ResultSetModelTableData extends AbstractTableModel {
     
     @Override
     public void setValueAt(Object value, int row, int col) {
-        dadesFiles.get(row).set(col, value);
+        ArrayList aux = dadesFiles.get(row);
+        aux.set(col,(String)value);
         fireTableCellUpdated(row, col);
     }
 
