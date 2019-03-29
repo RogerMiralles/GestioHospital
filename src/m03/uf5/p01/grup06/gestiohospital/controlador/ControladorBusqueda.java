@@ -5,8 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -38,7 +36,7 @@ public class ControladorBusqueda implements ActionListener {
 
     private void asignarComponentes() {
         ventana1.getBtnBuscar().setActionCommand("btnBuscar");
-        ventana1.getBtnBuscar().addActionListener(this);        
+        ventana1.getBtnBuscar().addActionListener(this);
 
         ventana1.getBtnNuevo().setActionCommand("btnNuevo");
         ventana1.getBtnNuevo().addActionListener(this);
@@ -48,11 +46,10 @@ public class ControladorBusqueda implements ActionListener {
 
         ventana1.getCbTipoId().setActionCommand("cbTipoId");
         ventana1.getCbTipoId().addActionListener(this);
-        
+
         ventana1.getChkFiltrar().setActionCommand("chkFiltrar");
         ventana1.getChkFiltrar().addActionListener(this);
-        
-        
+
         onlyAllowNumbers(ventana1.getTfBuscar());
     }
 
@@ -83,7 +80,7 @@ public class ControladorBusqueda implements ActionListener {
                 onlyAllowNumbers(ventana1.getTfBuscar());
             }
         }
-        
+
         if (e.getActionCommand().equals("chkFiltrar")) {
             boolean enabled = ventana1.getChkFiltrar().isSelected();
             ventana1.getBtnBuscar().setEnabled(enabled);
@@ -127,39 +124,38 @@ public class ControladorBusqueda implements ActionListener {
                 ventana1.getCbTipoId().removeAllItems();
         }
     }
-    
-     private void actualitzaTaula(JTable taula, TableModel model){
+
+    private void actualitzaTaula(JTable taula, TableModel model) {
         taula.getTableHeader().setDefaultRenderer(new CellRender("Header"));
         taula.setModel(model);
         CellRender renderizador = new CellRender();
         for (int i = 0; i < taula.getColumnCount(); i++) {
-            
+
             taula.getColumnModel().getColumn(i).setCellRenderer(renderizador);
         }
-        
+
         tblDades.getModel().addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
                 actualitzaTaulaUpdate(e);
             }
         });
-     }
-     
-     
-     private void actualitzaTaulaUpdate(TableModelEvent e){
+    }
+
+    private void actualitzaTaulaUpdate(TableModelEvent e) {
         System.out.println("MODIFICACION");
         int fila = e.getFirstRow();
         PreparedStatement sentencia = null;
         Connection con = null;
         TableModel dades = tblDades.getModel();
-        
+
     }
 
     public void buscaContenido() {
         int tipoDato = ventana1.getCbTipoDato().getSelectedIndex();
         int tipoId = ventana1.getCbTipoId().getSelectedIndex();
         String dato = ventana1.getTfBuscar().getText();
-        
+
         try {
             ResultSet rsDatos = null;
             switch (tipoDato) {
@@ -202,10 +198,9 @@ public class ControladorBusqueda implements ActionListener {
             }
             if (rsDatos != null) {
                 ResultSetModelTableData model = new ResultSetModelTableData(rsDatos);
-                
-                
+
                 actualitzaTaula(tblDades, model);
-        
+
             }
         } catch (NumberFormatException e) {
             showErrorMessage("Campos vacios", "No deje el formulario en blanco");
@@ -224,7 +219,7 @@ public class ControladorBusqueda implements ActionListener {
             }
         });
     }
-    
+
     private void onlyAllowNumbers(JTextField txt) {
         numbersListener = new KeyAdapter() {
             @Override
@@ -254,30 +249,29 @@ public class ControladorBusqueda implements ActionListener {
     private void showErrorMessage(String titulo, String msg) {
         JOptionPane.showMessageDialog(ventana1, msg, titulo, JOptionPane.ERROR_MESSAGE);
     }
-    
+
     private void loadAllData(String tipo) {
         try {
             ResultSet dadesRS = null;
             switch (tipo) {
-                case "Malaltia" :
+                case "Malaltia":
                     dadesRS = MalaltiaDAO.getAllMalaltiesRS();
                     break;
-                case "Metge" :
+                case "Metge":
                     dadesRS = MetgeDAO.getAllMetgesRS();
                     break;
-                case "Pacient" :
+                case "Pacient":
                     dadesRS = PacienteDAO.getAllPacientsRS();
                     break;
-                case "Visita" :
+                case "Visita":
                     dadesRS = VisitaDAO.getAllVisitesRS();
                     break;
-            } 
+            }
             if (dadesRS != null) {
                 ResultSetModelTableData model = new ResultSetModelTableData(dadesRS);
-                
+
                 actualitzaTaula(tblDades, model);
-        
-                
+
             }
         } catch (Exception ex) {
             showErrorMessage("ERROR", ex.getMessage());

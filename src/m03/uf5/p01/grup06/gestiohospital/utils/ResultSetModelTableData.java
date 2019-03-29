@@ -78,6 +78,5 @@ public class ResultSetModelTableData extends AbstractTableModel {
             }
         }
         return formatedTitle;
-    }
-        
+    }   
 }

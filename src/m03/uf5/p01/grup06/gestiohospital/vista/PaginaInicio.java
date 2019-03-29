@@ -55,15 +55,19 @@ public class PaginaInicio extends JFrame {
         tfBuscar.setPreferredSize(new Dimension(300, 30));
         
         JPanel pTabla = new JPanel(new BorderLayout());
-                
+        
         tblDatos = new JTable();
         tblDatos.getTableHeader().setReorderingAllowed(false);
         tblDatos.setFillsViewportHeight(true);
         tblDatos.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         
+        tblDatos.setPreferredScrollableViewportSize(tblDatos.getPreferredSize());
+        tblDatos.setFillsViewportHeight(true);
+        tblDatos.setRowHeight(24);
+        
         pTabla.add(tblDatos, BorderLayout.CENTER);
         pTabla.add(tblDatos.getTableHeader(), BorderLayout.NORTH);         
-         
+ 
         pCentro.setBorder(BorderFactory.createTitledBorder("Información Buscada: "));
         
         btnBuscar = new JButton("Filtrar");
